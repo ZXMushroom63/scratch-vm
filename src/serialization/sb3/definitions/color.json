@@ -1,0 +1,1737 @@
+{
+    "7T.S_t-ppwzJ*cb+bqTK": {
+        "opcode": "procedures_definition",
+        "next": "^mn;YlSNFJ?Vivfv#lw:",
+        "parent": null,
+        "inputs": { "custom_block": [1, "i^S[Y-0%-#pEL5M3qXgH"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": true,
+        "x": 44,
+        "y": 44
+    },
+    "i^S[Y-0%-#pEL5M3qXgH": {
+        "opcode": "procedures_prototype",
+        "next": null,
+        "parent": "7T.S_t-ppwzJ*cb+bqTK",
+        "inputs": {},
+        "fields": {},
+        "shadow": true,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt.color at my position",
+            "argumentids": "[]",
+            "argumentnames": "[]",
+            "argumentdefaults": "[\"\",\"\"]",
+            "warp": "true"
+        }
+    },
+    "^mn;YlSNFJ?Vivfv#lw:": {
+        "opcode": "data_setvariableto",
+        "next": "2XAdu./zjU32?#Wxx80g",
+        "parent": "7T.S_t-ppwzJ*cb+bqTK",
+        "inputs": { "VALUE": [3, "s{63:@I7lTvcN,;f8P#P", [10, "0"]] },
+        "fields": {
+            "VARIABLE": ["$rt.color.oldCostume", "rt_color_oldCostume"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "s{63:@I7lTvcN,;f8P#P": {
+        "opcode": "looks_costumenumbername",
+        "next": null,
+        "parent": "^mn;YlSNFJ?Vivfv#lw:",
+        "inputs": {},
+        "fields": { "NUMBER_NAME": ["number", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "2XAdu./zjU32?#Wxx80g": {
+        "opcode": "data_setvariableto",
+        "next": "HoeV912C,g#~]H%dX=]t",
+        "parent": "^mn;YlSNFJ?Vivfv#lw:",
+        "inputs": { "VALUE": [3, "jO:ZHUAASUxzJH~=7e-K", [10, "0"]] },
+        "fields": {
+            "VARIABLE": ["$rt.color.oldSize", "rt_color_oldSize"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "jO:ZHUAASUxzJH~=7e-K": {
+        "opcode": "looks_size",
+        "next": null,
+        "parent": "2XAdu./zjU32?#Wxx80g",
+        "inputs": {},
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "HoeV912C,g#~]H%dX=]t": {
+        "opcode": "data_setvariableto",
+        "next": "sN}jn4i{KtId8FRo/Flf",
+        "parent": "2XAdu./zjU32?#Wxx80g",
+        "inputs": { "VALUE": [1, [10, ""]] },
+        "fields": { "VARIABLE": ["$rt.out", "rt_out"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "sN}jn4i{KtId8FRo/Flf": {
+        "opcode": "looks_switchcostumeto",
+        "next": "W+I|:%JGyq00[|[P7#I$",
+        "parent": "HoeV912C,g#~]H%dX=]t",
+        "inputs": { "COSTUME": [1, "0n!F(/N?TOqZg{O|Uih`"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "0n!F(/N?TOqZg{O|Uih`": {
+        "opcode": "looks_costume",
+        "next": null,
+        "parent": "sN}jn4i{KtId8FRo/Flf",
+        "inputs": {},
+        "fields": { "COSTUME": ["$rt.dot", null] },
+        "shadow": true,
+        "topLevel": false
+    },
+    "W+I|:%JGyq00[|[P7#I$": {
+        "opcode": "looks_setsizeto",
+        "next": "o+um!Bkq4)g|;yLj3Y~{",
+        "parent": "sN}jn4i{KtId8FRo/Flf",
+        "inputs": { "SIZE": [1, [4, "100"]] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "o+um!Bkq4)g|;yLj3Y~{": {
+        "opcode": "data_setvariableto",
+        "next": "D7.(P!yA)gCDomw{,Bv=",
+        "parent": "W+I|:%JGyq00[|[P7#I$",
+        "inputs": { "VALUE": [1, [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.color.r", "rt_color_r"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "D7.(P!yA)gCDomw{,Bv=": {
+        "opcode": "control_repeat",
+        "next": "ClH9_@zk9?ng,7z;.gWs",
+        "parent": "o+um!Bkq4)g|;yLj3Y~{",
+        "inputs": {
+            "TIMES": [1, [6, "32"]],
+            "SUBSTACK": [2, "}ws6.h^6h#(_Q0/;NVS`"]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "}ws6.h^6h#(_Q0/;NVS`": {
+        "opcode": "data_setvariableto",
+        "next": "4/X}euBrRLN!NU_0W0zX",
+        "parent": "D7.(P!yA)gCDomw{,Bv=",
+        "inputs": { "VALUE": [1, [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.color.g", "rt_color_g"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "4/X}euBrRLN!NU_0W0zX": {
+        "opcode": "control_repeat",
+        "next": "R8JDrdsoAz]ZZVKl_w=d",
+        "parent": "}ws6.h^6h#(_Q0/;NVS`",
+        "inputs": {
+            "TIMES": [1, [6, "32"]],
+            "SUBSTACK": [2, "`:)d2^3B9s]c8VYn@,P["]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "`:)d2^3B9s]c8VYn@,P[": {
+        "opcode": "data_setvariableto",
+        "next": "/A!8-.DPr/Zs7,+HRh(F",
+        "parent": "4/X}euBrRLN!NU_0W0zX",
+        "inputs": { "VALUE": [1, [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.color.b", "rt_color_b"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "/A!8-.DPr/Zs7,+HRh(F": {
+        "opcode": "control_repeat",
+        "next": "Qs,N{}ZIEl0WG:))%FdK",
+        "parent": "`:)d2^3B9s]c8VYn@,P[",
+        "inputs": {
+            "TIMES": [1, [6, "16"]],
+            "SUBSTACK": [2, "5:)B-29)_rxlq[0Vef.("]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "5:)B-29)_rxlq[0Vef.(": {
+        "opcode": "control_if",
+        "next": "oX%1QGWPJBsVzd/YNmGA",
+        "parent": "/A!8-.DPr/Zs7,+HRh(F",
+        "inputs": {
+            "CONDITION": [2, "(-[zVGD:]U=0K,MxIe(F"],
+            "SUBSTACK": [2, "yRLwE(2aR6[XEI!546?Q"]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "(-[zVGD:]U=0K,MxIe(F": {
+        "opcode": "sensing_touchingcolor",
+        "next": null,
+        "parent": "5:)B-29)_rxlq[0Vef.(",
+        "inputs": { "COLOR": [3, "um,:rBUn@(WjZdc{sc?:", [9, "#d3d148"]] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "um,:rBUn@(WjZdc{sc?:": {
+        "opcode": "operator_add",
+        "next": null,
+        "parent": "(-[zVGD:]U=0K,MxIe(F",
+        "inputs": {
+            "NUM1": [3, "E_qS|tMnc`8v/8^mCT%k", [4, ""]],
+            "NUM2": [3, "u|(wUUK2vX^%-6@cN-A=", [4, ""]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "E_qS|tMnc`8v/8^mCT%k": {
+        "opcode": "operator_multiply",
+        "next": null,
+        "parent": "um,:rBUn@(WjZdc{sc?:",
+        "inputs": {
+            "NUM1": [3, [12, "$rt.color.r", "rt_color_r"], [4, ""]],
+            "NUM2": [1, [4, "65536"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "u|(wUUK2vX^%-6@cN-A=": {
+        "opcode": "operator_add",
+        "next": null,
+        "parent": "um,:rBUn@(WjZdc{sc?:",
+        "inputs": {
+            "NUM1": [3, ",iHeT@,}PnF)E1~{+~)S", [4, ""]],
+            "NUM2": [3, [12, "$rt.color.b", "rt_color_b"], [4, ""]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    ",iHeT@,}PnF)E1~{+~)S": {
+        "opcode": "operator_multiply",
+        "next": null,
+        "parent": "u|(wUUK2vX^%-6@cN-A=",
+        "inputs": {
+            "NUM1": [3, [12, "$rt.color.g", "rt_color_g"], [4, ""]],
+            "NUM2": [1, [4, "256"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "yRLwE(2aR6[XEI!546?Q": {
+        "opcode": "data_setvariableto",
+        "next": "R-T]HSgZ%}nA:@iHeF(#",
+        "parent": "5:)B-29)_rxlq[0Vef.(",
+        "inputs": { "VALUE": [1, [10, ""]] },
+        "fields": { "VARIABLE": ["$rt.color.hex", "rt_color_hex"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "R-T]HSgZ%}nA:@iHeF(#": {
+        "opcode": "data_setvariableto",
+        "next": "GJb)Tvv!AJSL8*13I%b9",
+        "parent": "yRLwE(2aR6[XEI!546?Q",
+        "inputs": {
+            "VALUE": [3, [12, "$rt.color.r", "rt_color_r"], [10, "0"]]
+        },
+        "fields": { "VARIABLE": ["$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "GJb)Tvv!AJSL8*13I%b9": {
+        "opcode": "data_setvariableto",
+        "next": "wCQ5pXK9iMZd1,yz,#Nr",
+        "parent": "R-T]HSgZ%}nA:@iHeF(#",
+        "inputs": { "VALUE": [3, "{y-O^pC`_%NghmCp5g_:", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.color.hex", "rt_color_hex"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{y-O^pC`_%NghmCp5g_:": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "GJb)Tvv!AJSL8*13I%b9",
+        "inputs": {
+            "STRING1": [3, "28H=v;Hli#am?DHpo%pZ", [10, "apple "]],
+            "STRING2": [
+                3,
+                [12, "$rt.color.hex", "rt_color_hex"],
+                [10, "banana"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "28H=v;Hli#am?DHpo%pZ": {
+        "opcode": "operator_letter_of",
+        "next": null,
+        "parent": "{y-O^pC`_%NghmCp5g_:",
+        "inputs": {
+            "LETTER": [3, "K=HQm5g*U`Zi!OY^%8+I", [6, "1"]],
+            "STRING": [1, [10, "0123456789ABCDEF"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "K=HQm5g*U`Zi!OY^%8+I": {
+        "opcode": "operator_add",
+        "next": null,
+        "parent": "28H=v;Hli#am?DHpo%pZ",
+        "inputs": {
+            "NUM1": [3, "[JToCqDyBCb%~mH0it@N", [4, ""]],
+            "NUM2": [1, [4, "1"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "[JToCqDyBCb%~mH0it@N": {
+        "opcode": "operator_mod",
+        "next": null,
+        "parent": "K=HQm5g*U`Zi!OY^%8+I",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [4, ""]
+            ],
+            "NUM2": [1, [4, "16"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "wCQ5pXK9iMZd1,yz,#Nr": {
+        "opcode": "data_setvariableto",
+        "next": "yF0qijOUh`hXSw3gekPT",
+        "parent": "GJb)Tvv!AJSL8*13I%b9",
+        "inputs": { "VALUE": [3, "43bb^J9.Q~@]e3S.NqAD", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "43bb^J9.Q~@]e3S.NqAD": {
+        "opcode": "operator_mathop",
+        "next": null,
+        "parent": "wCQ5pXK9iMZd1,yz,#Nr",
+        "inputs": { "NUM": [3, "JX5[Dg]lsF+f?]m/)nh2", [4, ""]] },
+        "fields": { "OPERATOR": ["floor", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "JX5[Dg]lsF+f?]m/)nh2": {
+        "opcode": "operator_divide",
+        "next": null,
+        "parent": "43bb^J9.Q~@]e3S.NqAD",
+        "inputs": {
+            "NUM1": [3, "/f-Z~[l!QjfB@V-U!7lG", [4, ""]],
+            "NUM2": [1, [4, "16"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "/f-Z~[l!QjfB@V-U!7lG": {
+        "opcode": "operator_subtract",
+        "next": null,
+        "parent": "JX5[Dg]lsF+f?]m/)nh2",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [4, ""]
+            ],
+            "NUM2": [3, "aI3N==a(4*F6u_-OOso7", [4, ""]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "aI3N==a(4*F6u_-OOso7": {
+        "opcode": "operator_mod",
+        "next": null,
+        "parent": "/f-Z~[l!QjfB@V-U!7lG",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [4, ""]
+            ],
+            "NUM2": [1, [4, "16"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "yF0qijOUh`hXSw3gekPT": {
+        "opcode": "control_repeat_until",
+        "next": "=ZEsY+Nkz.0j)GfoRI2l",
+        "parent": "wCQ5pXK9iMZd1,yz,#Nr",
+        "inputs": {
+            "CONDITION": [2, ":OGb3~A=laKuvVs:sH,%"],
+            "SUBSTACK": [2, "G}u;/x-uuUUWbF73cmA,"]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    ":OGb3~A=laKuvVs:sH,%": {
+        "opcode": "operator_equals",
+        "next": null,
+        "parent": "yF0qijOUh`hXSw3gekPT",
+        "inputs": {
+            "OPERAND1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [10, ""]
+            ],
+            "OPERAND2": [1, [10, "0"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "G}u;/x-uuUUWbF73cmA,": {
+        "opcode": "data_setvariableto",
+        "next": "JiEesaNr[bt9Sq|plpiP",
+        "parent": "yF0qijOUh`hXSw3gekPT",
+        "inputs": { "VALUE": [3, "aoFQ1FP^hGaTwLbz8eLy", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.color.hex", "rt_color_hex"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "aoFQ1FP^hGaTwLbz8eLy": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "G}u;/x-uuUUWbF73cmA,",
+        "inputs": {
+            "STRING1": [3, "+S1@W.|{#[uJ,~;rq:c5", [10, "apple "]],
+            "STRING2": [
+                3,
+                [12, "$rt.color.hex", "rt_color_hex"],
+                [10, "banana"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "+S1@W.|{#[uJ,~;rq:c5": {
+        "opcode": "operator_letter_of",
+        "next": null,
+        "parent": "aoFQ1FP^hGaTwLbz8eLy",
+        "inputs": {
+            "LETTER": [3, "r-Iff]X./A-SbGO6suID", [6, "1"]],
+            "STRING": [1, [10, "0123456789ABCDEF"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "r-Iff]X./A-SbGO6suID": {
+        "opcode": "operator_add",
+        "next": null,
+        "parent": "+S1@W.|{#[uJ,~;rq:c5",
+        "inputs": {
+            "NUM1": [3, "_R[CkDG(TlWM~zi_-iCS", [4, ""]],
+            "NUM2": [1, [4, "1"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "_R[CkDG(TlWM~zi_-iCS": {
+        "opcode": "operator_mod",
+        "next": null,
+        "parent": "r-Iff]X./A-SbGO6suID",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [4, ""]
+            ],
+            "NUM2": [1, [4, "16"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "JiEesaNr[bt9Sq|plpiP": {
+        "opcode": "data_setvariableto",
+        "next": null,
+        "parent": "G}u;/x-uuUUWbF73cmA,",
+        "inputs": { "VALUE": [3, "S3:3`L?~@5%3OZwnLOKV", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "S3:3`L?~@5%3OZwnLOKV": {
+        "opcode": "operator_mathop",
+        "next": null,
+        "parent": "JiEesaNr[bt9Sq|plpiP",
+        "inputs": { "NUM": [3, "?A0v9eNT[JJnJBgQ5!3)", [4, ""]] },
+        "fields": { "OPERATOR": ["floor", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "?A0v9eNT[JJnJBgQ5!3)": {
+        "opcode": "operator_divide",
+        "next": null,
+        "parent": "S3:3`L?~@5%3OZwnLOKV",
+        "inputs": {
+            "NUM1": [3, "k8gv-X~z#j7hF.(AV:yr", [4, ""]],
+            "NUM2": [1, [4, "16"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "k8gv-X~z#j7hF.(AV:yr": {
+        "opcode": "operator_subtract",
+        "next": null,
+        "parent": "?A0v9eNT[JJnJBgQ5!3)",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [4, ""]
+            ],
+            "NUM2": [3, "OLCw@3km)A^RIW8[qQz|", [4, ""]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "OLCw@3km)A^RIW8[qQz|": {
+        "opcode": "operator_mod",
+        "next": null,
+        "parent": "k8gv-X~z#j7hF.(AV:yr",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [4, ""]
+            ],
+            "NUM2": [1, [4, "16"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "=ZEsY+Nkz.0j)GfoRI2l": {
+        "opcode": "control_if",
+        "next": "/V}6sYJhdl;GgHxh01JN",
+        "parent": "yF0qijOUh`hXSw3gekPT",
+        "inputs": {
+            "CONDITION": [2, "-LzL]8Jv7j2lx0)a7PlX"],
+            "SUBSTACK": [2, "i0p3-PZ(%PNcRm)b7LNf"]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "-LzL]8Jv7j2lx0)a7PlX": {
+        "opcode": "operator_lt",
+        "next": null,
+        "parent": "=ZEsY+Nkz.0j)GfoRI2l",
+        "inputs": {
+            "OPERAND1": [3, "I1C3-H?DN#M.%ZNmFa@F", [10, ""]],
+            "OPERAND2": [1, [10, "2"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "I1C3-H?DN#M.%ZNmFa@F": {
+        "opcode": "operator_length",
+        "next": null,
+        "parent": "-LzL]8Jv7j2lx0)a7PlX",
+        "inputs": {
+            "STRING": [
+                3,
+                [12, "$rt.color.hex", "rt_color_hex"],
+                [10, "apple"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "i0p3-PZ(%PNcRm)b7LNf": {
+        "opcode": "data_setvariableto",
+        "next": null,
+        "parent": "=ZEsY+Nkz.0j)GfoRI2l",
+        "inputs": { "VALUE": [3, "hDlZ0^4{P*ez8BkkDDnT", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.color.hex", "rt_color_hex"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "hDlZ0^4{P*ez8BkkDDnT": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "i0p3-PZ(%PNcRm)b7LNf",
+        "inputs": {
+            "STRING1": [1, [10, "0"]],
+            "STRING2": [
+                3,
+                [12, "$rt.color.hex", "rt_color_hex"],
+                [10, "banana"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "/V}6sYJhdl;GgHxh01JN": {
+        "opcode": "data_setvariableto",
+        "next": "B,6U7dnFW3;r;Uq(3Og~",
+        "parent": "=ZEsY+Nkz.0j)GfoRI2l",
+        "inputs": { "VALUE": [3, "FoyiyJgXOQ56bq2Q6uI7", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.out", "rt_out"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "FoyiyJgXOQ56bq2Q6uI7": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "/V}6sYJhdl;GgHxh01JN",
+        "inputs": {
+            "STRING1": [
+                3,
+                [12, "$rt.out", "rt_out"],
+                [10, "apple "]
+            ],
+            "STRING2": [
+                3,
+                [12, "$rt.color.hex", "rt_color_hex"],
+                [10, "banana"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "B,6U7dnFW3;r;Uq(3Og~": {
+        "opcode": "data_setvariableto",
+        "next": "@9A*2UWTZc#pZ[0a36uE",
+        "parent": "/V}6sYJhdl;GgHxh01JN",
+        "inputs": { "VALUE": [1, [10, ""]] },
+        "fields": { "VARIABLE": ["$rt.color.hex", "rt_color_hex"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "@9A*2UWTZc#pZ[0a36uE": {
+        "opcode": "data_setvariableto",
+        "next": "J!uu)M3aambr(Ak]5QkJ",
+        "parent": "B,6U7dnFW3;r;Uq(3Og~",
+        "inputs": {
+            "VALUE": [3, [12, "$rt.color.g", "rt_color_g"], [10, "0"]]
+        },
+        "fields": { "VARIABLE": ["$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "J!uu)M3aambr(Ak]5QkJ": {
+        "opcode": "data_setvariableto",
+        "next": "RQJrw06NSZP@%f0Z*7KL",
+        "parent": "@9A*2UWTZc#pZ[0a36uE",
+        "inputs": { "VALUE": [3, "HSa=,]a+=_3HjacyCZN4", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.color.hex", "rt_color_hex"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "HSa=,]a+=_3HjacyCZN4": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "J!uu)M3aambr(Ak]5QkJ",
+        "inputs": {
+            "STRING1": [3, "{YE]=dozV.*MLzL%@e+B", [10, "apple "]],
+            "STRING2": [
+                3,
+                [12, "$rt.color.hex", "rt_color_hex"],
+                [10, "banana"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{YE]=dozV.*MLzL%@e+B": {
+        "opcode": "operator_letter_of",
+        "next": null,
+        "parent": "HSa=,]a+=_3HjacyCZN4",
+        "inputs": {
+            "LETTER": [3, "sX8J`KQ1H)wKp~OtB}Rc", [6, "1"]],
+            "STRING": [1, [10, "0123456789ABCDEF"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "sX8J`KQ1H)wKp~OtB}Rc": {
+        "opcode": "operator_add",
+        "next": null,
+        "parent": "{YE]=dozV.*MLzL%@e+B",
+        "inputs": {
+            "NUM1": [3, "Ca6~/O=R*;z9(5^G89],", [4, ""]],
+            "NUM2": [1, [4, "1"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "Ca6~/O=R*;z9(5^G89],": {
+        "opcode": "operator_mod",
+        "next": null,
+        "parent": "sX8J`KQ1H)wKp~OtB}Rc",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [4, ""]
+            ],
+            "NUM2": [1, [4, "16"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "RQJrw06NSZP@%f0Z*7KL": {
+        "opcode": "data_setvariableto",
+        "next": "nnoK1eAd)k.kJ|/O[s{V",
+        "parent": "J!uu)M3aambr(Ak]5QkJ",
+        "inputs": { "VALUE": [3, "LWy2x6,5mfX~ZaV^8Xf2", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "LWy2x6,5mfX~ZaV^8Xf2": {
+        "opcode": "operator_mathop",
+        "next": null,
+        "parent": "RQJrw06NSZP@%f0Z*7KL",
+        "inputs": { "NUM": [3, ":Qbrv);54M6qpyDAxI_3", [4, ""]] },
+        "fields": { "OPERATOR": ["floor", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    ":Qbrv);54M6qpyDAxI_3": {
+        "opcode": "operator_divide",
+        "next": null,
+        "parent": "LWy2x6,5mfX~ZaV^8Xf2",
+        "inputs": {
+            "NUM1": [3, "}Rg8paSbx1gCpx_C{Hrs", [4, ""]],
+            "NUM2": [1, [4, "16"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "}Rg8paSbx1gCpx_C{Hrs": {
+        "opcode": "operator_subtract",
+        "next": null,
+        "parent": ":Qbrv);54M6qpyDAxI_3",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [4, ""]
+            ],
+            "NUM2": [3, "oVI_;wBU]K%2sBmcIqev", [4, ""]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "oVI_;wBU]K%2sBmcIqev": {
+        "opcode": "operator_mod",
+        "next": null,
+        "parent": "}Rg8paSbx1gCpx_C{Hrs",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [4, ""]
+            ],
+            "NUM2": [1, [4, "16"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "nnoK1eAd)k.kJ|/O[s{V": {
+        "opcode": "control_repeat_until",
+        "next": "yhrJpsGb1)r.5D+nvo;}",
+        "parent": "RQJrw06NSZP@%f0Z*7KL",
+        "inputs": {
+            "CONDITION": [2, "i5a0J~O4:kD0Y2M,P[fG"],
+            "SUBSTACK": [2, "6GSo3;:oeUxsUw`8qt0R"]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "i5a0J~O4:kD0Y2M,P[fG": {
+        "opcode": "operator_equals",
+        "next": null,
+        "parent": "nnoK1eAd)k.kJ|/O[s{V",
+        "inputs": {
+            "OPERAND1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [10, ""]
+            ],
+            "OPERAND2": [1, [10, "0"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "6GSo3;:oeUxsUw`8qt0R": {
+        "opcode": "data_setvariableto",
+        "next": "[u?Te4+iHqq}3^jyVbWC",
+        "parent": "nnoK1eAd)k.kJ|/O[s{V",
+        "inputs": { "VALUE": [3, ")s@mbq38cAvx/B3Bc75m", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.color.hex", "rt_color_hex"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    ")s@mbq38cAvx/B3Bc75m": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "6GSo3;:oeUxsUw`8qt0R",
+        "inputs": {
+            "STRING1": [3, "}rM{Q1Xv0IluSv)aiLXM", [10, "apple "]],
+            "STRING2": [
+                3,
+                [12, "$rt.color.hex", "rt_color_hex"],
+                [10, "banana"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "}rM{Q1Xv0IluSv)aiLXM": {
+        "opcode": "operator_letter_of",
+        "next": null,
+        "parent": ")s@mbq38cAvx/B3Bc75m",
+        "inputs": {
+            "LETTER": [3, ")xR,sic_=Ygj=TnH-7a1", [6, "1"]],
+            "STRING": [1, [10, "0123456789ABCDEF"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    ")xR,sic_=Ygj=TnH-7a1": {
+        "opcode": "operator_add",
+        "next": null,
+        "parent": "}rM{Q1Xv0IluSv)aiLXM",
+        "inputs": {
+            "NUM1": [3, "%)/j=6yv?/~[q|K+:o6v", [4, ""]],
+            "NUM2": [1, [4, "1"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "%)/j=6yv?/~[q|K+:o6v": {
+        "opcode": "operator_mod",
+        "next": null,
+        "parent": ")xR,sic_=Ygj=TnH-7a1",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [4, ""]
+            ],
+            "NUM2": [1, [4, "16"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "[u?Te4+iHqq}3^jyVbWC": {
+        "opcode": "data_setvariableto",
+        "next": null,
+        "parent": "6GSo3;:oeUxsUw`8qt0R",
+        "inputs": { "VALUE": [3, "BjzM}1)FR7_/82mn!30D", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "BjzM}1)FR7_/82mn!30D": {
+        "opcode": "operator_mathop",
+        "next": null,
+        "parent": "[u?Te4+iHqq}3^jyVbWC",
+        "inputs": { "NUM": [3, ")X-J7(+Gr~d=yh,4qfFu", [4, ""]] },
+        "fields": { "OPERATOR": ["floor", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    ")X-J7(+Gr~d=yh,4qfFu": {
+        "opcode": "operator_divide",
+        "next": null,
+        "parent": "BjzM}1)FR7_/82mn!30D",
+        "inputs": {
+            "NUM1": [3, "58.RFoGS9BaDG~Q@@U?Q", [4, ""]],
+            "NUM2": [1, [4, "16"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "58.RFoGS9BaDG~Q@@U?Q": {
+        "opcode": "operator_subtract",
+        "next": null,
+        "parent": ")X-J7(+Gr~d=yh,4qfFu",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [4, ""]
+            ],
+            "NUM2": [3, "+-LRAP0S[=/?h2^X.SD_", [4, ""]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "+-LRAP0S[=/?h2^X.SD_": {
+        "opcode": "operator_mod",
+        "next": null,
+        "parent": "58.RFoGS9BaDG~Q@@U?Q",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [4, ""]
+            ],
+            "NUM2": [1, [4, "16"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "yhrJpsGb1)r.5D+nvo;}": {
+        "opcode": "control_if",
+        "next": "-5|w#B~~uu~{YyIj8.*2",
+        "parent": "nnoK1eAd)k.kJ|/O[s{V",
+        "inputs": {
+            "CONDITION": [2, "2Zu|{d~p,}FWmAA?i`+*"],
+            "SUBSTACK": [2, "^UNjx-^BdWd#-UxpCJa1"]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "2Zu|{d~p,}FWmAA?i`+*": {
+        "opcode": "operator_lt",
+        "next": null,
+        "parent": "yhrJpsGb1)r.5D+nvo;}",
+        "inputs": {
+            "OPERAND1": [3, "@5oT0v3v/__#:Eda8li=", [10, ""]],
+            "OPERAND2": [1, [10, "2"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "@5oT0v3v/__#:Eda8li=": {
+        "opcode": "operator_length",
+        "next": null,
+        "parent": "2Zu|{d~p,}FWmAA?i`+*",
+        "inputs": {
+            "STRING": [
+                3,
+                [12, "$rt.color.hex", "rt_color_hex"],
+                [10, "apple"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "^UNjx-^BdWd#-UxpCJa1": {
+        "opcode": "data_setvariableto",
+        "next": null,
+        "parent": "yhrJpsGb1)r.5D+nvo;}",
+        "inputs": { "VALUE": [3, "K@`v*yEnKvrRa^;?gAcj", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.color.hex", "rt_color_hex"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "K@`v*yEnKvrRa^;?gAcj": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "^UNjx-^BdWd#-UxpCJa1",
+        "inputs": {
+            "STRING1": [1, [10, "0"]],
+            "STRING2": [
+                3,
+                [12, "$rt.color.hex", "rt_color_hex"],
+                [10, "banana"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "-5|w#B~~uu~{YyIj8.*2": {
+        "opcode": "data_setvariableto",
+        "next": "5v]RU)BDMOrU;(Ht=V*R",
+        "parent": "yhrJpsGb1)r.5D+nvo;}",
+        "inputs": { "VALUE": [3, "`-s*~eas~Bit:sudle@k", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.out", "rt_out"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "`-s*~eas~Bit:sudle@k": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "-5|w#B~~uu~{YyIj8.*2",
+        "inputs": {
+            "STRING1": [
+                3,
+                [12, "$rt.out", "rt_out"],
+                [10, "apple "]
+            ],
+            "STRING2": [
+                3,
+                [12, "$rt.color.hex", "rt_color_hex"],
+                [10, "banana"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "5v]RU)BDMOrU;(Ht=V*R": {
+        "opcode": "data_setvariableto",
+        "next": "8)e2I^M+Zg7Tb,]ioX26",
+        "parent": "-5|w#B~~uu~{YyIj8.*2",
+        "inputs": { "VALUE": [1, [10, ""]] },
+        "fields": { "VARIABLE": ["$rt.color.hex", "rt_color_hex"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "8)e2I^M+Zg7Tb,]ioX26": {
+        "opcode": "data_setvariableto",
+        "next": "i-lW_oCWf)KS,e~8/;({",
+        "parent": "5v]RU)BDMOrU;(Ht=V*R",
+        "inputs": {
+            "VALUE": [3, [12, "$rt.color.b", "rt_color_b"], [10, "0"]]
+        },
+        "fields": { "VARIABLE": ["$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "i-lW_oCWf)KS,e~8/;({": {
+        "opcode": "data_setvariableto",
+        "next": "ThrLf2t)K,fsh{N8aR7Z",
+        "parent": "8)e2I^M+Zg7Tb,]ioX26",
+        "inputs": { "VALUE": [3, "cU=*U{B`gViP7}-BSrUn", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.color.hex", "rt_color_hex"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "cU=*U{B`gViP7}-BSrUn": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "i-lW_oCWf)KS,e~8/;({",
+        "inputs": {
+            "STRING1": [3, "AyQUE;ysSf[Ny0q.gYA=", [10, "apple "]],
+            "STRING2": [
+                3,
+                [12, "$rt.color.hex", "rt_color_hex"],
+                [10, "banana"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "AyQUE;ysSf[Ny0q.gYA=": {
+        "opcode": "operator_letter_of",
+        "next": null,
+        "parent": "cU=*U{B`gViP7}-BSrUn",
+        "inputs": {
+            "LETTER": [3, "svjKP:1UM6SIY_P[.K4Q", [6, "1"]],
+            "STRING": [1, [10, "0123456789ABCDEF"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "svjKP:1UM6SIY_P[.K4Q": {
+        "opcode": "operator_add",
+        "next": null,
+        "parent": "AyQUE;ysSf[Ny0q.gYA=",
+        "inputs": {
+            "NUM1": [3, "KV.XxIOO0Lvk~XHa_mtu", [4, ""]],
+            "NUM2": [1, [4, "1"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "KV.XxIOO0Lvk~XHa_mtu": {
+        "opcode": "operator_mod",
+        "next": null,
+        "parent": "svjKP:1UM6SIY_P[.K4Q",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [4, ""]
+            ],
+            "NUM2": [1, [4, "16"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "ThrLf2t)K,fsh{N8aR7Z": {
+        "opcode": "data_setvariableto",
+        "next": ";|ai(r-?(l.BNJ!Y4/%z",
+        "parent": "i-lW_oCWf)KS,e~8/;({",
+        "inputs": { "VALUE": [3, ".xOPfhN[vip,nvi1q11l", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    ".xOPfhN[vip,nvi1q11l": {
+        "opcode": "operator_mathop",
+        "next": null,
+        "parent": "ThrLf2t)K,fsh{N8aR7Z",
+        "inputs": { "NUM": [3, "r-^*37RbGaxj4{4fmGhU", [4, ""]] },
+        "fields": { "OPERATOR": ["floor", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "r-^*37RbGaxj4{4fmGhU": {
+        "opcode": "operator_divide",
+        "next": null,
+        "parent": ".xOPfhN[vip,nvi1q11l",
+        "inputs": {
+            "NUM1": [3, "7t[bBY^wF~*2bZVUntO-", [4, ""]],
+            "NUM2": [1, [4, "16"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "7t[bBY^wF~*2bZVUntO-": {
+        "opcode": "operator_subtract",
+        "next": null,
+        "parent": "r-^*37RbGaxj4{4fmGhU",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [4, ""]
+            ],
+            "NUM2": [3, "2N*muK![Hl35w0*AH;?g", [4, ""]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "2N*muK![Hl35w0*AH;?g": {
+        "opcode": "operator_mod",
+        "next": null,
+        "parent": "7t[bBY^wF~*2bZVUntO-",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [4, ""]
+            ],
+            "NUM2": [1, [4, "16"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    ";|ai(r-?(l.BNJ!Y4/%z": {
+        "opcode": "control_repeat_until",
+        "next": "*Bvtf#D(zud0PT2!@+!d",
+        "parent": "ThrLf2t)K,fsh{N8aR7Z",
+        "inputs": {
+            "CONDITION": [2, "GN=t%AViqs-|eh1bCT5%"],
+            "SUBSTACK": [2, "IR]!HtZs-4P9ZjyR+ls8"]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "GN=t%AViqs-|eh1bCT5%": {
+        "opcode": "operator_equals",
+        "next": null,
+        "parent": ";|ai(r-?(l.BNJ!Y4/%z",
+        "inputs": {
+            "OPERAND1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [10, ""]
+            ],
+            "OPERAND2": [1, [10, "0"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "IR]!HtZs-4P9ZjyR+ls8": {
+        "opcode": "data_setvariableto",
+        "next": "]d7}kVLiH~oxb%!?L{ML",
+        "parent": ";|ai(r-?(l.BNJ!Y4/%z",
+        "inputs": { "VALUE": [3, ";5Mzf3i,AkIu~_C.Y^JH", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.color.hex", "rt_color_hex"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    ";5Mzf3i,AkIu~_C.Y^JH": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "IR]!HtZs-4P9ZjyR+ls8",
+        "inputs": {
+            "STRING1": [3, "%D`G:lyG3DASa^[Ildr1", [10, "apple "]],
+            "STRING2": [
+                3,
+                [12, "$rt.color.hex", "rt_color_hex"],
+                [10, "banana"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "%D`G:lyG3DASa^[Ildr1": {
+        "opcode": "operator_letter_of",
+        "next": null,
+        "parent": ";5Mzf3i,AkIu~_C.Y^JH",
+        "inputs": {
+            "LETTER": [3, "?OAf0u{z8KILDWGmAi,T", [6, "1"]],
+            "STRING": [1, [10, "0123456789ABCDEF"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "?OAf0u{z8KILDWGmAi,T": {
+        "opcode": "operator_add",
+        "next": null,
+        "parent": "%D`G:lyG3DASa^[Ildr1",
+        "inputs": {
+            "NUM1": [3, "(?/K]X7fhRr1|93lsls_", [4, ""]],
+            "NUM2": [1, [4, "1"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "(?/K]X7fhRr1|93lsls_": {
+        "opcode": "operator_mod",
+        "next": null,
+        "parent": "?OAf0u{z8KILDWGmAi,T",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [4, ""]
+            ],
+            "NUM2": [1, [4, "16"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "]d7}kVLiH~oxb%!?L{ML": {
+        "opcode": "data_setvariableto",
+        "next": null,
+        "parent": "IR]!HtZs-4P9ZjyR+ls8",
+        "inputs": { "VALUE": [3, "q(Bby42xa6PK]OJoH:u1", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "q(Bby42xa6PK]OJoH:u1": {
+        "opcode": "operator_mathop",
+        "next": null,
+        "parent": "]d7}kVLiH~oxb%!?L{ML",
+        "inputs": { "NUM": [3, "iq6xQ})FX0NHPV#b!?FV", [4, ""]] },
+        "fields": { "OPERATOR": ["floor", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "iq6xQ})FX0NHPV#b!?FV": {
+        "opcode": "operator_divide",
+        "next": null,
+        "parent": "q(Bby42xa6PK]OJoH:u1",
+        "inputs": {
+            "NUM1": [3, "o@d+npH@!al4D+sw9-0n", [4, ""]],
+            "NUM2": [1, [4, "16"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "o@d+npH@!al4D+sw9-0n": {
+        "opcode": "operator_subtract",
+        "next": null,
+        "parent": "iq6xQ})FX0NHPV#b!?FV",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [4, ""]
+            ],
+            "NUM2": [3, "`C4R^8^*|/k~1{u,jW-G", [4, ""]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "`C4R^8^*|/k~1{u,jW-G": {
+        "opcode": "operator_mod",
+        "next": null,
+        "parent": "o@d+npH@!al4D+sw9-0n",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.color.cdiv", "h`5?]l{lZ,))(B}.p]5N"],
+                [4, ""]
+            ],
+            "NUM2": [1, [4, "16"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "*Bvtf#D(zud0PT2!@+!d": {
+        "opcode": "control_if",
+        "next": "fdMlAqZK}Q`d-|Ton%t5",
+        "parent": ";|ai(r-?(l.BNJ!Y4/%z",
+        "inputs": {
+            "CONDITION": [2, "E?yb-Iq=!L,Tj*1|AXz#"],
+            "SUBSTACK": [2, "_z+Pi6(gMh-2T(jR.cOs"]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "E?yb-Iq=!L,Tj*1|AXz#": {
+        "opcode": "operator_lt",
+        "next": null,
+        "parent": "*Bvtf#D(zud0PT2!@+!d",
+        "inputs": {
+            "OPERAND1": [3, "%`MNQli%cwZ)Oa/|vW}U", [10, ""]],
+            "OPERAND2": [1, [10, "2"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "%`MNQli%cwZ)Oa/|vW}U": {
+        "opcode": "operator_length",
+        "next": null,
+        "parent": "E?yb-Iq=!L,Tj*1|AXz#",
+        "inputs": {
+            "STRING": [
+                3,
+                [12, "$rt.color.hex", "rt_color_hex"],
+                [10, "apple"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "_z+Pi6(gMh-2T(jR.cOs": {
+        "opcode": "data_setvariableto",
+        "next": null,
+        "parent": "*Bvtf#D(zud0PT2!@+!d",
+        "inputs": { "VALUE": [3, "k#Iq9E[yB|q0]sF)3wdd", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.color.hex", "rt_color_hex"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "k#Iq9E[yB|q0]sF)3wdd": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "_z+Pi6(gMh-2T(jR.cOs",
+        "inputs": {
+            "STRING1": [1, [10, "0"]],
+            "STRING2": [
+                3,
+                [12, "$rt.color.hex", "rt_color_hex"],
+                [10, "banana"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "fdMlAqZK}Q`d-|Ton%t5": {
+        "opcode": "data_setvariableto",
+        "next": "k#E1T[poTG2%gm0ZuV(W",
+        "parent": "*Bvtf#D(zud0PT2!@+!d",
+        "inputs": { "VALUE": [3, "B;9V,=Z4FMt}aYh7isx,", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.out", "rt_out"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "B;9V,=Z4FMt}aYh7isx,": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "fdMlAqZK}Q`d-|Ton%t5",
+        "inputs": {
+            "STRING1": [
+                3,
+                [12, "$rt.out", "rt_out"],
+                [10, "apple "]
+            ],
+            "STRING2": [
+                3,
+                [12, "$rt.color.hex", "rt_color_hex"],
+                [10, "banana"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "JHbI[u|0z(M^KJs40h7N": {
+        "opcode": "looks_switchcostumeto",
+        "next": "/Ia(~)2o=vWUU)Pe^{^a",
+        "parent": "k#E1T[poTG2%gm0ZuV(W",
+        "inputs": {
+            "COSTUME": [
+                3,
+                [12, "$rt.color.oldCostume", "rt_color_oldCostume"],
+                ";I#Y@Pr5ri|~~(+S[~Q*"
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    ";I#Y@Pr5ri|~~(+S[~Q*": {
+        "opcode": "looks_costume",
+        "next": null,
+        "parent": "JHbI[u|0z(M^KJs40h7N",
+        "inputs": {},
+        "fields": { "COSTUME": ["Cat-b", null] },
+        "shadow": true,
+        "topLevel": false
+    },
+    "/Ia(~)2o=vWUU)Pe^{^a": {
+        "opcode": "data_addtolist",
+        "next": "Q==^XSr@?-sV];_+Xgz(",
+        "parent": "JHbI[u|0z(M^KJs40h7N",
+        "inputs": { "ITEM": [3, "%bmhtoYmO]iWuO[f!Dp`", [10, "thing"]] },
+        "fields": { "LIST": ["$rt.stack", "rt_stack"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "%bmhtoYmO]iWuO[f!Dp`": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "/Ia(~)2o=vWUU)Pe^{^a",
+        "inputs": {
+            "STRING1": [1, [10, "#"]],
+            "STRING2": [
+                3,
+                [12, "$rt.out", "rt_out"],
+                [10, "banana"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "Q==^XSr@?-sV];_+Xgz(": {
+        "opcode": "control_stop",
+        "next": null,
+        "parent": "/Ia(~)2o=vWUU)Pe^{^a",
+        "inputs": {},
+        "fields": { "STOP_OPTION": ["this script", null] },
+        "shadow": false,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "hasnext": "false"
+        }
+    },
+    "oX%1QGWPJBsVzd/YNmGA": {
+        "opcode": "data_changevariableby",
+        "next": null,
+        "parent": "5:)B-29)_rxlq[0Vef.(",
+        "inputs": { "VALUE": [1, [4, "16"]] },
+        "fields": { "VARIABLE": ["$rt.color.b", "rt_color_b"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "Qs,N{}ZIEl0WG:))%FdK": {
+        "opcode": "data_changevariableby",
+        "next": null,
+        "parent": "/A!8-.DPr/Zs7,+HRh(F",
+        "inputs": { "VALUE": [1, [4, "8"]] },
+        "fields": { "VARIABLE": ["$rt.color.g", "rt_color_g"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "R8JDrdsoAz]ZZVKl_w=d": {
+        "opcode": "data_changevariableby",
+        "next": null,
+        "parent": "4/X}euBrRLN!NU_0W0zX",
+        "inputs": { "VALUE": [1, [4, "8"]] },
+        "fields": { "VARIABLE": ["$rt.color.r", "rt_color_r"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "ClH9_@zk9?ng,7z;.gWs": {
+        "opcode": "control_if_else",
+        "next": "FzIt=bRQf)aJE/X`TXfC",
+        "parent": "D7.(P!yA)gCDomw{,Bv=",
+        "inputs": {
+            "CONDITION": [2, ".s*6(|7.GS_0H8v:!R]u"],
+            "SUBSTACK": [2, "r@wOW1(o9^.REDt%*QGK"],
+            "SUBSTACK2": [2, "SGeOqhlxrcW([As7TkzM"]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    ".s*6(|7.GS_0H8v:!R]u": {
+        "opcode": "operator_gt",
+        "next": null,
+        "parent": "ClH9_@zk9?ng,7z;.gWs",
+        "inputs": {
+            "OPERAND1": [
+                3,
+                [12, "$rt.color.oldSize", "rt_color_oldSize"],
+                [10, ""]
+            ],
+            "OPERAND2": [1, [10, "100"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "r@wOW1(o9^.REDt%*QGK": {
+        "opcode": "looks_switchcostumeto",
+        "next": "@j4|e*=)fRY.n#?C`^=(",
+        "parent": "ClH9_@zk9?ng,7z;.gWs",
+        "inputs": { "COSTUME": [1, "u(m4_glp#_C)7).WOd~["] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "u(m4_glp#_C)7).WOd~[": {
+        "opcode": "looks_costume",
+        "next": null,
+        "parent": "r@wOW1(o9^.REDt%*QGK",
+        "inputs": {},
+        "fields": { "COSTUME": ["$rt.null", null] },
+        "shadow": true,
+        "topLevel": false
+    },
+    "@j4|e*=)fRY.n#?C`^=(": {
+        "opcode": "looks_setsizeto",
+        "next": null,
+        "parent": "r@wOW1(o9^.REDt%*QGK",
+        "inputs": {
+            "SIZE": [
+                3,
+                [12, "$rt.color.oldSize", "rt_color_oldSize"],
+                [4, "100"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "SGeOqhlxrcW([As7TkzM": {
+        "opcode": "looks_switchcostumeto",
+        "next": "u5l:-Y[OV)60fTS39=YH",
+        "parent": "ClH9_@zk9?ng,7z;.gWs",
+        "inputs": { "COSTUME": [1, "57ev`O;_EP%n0:orc-cT"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "57ev`O;_EP%n0:orc-cT": {
+        "opcode": "looks_costume",
+        "next": null,
+        "parent": "SGeOqhlxrcW([As7TkzM",
+        "inputs": {},
+        "fields": { "COSTUME": ["$rt.large", null] },
+        "shadow": true,
+        "topLevel": false
+    },
+    "u5l:-Y[OV)60fTS39=YH": {
+        "opcode": "looks_setsizeto",
+        "next": null,
+        "parent": "SGeOqhlxrcW([As7TkzM",
+        "inputs": {
+            "SIZE": [
+                3,
+                [12, "$rt.color.oldSize", "rt_color_oldSize"],
+                [4, "100"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "FzIt=bRQf)aJE/X`TXfC": {
+        "opcode": "looks_switchcostumeto",
+        "next": "k/Tw53,SyjO~ncPS)gU)",
+        "parent": "ClH9_@zk9?ng,7z;.gWs",
+        "inputs": {
+            "COSTUME": [
+                3,
+                [12, "$rt.color.oldCostume", "rt_color_oldCostume"],
+                "{t~mdHxyv0{dgy{[0W%C"
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{t~mdHxyv0{dgy{[0W%C": {
+        "opcode": "looks_costume",
+        "next": null,
+        "parent": "FzIt=bRQf)aJE/X`TXfC",
+        "inputs": {},
+        "fields": { "COSTUME": ["Cat-b", null] },
+        "shadow": true,
+        "topLevel": false
+    },
+    "k/Tw53,SyjO~ncPS)gU)": {
+        "opcode": "data_addtolist",
+        "next": null,
+        "parent": "FzIt=bRQf)aJE/X`TXfC",
+        "inputs": { "ITEM": [1, [10, "#000000"]] },
+        "fields": { "LIST": ["$rt.stack", "rt_stack"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "k#E1T[poTG2%gm0ZuV(W": {
+        "opcode": "control_if_else",
+        "next": "JHbI[u|0z(M^KJs40h7N",
+        "parent": "fdMlAqZK}Q`d-|Ton%t5",
+        "inputs": {
+            "CONDITION": [2, "MI6YUH+wbT,Y^X38dGU9"],
+            "SUBSTACK": [2, "`aoH#7uV=m[E%T+.;e9}"],
+            "SUBSTACK2": [2, "}?vk!/O22v7aIcW)36ac"]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "MI6YUH+wbT,Y^X38dGU9": {
+        "opcode": "operator_gt",
+        "next": null,
+        "parent": "k#E1T[poTG2%gm0ZuV(W",
+        "inputs": {
+            "OPERAND1": [
+                3,
+                [12, "$rt.color.oldSize", "rt_color_oldSize"],
+                [10, ""]
+            ],
+            "OPERAND2": [1, [10, "100"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "`aoH#7uV=m[E%T+.;e9}": {
+        "opcode": "looks_switchcostumeto",
+        "next": "ds,YLmy.3tV=UM!BBj@]",
+        "parent": "k#E1T[poTG2%gm0ZuV(W",
+        "inputs": { "COSTUME": [1, "N6=@X(L$Ej`$oj_p]4M/"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "N6=@X(L$Ej`$oj_p]4M/": {
+        "opcode": "looks_costume",
+        "next": null,
+        "parent": "`aoH#7uV=m[E%T+.;e9}",
+        "inputs": {},
+        "fields": { "COSTUME": ["$rt.null", null] },
+        "shadow": true,
+        "topLevel": false
+    },
+    "ds,YLmy.3tV=UM!BBj@]": {
+        "opcode": "looks_setsizeto",
+        "next": null,
+        "parent": "`aoH#7uV=m[E%T+.;e9}",
+        "inputs": {
+            "SIZE": [
+                3,
+                [12, "$rt.color.oldSize", "rt_color_oldSize"],
+                [4, "100"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "}?vk!/O22v7aIcW)36ac": {
+        "opcode": "looks_switchcostumeto",
+        "next": "v:X{Y?[AtUm{6jZShC5|",
+        "parent": "k#E1T[poTG2%gm0ZuV(W",
+        "inputs": { "COSTUME": [1, "2-zAR@^G9iM8_(d}JW,h"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "2-zAR@^G9iM8_(d}JW,h": {
+        "opcode": "looks_costume",
+        "next": null,
+        "parent": "}?vk!/O22v7aIcW)36ac",
+        "inputs": {},
+        "fields": { "COSTUME": ["$rt.large", null] },
+        "shadow": true,
+        "topLevel": false
+    },
+    "v:X{Y?[AtUm{6jZShC5|": {
+        "opcode": "looks_setsizeto",
+        "next": null,
+        "parent": "}?vk!/O22v7aIcW)36ac",
+        "inputs": {
+            "SIZE": [
+                3,
+                [12, "$rt.color.oldSize", "rt_color_oldSize"],
+                [4, "100"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    }
+}

@@ -1,0 +1,40 @@
+{
+    "$!w~0yGV$vVY(Q}b(!e6": {
+        "opcode": "procedures_definition",
+        "next": "2TEEuvsQ62Y17|EhMbqx",
+        "parent": null,
+        "inputs": { "custom_block": [1, "lTJQ4W^=ao4e2$ZB{XZL"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": true,
+        "x": 44,
+        "y": 44
+    },
+    "lTJQ4W^=ao4e2$ZB{XZL": {
+        "opcode": "procedures_prototype",
+        "next": null,
+        "parent": "$!w~0yGV$vVY(Q}b(!e6",
+        "inputs": {},
+        "fields": {},
+        "shadow": true,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt.new line",
+            "argumentids": "[]",
+            "argumentnames": "[]",
+            "argumentdefaults": "[]",
+            "warp": "true"
+        }
+    },
+    "2TEEuvsQ62Y17|EhMbqx": {
+        "opcode": "data_addtolist",
+        "next": null,
+        "parent": "$!w~0yGV$vVY(Q}b(!e6",
+        "inputs": { "ITEM": [1, [10, "\n"]] },
+        "fields": { "LIST": ["$rt.stack", "rt_stack"] },
+        "shadow": false,
+        "topLevel": false
+    }
+}

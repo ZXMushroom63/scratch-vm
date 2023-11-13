@@ -3,7 +3,7 @@ const Timer = require('../util/timer');
 const getMonitorIdForBlockWithArgs = require('../util/get-monitor-id');
 
 class Scratch3SensingBlocks {
-    constructor (runtime) {
+    constructor(runtime) {
         /**
          * The runtime instantiating this block package.
          * @type {Runtime}
@@ -51,11 +51,12 @@ class Scratch3SensingBlocks {
      * Retrieve the block primitives implemented by this package.
      * @return {object.<string, Function>} Mapping of opcode to Function.
      */
-    getPrimitives () {
+    getPrimitives() {
         return {
             sensing_touchingobject: this.touchingObject,
             sensing_touchingcolor: this.touchingColor,
             sensing_coloristouchingcolor: this.colorTouchingColor,
+            sensing_color: this.colorAtMyPosition,
             sensing_distanceto: this.distanceTo,
             sensing_timer: this.getTimer,
             sensing_resettimer: this.resetTimer,
@@ -72,11 +73,11 @@ class Scratch3SensingBlocks {
             sensing_askandwait: this.askAndWait,
             sensing_answer: this.getAnswer,
             sensing_username: this.getUsername,
-            sensing_userid: () => {} // legacy no-op block
+            sensing_userid: () => { } // legacy no-op block
         };
     }
 
-    getMonitored () {
+    getMonitored() {
         return {
             sensing_answer: {
                 getId: () => 'answer'
@@ -96,7 +97,7 @@ class Scratch3SensingBlocks {
         };
     }
 
-    _onAnswer (answer) {
+    _onAnswer(answer) {
         this._answer = answer;
         const questionObj = this._questionList.shift();
         if (questionObj) {
@@ -110,15 +111,15 @@ class Scratch3SensingBlocks {
         }
     }
 
-    _resetAnswer () {
+    _resetAnswer() {
         this._answer = '';
     }
 
-    _enqueueAsk (question, resolve, target, wasVisible, wasStage) {
+    _enqueueAsk(question, resolve, target, wasVisible, wasStage) {
         this._questionList.push([question, resolve, target, wasVisible, wasStage]);
     }
 
-    _askNextQuestion () {
+    _askNextQuestion() {
         if (this._questionList.length > 0) {
             const [question, _resolve, target, wasVisible, wasStage] = this._questionList[0];
             // If the target is visible, emit a blank question and use the
@@ -132,12 +133,12 @@ class Scratch3SensingBlocks {
         }
     }
 
-    _clearAllQuestions () {
+    _clearAllQuestions() {
         this._questionList = [];
         this.runtime.emit('QUESTION', null);
     }
 
-    _clearTargetQuestions (stopTarget) {
+    _clearTargetQuestions(stopTarget) {
         const currentlyAsking = this._questionList.length > 0 && this._questionList[0][2] === stopTarget;
         this._questionList = this._questionList.filter(question => (
             question[2] !== stopTarget
@@ -153,7 +154,7 @@ class Scratch3SensingBlocks {
         }
     }
 
-    askAndWait (args, util) {
+    askAndWait(args, util) {
         const _target = util.target;
         return new Promise(resolve => {
             const isQuestionAsked = this._questionList.length > 0;
@@ -164,26 +165,77 @@ class Scratch3SensingBlocks {
         });
     }
 
-    getAnswer () {
+    getAnswer() {
         return this._answer;
     }
 
-    touchingObject (args, util) {
+    touchingObject(args, util) {
         return util.target.isTouchingObject(args.TOUCHINGOBJECTMENU);
     }
 
-    touchingColor (args, util) {
+    touchingColor(args, util) {
         const color = Cast.toRgbColorList(args.COLOR);
         return util.target.isTouchingColor(color);
     }
 
-    colorTouchingColor (args, util) {
+    colorAtMyPosition(args, util) {
+        function _touchingColor(decimalColor) {
+            const color = Cast.toRgbColorList(decimalColor);
+            return util.target.isTouchingColor(color);
+        }
+        function _toHex(num) {
+            function _mod(x, y) {
+                let result = x % y;
+                // Scratch mod uses floored division instead of truncated division.
+                if (result / y < 0) result += y;
+                return result;
+            }
+            var hex = "";
+            var digits = "0123456789ABCDEF";
+            var cdiv = num;
+            hex = digits[_mod(cdiv, 16)] + hex;
+            cdiv = Math.floor((cdiv - _mod(cdiv, 16)) / 16);
+            while (!(cdiv === 0)) {
+                hex = digits[_mod(cdiv, 16)] + hex;
+                cdiv = Math.floor((cdiv - _mod(cdiv, 16)) / 16);
+            }
+            if (hex.length < 2) {
+                hex = "0" + hex;
+            }
+            return hex;
+        }
+        var oldSize = util.target.size;
+        var out = "";
+        util.target.size = 100;
+        var widthAndHeight = util.target.getWidthAndHeight();
+        var largest = Math.max(widthAndHeight[0], widthAndHeight[1]);
+        util.target.setSize(Math.ceil((100 / Math.ceil(largest)) * 2), true);
+        for (let r = 0; r < 32*8; r += 8) {
+            for (let g = 0; g < 32*8; g += 8) {
+                for (let b = 0; b < 16*16; b += 16) {
+                    if (_touchingColor((r * 65536) + ((g * 256) + b))) {
+                        //console.log("match");
+                        out = out + _toHex(r);
+                        out = out + _toHex(g);
+                        out = out + _toHex(b);
+                        out = "#" + out;
+                        util.target.setSize(oldSize, true);
+                        return out;
+                    }
+                }
+            }
+        }
+        util.target.setSize(oldSize, true);
+        return "#000000";
+    }
+
+    colorTouchingColor(args, util) {
         const maskColor = Cast.toRgbColorList(args.COLOR);
         const targetColor = Cast.toRgbColorList(args.COLOR2);
         return util.target.colorIsTouchingColor(targetColor, maskColor);
     }
 
-    distanceTo (args, util) {
+    distanceTo(args, util) {
         if (util.target.isStage) return 10000;
 
         let targetX = 0;
@@ -206,50 +258,50 @@ class Scratch3SensingBlocks {
         return Math.sqrt((dx * dx) + (dy * dy));
     }
 
-    setDragMode (args, util) {
+    setDragMode(args, util) {
         util.target.setDraggable(args.DRAG_MODE === 'draggable');
     }
 
-    getTimer (args, util) {
+    getTimer(args, util) {
         return util.ioQuery('clock', 'projectTimer');
     }
 
-    resetTimer (args, util) {
+    resetTimer(args, util) {
         util.ioQuery('clock', 'resetProjectTimer');
     }
 
-    getMouseX (args, util) {
+    getMouseX(args, util) {
         return util.ioQuery('mouse', 'getScratchX');
     }
 
-    getMouseY (args, util) {
+    getMouseY(args, util) {
         return util.ioQuery('mouse', 'getScratchY');
     }
 
-    getMouseDown (args, util) {
+    getMouseDown(args, util) {
         return util.ioQuery('mouse', 'getIsDown');
     }
 
-    current (args) {
+    current(args) {
         const menuOption = Cast.toString(args.CURRENTMENU).toLowerCase();
         const date = new Date();
         switch (menuOption) {
-        case 'year': return date.getFullYear();
-        case 'month': return date.getMonth() + 1; // getMonth is zero-based
-        case 'date': return date.getDate();
-        case 'dayofweek': return date.getDay() + 1; // getDay is zero-based, Sun=0
-        case 'hour': return date.getHours();
-        case 'minute': return date.getMinutes();
-        case 'second': return date.getSeconds();
+            case 'year': return date.getFullYear();
+            case 'month': return date.getMonth() + 1; // getMonth is zero-based
+            case 'date': return date.getDate();
+            case 'dayofweek': return date.getDay() + 1; // getDay is zero-based, Sun=0
+            case 'hour': return date.getHours();
+            case 'minute': return date.getMinutes();
+            case 'second': return date.getSeconds();
         }
         return 0;
     }
 
-    getKeyPressed (args, util) {
+    getKeyPressed(args, util) {
         return util.ioQuery('keyboard', 'getKeyIsDown', [args.KEY_OPTION]);
     }
 
-    daysSince2000 () {
+    daysSince2000() {
         const msPerDay = 24 * 60 * 60 * 1000;
         const start = new Date(2000, 0, 1); // Months are 0-indexed.
         const today = new Date();
@@ -259,7 +311,7 @@ class Scratch3SensingBlocks {
         return mSecsSinceStart / msPerDay;
     }
 
-    getLoudness () {
+    getLoudness() {
         if (typeof this.runtime.audioEngine === 'undefined') return -1;
         if (this.runtime.currentStepTime === null) return -1;
 
@@ -274,11 +326,11 @@ class Scratch3SensingBlocks {
         return this._cachedLoudness;
     }
 
-    isLoud () {
+    isLoud() {
         return this.getLoudness() > 10;
     }
 
-    getAttributeOf (args) {
+    getAttributeOf(args) {
         let attrTarget;
 
         if (args.OBJECT === '_stage_') {
@@ -296,24 +348,24 @@ class Scratch3SensingBlocks {
         // Generic attributes
         if (attrTarget.isStage) {
             switch (args.PROPERTY) {
-            // Scratch 1.4 support
-            case 'background #': return attrTarget.currentCostume + 1;
+                // Scratch 1.4 support
+                case 'background #': return attrTarget.currentCostume + 1;
 
-            case 'backdrop #': return attrTarget.currentCostume + 1;
-            case 'backdrop name':
-                return attrTarget.getCostumes()[attrTarget.currentCostume].name;
-            case 'volume': return attrTarget.volume;
+                case 'backdrop #': return attrTarget.currentCostume + 1;
+                case 'backdrop name':
+                    return attrTarget.getCostumes()[attrTarget.currentCostume].name;
+                case 'volume': return attrTarget.volume;
             }
         } else {
             switch (args.PROPERTY) {
-            case 'x position': return attrTarget.x;
-            case 'y position': return attrTarget.y;
-            case 'direction': return attrTarget.direction;
-            case 'costume #': return attrTarget.currentCostume + 1;
-            case 'costume name':
-                return attrTarget.getCostumes()[attrTarget.currentCostume].name;
-            case 'size': return attrTarget.size;
-            case 'volume': return attrTarget.volume;
+                case 'x position': return attrTarget.x;
+                case 'y position': return attrTarget.y;
+                case 'direction': return attrTarget.direction;
+                case 'costume #': return attrTarget.currentCostume + 1;
+                case 'costume name':
+                    return attrTarget.getCostumes()[attrTarget.currentCostume].name;
+                case 'size': return attrTarget.size;
+                case 'volume': return attrTarget.volume;
             }
         }
 
@@ -328,7 +380,7 @@ class Scratch3SensingBlocks {
         return 0;
     }
 
-    getUsername (args, util) {
+    getUsername(args, util) {
         return util.ioQuery('userData', 'getUsername');
     }
 }

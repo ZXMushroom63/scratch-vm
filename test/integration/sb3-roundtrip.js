@@ -6,7 +6,7 @@ const {loadCostume} = require('../../src/import/load-costume');
 const {loadSound} = require('../../src/import/load-sound');
 const makeTestStorage = require('../fixtures/make-test-storage');
 const Runtime = require('../../src/engine/runtime');
-const sb3 = require('../../src/serialization/sb3');
+const sb3 = require('../../src/serialization/sbpp');
 const Sprite = require('../../src/sprites/sprite');
 
 const defaultCostumeInfo = {

@@ -296,11 +296,14 @@ class Scratch3LooksBlocks {
             looks_switchbackdroptoandwait: this.switchBackdropAndWait,
             looks_nextcostume: this.nextCostume,
             looks_nextbackdrop: this.nextBackdrop,
+            looks_previouscostume: this.previousCostume,
+            looks_previousbackdrop: this.previousBackdrop,
             looks_changeeffectby: this.changeEffect,
             looks_seteffectto: this.setEffect,
             looks_cleargraphiceffects: this.clearEffects,
             looks_changesizeby: this.changeSize,
             looks_setsizeto: this.setSize,
+            looks_forcesizeto: this.forceSetSize,
             looks_changestretchby: () => {}, // legacy no-op blocks
             looks_setstretchto: () => {},
             looks_gotofrontback: this.goToFrontBack,
@@ -471,6 +474,12 @@ class Scratch3LooksBlocks {
         );
     }
 
+    previousCostume (args, util) {
+        this._setCostume(
+            util.target, util.target.currentCostume - 1, true
+        );
+    }
+
     switchBackdrop (args) {
         this._setBackdrop(this.runtime.getTargetForStage(), args.BACKDROP);
     }
@@ -520,6 +529,13 @@ class Scratch3LooksBlocks {
         );
     }
 
+    previousBackdrop () {
+        const stage = this.runtime.getTargetForStage();
+        this._setBackdrop(
+            stage, stage.currentCostume - 1, true
+        );
+    }
+
     clampEffect (effect, value) {
         let clampedValue = value;
         switch (effect) {
@@ -565,6 +581,11 @@ class Scratch3LooksBlocks {
     setSize (args, util) {
         const size = Cast.toNumber(args.SIZE);
         util.target.setSize(size);
+    }
+
+    forceSetSize (args, util) {
+        const size = Cast.toNumber(args.SIZE);
+        util.target.setSize(size, true);
     }
 
     goToFrontBack (args, util) {

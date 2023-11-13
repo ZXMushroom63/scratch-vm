@@ -1,0 +1,9 @@
+const largeCostumeSvg = `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="478.97898" height="360.36036" viewBox="0,0,478.97898,360.36036"><g transform="translate(-0.51051,0.18018)"><g data-paper-data="{&quot;isPaintingLayer&quot;:true}" fill="#9966ff" fill-rule="nonzero" stroke="none" stroke-width="0" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" style="mix-blend-mode: normal"><path d="M0.51051,360.18018v-360.36036h478.97898v360.36036z"/></g></g></svg>`;
+const nullCostumeSvg = `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0" viewBox="0,0,0,0"><g data-paper-data="{&quot;isPaintingLayer&quot;:true}" fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="sans-serif" font-weight="normal" font-size="12" text-anchor="start" style="mix-blend-mode: normal"/></svg>`;
+const dotCosumeSvg = `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1.56798" height="1.57193" viewBox="0,0,1.56798,1.57193"><g transform="translate(-239.21601,-179.21404)"><g data-paper-data="{&quot;isPaintingLayer&quot;:true}" fill="#000000" fill-rule="nonzero" stroke="#000000" stroke-width="0" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" style="mix-blend-mode: normal"><path d="M240.78399,180c0,0.43408 -0.351,0.78596 -0.78399,0.78596c-0.43298,0 -0.78399,-0.35189 -0.78399,-0.78596c0,-0.43408 0.351,-0.78596 0.78399,-0.78596c0.43298,0 0.78399,0.35189 0.78399,0.78596z"/></g></g></svg>`;
+
+module.exports = {
+    largeCostumeSvg: largeCostumeSvg,
+    nullCostumeSvg: nullCostumeSvg,
+    dotCosumeSvg: dotCosumeSvg
+}
