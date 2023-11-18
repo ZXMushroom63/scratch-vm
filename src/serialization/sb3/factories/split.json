@@ -1,0 +1,734 @@
+{
+    "{uuid1}": {
+        "opcode": "procedures_definition",
+        "next": "{uuid2}",
+        "parent": null,
+        "inputs": { "custom_block": [1, "{uuid3}"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": true,
+        "x": -1500,
+        "y": -1500
+    },
+    "{uuid3}": {
+        "opcode": "procedures_prototype",
+        "next": null,
+        "parent": "{uuid1}",
+        "inputs": {
+            "{uuid4}": [1, "{uuid5}"],
+            "{uuid6}": [1, "{uuid7}"]
+        },
+        "fields": {},
+        "shadow": true,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt.split.{LISTNAME} %s by %s",
+            "argumentids": "[\"{uuid4}\",\"{uuid6}\"]",
+            "argumentnames": "[\"x\",\"y\"]",
+            "argumentdefaults": "[\"\",\"\",\"\"]",
+            "warp": "true"
+        }
+    },
+    "{uuid5}": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "{uuid3}",
+        "inputs": {},
+        "fields": { "VALUE": ["x"] },
+        "shadow": true,
+        "topLevel": false
+    },
+    "{uuid7}": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "{uuid3}",
+        "inputs": {},
+        "fields": { "VALUE": ["y"] },
+        "shadow": true,
+        "topLevel": false
+    },
+    "{uuid2}": {
+        "opcode": "data_deletealloflist",
+        "next": "{uuid8}",
+        "parent": "{uuid1}",
+        "inputs": {},
+        "fields": { "LIST": ["$rt.split.temp", "rt_split_temp"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid8}": {
+        "opcode": "data_deletealloflist",
+        "next": "{uuid27}",
+        "parent": "{uuid2}",
+        "inputs": {},
+        "fields": { "LIST": ["{LISTNAME}", "{LISTID}"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid27}": {
+        "opcode": "control_if_else",
+        "next": null,
+        "parent": "{uuid8}",
+        "inputs": {
+            "CONDITION": [3, "{uuid26}", null],
+            "SUBSTACK": [3, "{uuid23}", null],
+            "SUBSTACK2": [3, "{uuid55}", null]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid26}": {
+        "opcode": "operator_gt",
+        "next": null,
+        "parent": "{uuid27}",
+        "inputs": {
+            "OPERAND1": [3, "{uuid25}", [10, "\n"]],
+            "OPERAND2": [1, [10, "0"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid25}": {
+        "opcode": "operator_length",
+        "next": null,
+        "parent": "{uuid26}",
+        "inputs": { "STRING": [3, "{uuid24}", [10, "apple"]] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid24}": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "{uuid25}",
+        "inputs": {},
+        "fields": { "VALUE": ["y"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid23}": {
+        "opcode": "data_setvariableto",
+        "next": "{uuid22}",
+        "parent": "{uuid27}",
+        "inputs": { "VALUE": [1, [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.split.i", "rt_split_i"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid22}": {
+        "opcode": "control_repeat",
+        "next": "{uuid28}",
+        "parent": "{uuid23}",
+        "inputs": {
+            "TIMES": [3, "{uuid67}", [6, "10"]],
+            "SUBSTACK": [3, "{uuid65}", null]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid67}": {
+        "opcode": "operator_length",
+        "next": null,
+        "parent": "{uuid22}",
+        "inputs": { "STRING": [3, "{uuid66}", [10, "apple"]] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid66}": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "{uuid67}",
+        "inputs": {},
+        "fields": { "VALUE": ["x"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid65}": {
+        "opcode": "data_changevariableby",
+        "next": "{uuid64}",
+        "parent": "{uuid22}",
+        "inputs": { "VALUE": [1, [4, "1"]] },
+        "fields": { "VARIABLE": ["$rt.split.i", "rt_split_i"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid64}": {
+        "opcode": "data_addtolist",
+        "next": null,
+        "parent": "{uuid65}",
+        "inputs": { "ITEM": [3, "{uuid63}", [10, "thing"]] },
+        "fields": { "LIST": ["$rt.split.temp", "rt_split_temp"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid63}": {
+        "opcode": "operator_letter_of",
+        "next": null,
+        "parent": "{uuid64}",
+        "inputs": {
+            "LETTER": [
+                3,
+                [12, "$rt.split.i", "rt_split_i"],
+                [6, "1"]
+            ],
+            "STRING": [3, "{uuid68}", [10, "apple"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid68}": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "{uuid63}",
+        "inputs": {},
+        "fields": { "VALUE": ["x"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid28}": {
+        "opcode": "data_setvariableto",
+        "next": "{uuid21}",
+        "parent": "{uuid22}",
+        "inputs": { "VALUE": [1, [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.split.i", "rt_split_i"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid21}": {
+        "opcode": "data_setvariableto",
+        "next": "{uuid29}",
+        "parent": "{uuid28}",
+        "inputs": { "VALUE": [1, [10, ""]] },
+        "fields": { "VARIABLE": ["$rt.split.tmp", "rt_split_tmp"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid29}": {
+        "opcode": "control_repeat",
+        "next": "{uuid20}",
+        "parent": "{uuid21}",
+        "inputs": {
+            "TIMES": [3, "{uuid30}", [6, "10"]],
+            "SUBSTACK": [3, "{uuid31}", null]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid30}": {
+        "opcode": "data_lengthoflist",
+        "next": null,
+        "parent": "{uuid29}",
+        "inputs": {},
+        "fields": { "LIST": ["$rt.split.temp", "rt_split_temp"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid31}": {
+        "opcode": "data_changevariableby",
+        "next": "{uuid32}",
+        "parent": "{uuid29}",
+        "inputs": { "VALUE": [1, [4, "1"]] },
+        "fields": { "VARIABLE": ["$rt.split.i", "rt_split_i"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid32}": {
+        "opcode": "control_if_else",
+        "next": null,
+        "parent": "{uuid31}",
+        "inputs": {
+            "CONDITION": [3, "{uuid33}`", null],
+            "SUBSTACK": [3, "{uuid36}", null],
+            "SUBSTACK2": [3, "{uuid17}", null]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid33}`": {
+        "opcode": "operator_equals",
+        "next": null,
+        "parent": "{uuid32}",
+        "inputs": {
+            "OPERAND1": [3, "{uuid34}", [10, "\n"]],
+            "OPERAND2": [3, "{uuid35}", [10, "50"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid34}": {
+        "opcode": "data_itemoflist",
+        "next": null,
+        "parent": "{uuid33}`",
+        "inputs": {
+            "INDEX": [3, [12, "$rt.split.i", "rt_split_i"], [7, "1"]]
+        },
+        "fields": { "LIST": ["$rt.split.temp", "rt_split_temp"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid35}": {
+        "opcode": "operator_letter_of",
+        "next": null,
+        "parent": "{uuid33}`",
+        "inputs": {
+            "LETTER": [1, [6, "1"]],
+            "STRING": [3, "{uuid69}", [10, "apple"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid69}": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "{uuid35}",
+        "inputs": {},
+        "fields": { "VALUE": ["y"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid36}": {
+        "opcode": "data_setvariableto",
+        "next": "{uuid37}",
+        "parent": "{uuid32}",
+        "inputs": { "VALUE": [1, [10, "1"]] },
+        "fields": {
+            "VARIABLE": ["$rt.split.isMatch", "rt_split_isMatch"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid37}": {
+        "opcode": "data_setvariableto",
+        "next": "{uuid12}",
+        "parent": "{uuid36}",
+        "inputs": { "VALUE": [1, [10, "1"]] },
+        "fields": { "VARIABLE": ["$rt.split.j", "rt_split_j"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid12}": {
+        "opcode": "control_repeat",
+        "next": "{uuid11}",
+        "parent": "{uuid37}",
+        "inputs": {
+            "TIMES": [3, "{uuid38}", [6, "10"]],
+            "SUBSTACK": [3, "{uuid41}", null]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid38}": {
+        "opcode": "operator_subtract",
+        "next": null,
+        "parent": "{uuid12}",
+        "inputs": {
+            "NUM1": [3, "{uuid39}", [4, "\n"]],
+            "NUM2": [1, [4, "1"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid39}": {
+        "opcode": "operator_length",
+        "next": null,
+        "parent": "{uuid38}",
+        "inputs": { "STRING": [3, "{uuid40}", [10, "apple"]] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid40}": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "{uuid39}",
+        "inputs": {},
+        "fields": { "VALUE": ["y"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid41}": {
+        "opcode": "data_changevariableby",
+        "next": "{uuid42}",
+        "parent": "{uuid12}",
+        "inputs": { "VALUE": [1, [4, "1"]] },
+        "fields": { "VARIABLE": ["$rt.split.j", "rt_split_j"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid42}": {
+        "opcode": "control_if",
+        "next": null,
+        "parent": "{uuid41}",
+        "inputs": {
+            "CONDITION": [3, "{uuid43}", null],
+            "SUBSTACK": [3, "{uuid50}", null]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid43}": {
+        "opcode": "operator_not",
+        "next": null,
+        "parent": "{uuid42}",
+        "inputs": { "OPERAND": [3, "{uuid44}", null] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid44}": {
+        "opcode": "operator_equals",
+        "next": null,
+        "parent": "{uuid43}",
+        "inputs": {
+            "OPERAND1": [3, "{uuid45}", [10, "\n"]],
+            "OPERAND2": [3, "{uuid48}", [10, "50"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid45}": {
+        "opcode": "data_itemoflist",
+        "next": null,
+        "parent": "{uuid44}",
+        "inputs": { "INDEX": [3, "{uuid46}", [7, "1"]] },
+        "fields": { "LIST": ["$rt.split.temp", "rt_split_temp"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid46}": {
+        "opcode": "operator_add",
+        "next": null,
+        "parent": "{uuid45}",
+        "inputs": {
+            "NUM1": [3, [12, "$rt.split.i", "rt_split_i"], [4, "\n"]],
+            "NUM2": [3, "{uuid47}", [4, "\n"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid47}": {
+        "opcode": "operator_subtract",
+        "next": null,
+        "parent": "{uuid46}",
+        "inputs": {
+            "NUM1": [3, [12, "$rt.split.j", "rt_split_j"], [4, "\n"]],
+            "NUM2": [1, [4, "1"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid48}": {
+        "opcode": "operator_letter_of",
+        "next": null,
+        "parent": "{uuid44}",
+        "inputs": {
+            "LETTER": [
+                3,
+                [12, "$rt.split.j", "rt_split_j"],
+                [6, "1"]
+            ],
+            "STRING": [3, "{uuid49}", [10, "apple"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid49}": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "{uuid48}",
+        "inputs": {},
+        "fields": { "VALUE": ["y"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid50}": {
+        "opcode": "data_setvariableto",
+        "next": null,
+        "parent": "{uuid42}",
+        "inputs": { "VALUE": [1, [10, "0"]] },
+        "fields": {
+            "VARIABLE": ["$rt.split.isMatch", "rt_split_isMatch"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid11}": {
+        "opcode": "control_if_else",
+        "next": null,
+        "parent": "{uuid12}",
+        "inputs": {
+            "CONDITION": [3, "{uuid13}", null],
+            "SUBSTACK": [3, "{uuid10}", null],
+            "SUBSTACK2": [3, "{uuid14}", null]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid13}": {
+        "opcode": "operator_equals",
+        "next": null,
+        "parent": "{uuid11}",
+        "inputs": {
+            "OPERAND1": [
+                3,
+                [12, "$rt.split.isMatch", "rt_split_isMatch"],
+                [10, "\n"]
+            ],
+            "OPERAND2": [1, [10, "1"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid10}": {
+        "opcode": "data_addtolist",
+        "next": "{uuid51}",
+        "parent": "{uuid11}",
+        "inputs": {
+            "ITEM": [
+                3,
+                [12, "$rt.split.tmp", "rt_split_tmp"],
+                [10, "thing"]
+            ]
+        },
+        "fields": { "LIST": ["{LISTNAME}", "{LISTID}"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid51}": {
+        "opcode": "data_setvariableto",
+        "next": "{uuid9}",
+        "parent": "{uuid10}",
+        "inputs": { "VALUE": [1, [10, ""]] },
+        "fields": { "VARIABLE": ["$rt.split.tmp", "rt_split_tmp"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid9}": {
+        "opcode": "data_changevariableby",
+        "next": null,
+        "parent": "{uuid51}",
+        "inputs": { "VALUE": [3, "{uuid52}", [4, "1"]] },
+        "fields": { "VARIABLE": ["$rt.split.i", "rt_split_i"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid52}": {
+        "opcode": "operator_subtract",
+        "next": null,
+        "parent": "{uuid9}",
+        "inputs": {
+            "NUM1": [3, "{uuid53}", [4, "\n"]],
+            "NUM2": [1, [4, "1"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid53}": {
+        "opcode": "operator_length",
+        "next": null,
+        "parent": "{uuid52}",
+        "inputs": { "STRING": [3, "{uuid54}", [10, "apple"]] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid54}": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "{uuid53}",
+        "inputs": {},
+        "fields": { "VALUE": ["y"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid14}": {
+        "opcode": "data_setvariableto",
+        "next": null,
+        "parent": "{uuid11}",
+        "inputs": { "VALUE": [3, "{uuid16}", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.split.tmp", "rt_split_tmp"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid16}": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "{uuid14}",
+        "inputs": {
+            "STRING1": [
+                3,
+                [12, "$rt.split.tmp", "rt_split_tmp"],
+                [10, "apple "]
+            ],
+            "STRING2": [3, "{uuid15}", [10, "banana"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid15}": {
+        "opcode": "data_itemoflist",
+        "next": null,
+        "parent": "{uuid16}",
+        "inputs": {
+            "INDEX": [3, [12, "$rt.split.i", "rt_split_i"], [7, "1"]]
+        },
+        "fields": { "LIST": ["$rt.split.temp", "rt_split_temp"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid17}": {
+        "opcode": "data_setvariableto",
+        "next": null,
+        "parent": "{uuid32}",
+        "inputs": { "VALUE": [3, "{uuid18}", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.split.tmp", "rt_split_tmp"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid18}": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "{uuid17}",
+        "inputs": {
+            "STRING1": [
+                3,
+                [12, "$rt.split.tmp", "rt_split_tmp"],
+                [10, "apple "]
+            ],
+            "STRING2": [3, "{uuid19}", [10, "banana"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid19}": {
+        "opcode": "data_itemoflist",
+        "next": null,
+        "parent": "{uuid18}",
+        "inputs": {
+            "INDEX": [3, [12, "$rt.split.i", "rt_split_i"], [7, "1"]]
+        },
+        "fields": { "LIST": ["$rt.split.temp", "rt_split_temp"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid20}": {
+        "opcode": "data_addtolist",
+        "next": null,
+        "parent": "{uuid29}",
+        "inputs": {
+            "ITEM": [
+                3,
+                [12, "$rt.split.tmp", "rt_split_tmp"],
+                [10, "thing"]
+            ]
+        },
+        "fields": { "LIST": ["{LISTNAME}", "{LISTID}"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid55}": {
+        "opcode": "data_setvariableto",
+        "next": "{uuid56}",
+        "parent": "{uuid27}",
+        "inputs": { "VALUE": [1, [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.split.i", "rt_split_i"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid56}": {
+        "opcode": "control_repeat",
+        "next": null,
+        "parent": "{uuid55}",
+        "inputs": {
+            "TIMES": [3, "{uuid57}", [6, "10"]],
+            "SUBSTACK": [3, "{uuid59}", null]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid57}": {
+        "opcode": "operator_length",
+        "next": null,
+        "parent": "{uuid56}",
+        "inputs": { "STRING": [3, "{uuid58}", [10, "apple"]] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid58}": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "{uuid57}",
+        "inputs": {},
+        "fields": { "VALUE": ["x"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid59}": {
+        "opcode": "data_changevariableby",
+        "next": "{uuid60}",
+        "parent": "{uuid56}",
+        "inputs": { "VALUE": [1, [4, "1"]] },
+        "fields": { "VARIABLE": ["$rt.split.i", "rt_split_i"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid60}": {
+        "opcode": "data_addtolist",
+        "next": null,
+        "parent": "{uuid59}",
+        "inputs": { "ITEM": [3, "{uuid61}", [10, "thing"]] },
+        "fields": { "LIST": ["{LISTNAME}", "{LISTID}"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid61}": {
+        "opcode": "operator_letter_of",
+        "next": null,
+        "parent": "{uuid60}",
+        "inputs": {
+            "LETTER": [
+                3,
+                [12, "$rt.split.i", "rt_split_i"],
+                [6, "1"]
+            ],
+            "STRING": [3, "{uuid62}", [10, "apple"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "{uuid62}": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "{uuid61}",
+        "inputs": {},
+        "fields": { "VALUE": ["x"] },
+        "shadow": false,
+        "topLevel": false
+    }
+}

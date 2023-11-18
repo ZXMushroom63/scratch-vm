@@ -14,7 +14,6 @@ const replaceBlockDefinitions = require("./definitions/replace.json");
 const newlineBlockDefinitions = require("./definitions/newline.json");
 const hexBlockDefinitions = require("./definitions/hex.json");
 const colorBlockDefinitions = require("./definitions/color.json");
-
 const statementPatches = require("./statementPatches.json");
 
 const { reporterPatches } = require("./reporterPatches");
@@ -22,11 +21,11 @@ const { reporterPatchesBasic } = require("./reporterPatches");
 
 var moddedBlocks = ["motion_fencing_enable", "motion_fencing_disable", "operator_true", "operator_false", "operator_power",
     "looks_previouscostume", "looks_previousbackdrop", "looks_forcesizeto", "motion_pointtoxy", "operator_min", "operator_max",
-    "operator_if", "operator_replace", "operator_newline", "operator_hex", "sensing_color"];
+    "operator_if", "operator_replace", "operator_newline", "operator_hex", "sensing_color", "data_setlisttosplit"];
 
 var skipInjectingBlockDefinitions = false;
 var debug = false;
-var githubUrl = "";
+var githubUrl = "https://github.com/ZXMushroom63/scratch-gui";
 
 /*/
 Note to self: If it is blank in normal scratch, check the imports, and scan for typos EVERYWHERE.
@@ -45,6 +44,11 @@ blockDefinitionsList.push(replaceBlockDefinitions);
 blockDefinitionsList.push(newlineBlockDefinitions);
 blockDefinitionsList.push(hexBlockDefinitions);
 blockDefinitionsList.push(colorBlockDefinitions);
+
+const splitFactory = require("./factories/split");
+
+var factoryList = [];
+factoryList.push(splitFactory);
 
 var localVariables = {
     "rt_fencing": ["$rt.spriteFencingEnabled", 1],
@@ -65,13 +69,18 @@ var localVariables = {
     "rt_color_cdiv": ["$rt.color.cdiv", 0],
     "rt_color_oldCostume": ["$rt.color.oldCostume", 0],
     "rt_color_oldSize": ["$rt.color.oldSize", 0],
-    "rt_color_hex": ["$rt.color.hex", 0]
+    "rt_color_hex": ["$rt.color.hex", 0],
+    "rt_split_i": ["$rt.split.i", 0],
+    "rt_split_isMatch": ["$rt.split.isMatch", 0],
+    "rt_split_j": ["$rt.split.j", 0],
+    "rt_split_tmp": ["$rt.split.tmp", 0]
 }
 var globalVariables = {
     "rt_out": ["$rt.out", 0]
 }
 var localLists = {
     "rt_stack": ["$rt.stack", []],
+    "rt_split_temp": ["$rt.split.temp", []],
     "rt_replace": ["$rt.replace", []]
 }
 var globalLists = {
@@ -559,7 +568,7 @@ function addCredits(project, obj) {
             "blockId": null,
             "x": 0,
             "y": -200,
-            "width": 406,
+            "width": 420,
             "height": 250,
             "minimized": false,
             "text": `▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱\nCompiled with ❤️ by Scratch++!\nMade by ZXMushroom63.${githubSection}${compiledSection}\n▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱`
@@ -589,6 +598,21 @@ function injectBlockDefinitions(project, obj) {
     return JSON.stringify(data);
 }
 
+function applyFactories(project, obj) {
+    var data = JSON.parse(project);
+    data.targets.forEach(target => {
+        var targetBlockKeys = Object.keys(target.blocks);
+        factoryList.forEach(factory=>{
+            targetBlockKeys.forEach(key=>{
+                var block = target.blocks[key];
+                if (block.opcode === factory.target_opcode) {
+                    factory.script(block, target.blocks, key, target);
+                }
+            });
+        });
+    });
+    return JSON.stringify(data);
+}
 
 /*/ 
 var obj = {
@@ -605,6 +629,7 @@ function toSb3(project, obj) {
     p = injectRuntimeVariables(p, obj);
     p = applyReporterPatches(p, obj);
     p = applyStatementPatches(p, obj);
+    p = applyFactories(p, obj);
     if (!skipInjectingBlockDefinitions) {
         p = injectBlockDefinitions(p, obj);
     }
