@@ -3,21 +3,66 @@
  * Convert's Scratch++'s custom blocks to normal scratch.
  */
 
-const fencingBlockDefinitions = require("./definitions/fencing.json");
-const powerBlockDefinitions = require("./definitions/power.json");
-const previousCostumeBlockDefinitions = require("./definitions/previous.json");
-const forceSetSizeBlockDefinitions = require("./definitions/forcesetsize.json");
-const pointToXYBlockDefinitions = require("./definitions/pointtoxy.json");
-const minMaxBlockDefinitions = require("./definitions/minmax.json");
-const ifOperatorBlockDefinitions = require("./definitions/ifoperator.json");
-const replaceBlockDefinitions = require("./definitions/replace.json");
-const newlineBlockDefinitions = require("./definitions/newline.json");
-const hexBlockDefinitions = require("./definitions/hex.json");
-const colorBlockDefinitions = require("./definitions/color.json");
-const statementPatches = require("./statementPatches.json");
+var blockDefinitions = [
+    {
+        opcodes: [],
+        force: true,
+        definition: require("./definitions/fencing.json")
+    },
+    {
+        opcodes: ["operator_power"],
+        force: false,
+        definition: require("./definitions/power.json")
+    },
+    {
+        opcodes: ["looks_previouscostume", "looks_previousbackdrop"],
+        force: false,
+        definition: require("./definitions/previous.json")
+    },
+    {
+        opcodes: ["looks_forcesizeto"],
+        force: false,
+        definition: require("./definitions/forcesetsize.json")
+    },
+    {
+        opcodes: ["motion_pointtoxy"],
+        force: false,
+        definition: require("./definitions/pointtoxy.json")
+    },
+    {
+        opcodes: ["operator_min", "operator_max"],
+        force: false,
+        definition: require("./definitions/minmax.json")
+    },
+    {
+        opcodes: ["operator_if"],
+        force: false,
+        definition: require("./definitions/ifoperator.json")
+    },
+    {
+        opcodes: ["operator_replace"],
+        force: false,
+        definition: require("./definitions/replace.json")
+    },
+    {
+        opcodes: ["operator_newline"],
+        force: false,
+        definition: require("./definitions/newline.json")
+    },
+    {
+        opcodes: ["operator_hex"],
+        force: false,
+        definition: require("./definitions/hex.json")
+    },
+    {
+        opcodes: ["sensing_color"],
+        force: false,
+        definition: require("./definitions/color.json")
+    }
+]
 
-const { reporterPatches } = require("./reporterPatches");
-const { reporterPatchesBasic } = require("./reporterPatches");
+const statementPatches = require("./statementPatches.json");
+const { reporterPatches, reporterPatchesBasic } = require("./reporterPatches");
 
 var moddedBlocks = ["motion_fencing_enable", "motion_fencing_disable", "operator_true", "operator_false", "operator_power",
     "looks_previouscostume", "looks_previousbackdrop", "looks_forcesizeto", "motion_pointtoxy", "operator_min", "operator_max",
@@ -33,22 +78,32 @@ If it loads but the inputs are blank make sure to check if the block definitions
 /*/
 
 var blockDefinitionsList = [];
-blockDefinitionsList.push(fencingBlockDefinitions);
-blockDefinitionsList.push(powerBlockDefinitions);
-blockDefinitionsList.push(previousCostumeBlockDefinitions);
-blockDefinitionsList.push(forceSetSizeBlockDefinitions);
-blockDefinitionsList.push(pointToXYBlockDefinitions);
-blockDefinitionsList.push(minMaxBlockDefinitions);
-blockDefinitionsList.push(ifOperatorBlockDefinitions);
-blockDefinitionsList.push(replaceBlockDefinitions);
-blockDefinitionsList.push(newlineBlockDefinitions);
-blockDefinitionsList.push(hexBlockDefinitions);
-blockDefinitionsList.push(colorBlockDefinitions);
+function makeBlockDefinitionsListForProject(project) {
+    var data = JSON.parse(project);
+    var uBlockDefinitionsList = [];
+    var blockDefinitionsClone = [...blockDefinitions];
+    data.targets.forEach(target => {
+        var keys = Object.keys(target.blocks);
+        keys.forEach(k => {
+            var opcode = target.blocks[k].opcode;
+            blockDefinitionsClone.forEach((bd, i) => {
+                if (bd.force) {
+                    uBlockDefinitionsList.push(bd.definition);
+                    blockDefinitionsClone.splice(i, 1);
+                } else if (bd.opcodes.includes(opcode)) {
+                    uBlockDefinitionsList.push(bd.definition);
+                    blockDefinitionsClone.splice(i, 1);
+                }
+            });
+        });
+    });
 
-const splitFactory = require("./factories/split");
+    blockDefinitionsList = uBlockDefinitionsList;
+    return project;
+}
 
 var factoryList = [];
-factoryList.push(splitFactory);
+factoryList.push(require("./factories/split"));
 
 var localVariables = {
     "rt_fencing": ["$rt.spriteFencingEnabled", 1],
@@ -179,7 +234,7 @@ function applyIfOperatorFix(project, obj) {
 function applyStatementPatches(project, obj) {
     // Converts Scratch++'s new blocks in to Scratch's custom blocks.
     var targetInputKeys = [];
-    function patchBlock(patch, theBlock) {
+    function patchBlock(patch, theBlock, blocks) {
         var newPatch = Object.assign({}, patch);
         var newBlock = Object.assign({}, theBlock);
         for (let K = 0; K < blockDefinitionsList.length; K++) {
@@ -212,7 +267,7 @@ function applyStatementPatches(project, obj) {
         keys.forEach(key => {
             var block = target.blocks[key];
             if (modKeys.includes(block.opcode)) {
-                target.blocks[key] = patchBlock(statementPatches[block.opcode], target.blocks[key]);
+                target.blocks[key] = patchBlock(statementPatches[block.opcode], target.blocks[key], target.blocks);
             }
         });
     });
@@ -228,7 +283,7 @@ function applyReporterPatches(project, obj) {
     // say (item (1) of $rt.stack)
     function transpileCustomReporters(project, obj) {
         var targetInputKeys = [];
-        function updatePatchWithInputs(patch, theBlock) {
+        function updatePatchWithInputs(patch, theBlock, blocks) {
             var newPatch = Object.assign({}, patch);
             var newBlock = Object.assign({}, theBlock);
             for (let K = 0; K < blockDefinitionsList.length; K++) {
@@ -291,7 +346,7 @@ function applyReporterPatches(project, obj) {
                                 "warp": "true"
                             }
                         }
-                        var newPatch = updatePatchWithInputs(tempPatch, target.blocks[result.reporterId]);
+                        var newPatch = updatePatchWithInputs(tempPatch, target.blocks[result.reporterId], target.blocks);
                         insertBeforeBlockId(target.blocks, block.id, newPatch);
                         Object.assign(target.blocks[result.reporterId], {
                             "opcode": "data_itemoflist",
@@ -602,8 +657,8 @@ function applyFactories(project, obj) {
     var data = JSON.parse(project);
     data.targets.forEach(target => {
         var targetBlockKeys = Object.keys(target.blocks);
-        factoryList.forEach(factory=>{
-            targetBlockKeys.forEach(key=>{
+        factoryList.forEach(factory => {
+            targetBlockKeys.forEach(key => {
                 var block = target.blocks[key];
                 if (block.opcode === factory.target_opcode) {
                     factory.script(block, target.blocks, key, target);
@@ -623,6 +678,7 @@ var obj = {
 
 function toSb3(project, obj) {
     var p = project;
+    p = makeBlockDefinitionsListForProject(p);
     p = applyIfOperatorFix(p, obj);
     p = addIdPropertiesToBlocks(p, obj);
     p = injectCostumes(p, obj);
