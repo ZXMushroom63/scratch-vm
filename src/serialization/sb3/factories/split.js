@@ -2,7 +2,7 @@ var splitDef = require("./split.json");
 
 module.exports = {
     target_opcode: "data_setlisttosplit",
-    script: function (block, blocks, blockId, target) {
+    script: function (block, blocks, blockId, target, projectJson) {
         var listName = block.fields["LIST"][0];
         var listId = block.fields["LIST"][1];
         var prototypeBlock = null;

@@ -2,8 +2,6 @@
     "motion_fencing_enable": {
         "opcode": "procedures_call",
         "mutation": {
-            "tagName": "mutation",
-            "children": [],
             "proccode": "$rt.enable fencing",
             "warp": "true"
         }
@@ -11,8 +9,6 @@
     "motion_fencing_disable": {
         "opcode": "procedures_call",
         "mutation": {
-            "tagName": "mutation",
-            "children": [],
             "proccode": "$rt.disable fencing",
             "warp": "true"
         }
@@ -20,8 +16,6 @@
     "motion_changexby": {
         "opcode": "procedures_call",
         "mutation": {
-            "tagName": "mutation",
-            "children": [],
             "proccode": "$rt.change x by %s",
             "warp": "true"
         }
@@ -29,8 +23,6 @@
     "motion_changeyby": {
         "opcode": "procedures_call",
         "mutation": {
-            "tagName": "mutation",
-            "children": [],
             "proccode": "$rt.change y by %s",
             "warp": "true"
         }
@@ -38,8 +30,6 @@
     "motion_movesteps": {
         "opcode": "procedures_call",
         "mutation": {
-            "tagName": "mutation",
-            "children": [],
             "proccode": "$rt.move %s steps",
             "warp": "true"
         }
@@ -47,8 +37,6 @@
     "motion_glideto": {
         "opcode": "procedures_call",
         "mutation": {
-            "tagName": "mutation",
-            "children": [],
             "proccode": "$rt.glide %s secs to %s",
             "warp": "false"
         }
@@ -56,8 +44,6 @@
     "motion_glidesecstoxy": {
         "opcode": "procedures_call",
         "mutation": {
-            "tagName": "mutation",
-            "children": [],
             "proccode": "$rt.glide %s secs to x: %s y: %s",
             "warp": "false"
         }
@@ -65,8 +51,6 @@
     "looks_nextcostume": {
         "opcode": "procedures_call",
         "mutation": {
-            "tagName": "mutation",
-            "children": [],
             "proccode": "$rt.next costume",
             "warp": "true"
         }
@@ -74,8 +58,6 @@
     "motion_setx": {
         "opcode": "procedures_call",
         "mutation": {
-            "tagName": "mutation",
-            "children": [],
             "proccode": "$rt.set x to %s",
             "warp": "true"
         }
@@ -83,8 +65,6 @@
     "motion_sety": {
         "opcode": "procedures_call",
         "mutation": {
-            "tagName": "mutation",
-            "children": [],
             "proccode": "$rt.set y to %s",
             "warp": "true"
         }
@@ -92,8 +72,6 @@
     "motion_goto": {
         "opcode": "procedures_call",
         "mutation": {
-            "tagName": "mutation",
-            "children": [],
             "proccode": "$rt.go to %s",
             "warp": "false"
         }
@@ -101,8 +79,6 @@
     "motion_gotoxy": {
         "opcode": "procedures_call",
         "mutation": {
-            "tagName": "mutation",
-            "children": [],
             "proccode": "$rt.go to x: %s y: %s",
             "warp": "false"
         }
@@ -110,8 +86,6 @@
     "looks_previouscostume": {
         "opcode": "procedures_call",
         "mutation": {
-            "tagName": "mutation",
-            "children": [],
             "proccode": "$rt.previous costume",
             "warp": "true"
         }
@@ -119,8 +93,6 @@
     "looks_previousbackdrop": {
         "opcode": "procedures_call",
         "mutation": {
-            "tagName": "mutation",
-            "children": [],
             "proccode": "$rt.previous backdrop",
             "warp": "true"
         }
@@ -128,8 +100,6 @@
     "looks_forcesizeto": {
         "opcode": "procedures_call",
         "mutation": {
-            "tagName": "mutation",
-            "children": [],
             "proccode": "$rt.force set size to %s %",
             "warp": "true"
         }
@@ -137,9 +107,35 @@
     "motion_pointtoxy": {
         "opcode": "procedures_call",
         "mutation": {
-            "tagName": "mutation",
-            "children": [],
             "proccode": "$rt.point towards x: %s y: %s",
+            "warp": "true"
+        }
+    },
+    "network_send": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.broadcast network message to all: %s",
+            "warp": "true"
+        }
+    },
+    "network_broadcast": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.broadcast network message to other clients: %s",
+            "warp": "true"
+        }
+    },
+    "network_start": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.start listening for messages",
+            "warp": "true"
+        }
+    },
+    "network_stop": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.stop listening for messages",
             "warp": "true"
         }
     }

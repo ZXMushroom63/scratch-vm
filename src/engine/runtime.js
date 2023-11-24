@@ -1818,6 +1818,7 @@ class Runtime extends EventEmitter {
         optMatchFields, optTarget) {
         if (!this._hats.hasOwnProperty(requestedHatOpcode)) {
             // No known hat with this opcode.
+            console.log("Invalid hat started!" + requestedHatOpcode);
             return;
         }
         const instance = this;

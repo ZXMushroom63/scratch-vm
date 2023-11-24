@@ -21,6 +21,7 @@ class Scratch3OperatorsBlocks {
             operator_multiply: this.multiply,
             operator_divide: this.divide,
             operator_power: this.power,
+            operator_fastpower: this.fastpower,
             operator_lt: this.lt,
             operator_equals: this.equals,
             operator_gt: this.gt,
@@ -33,8 +34,11 @@ class Scratch3OperatorsBlocks {
             operator_join: this.join,
             operator_newline: this.newline,
             operator_letter_of: this.letterOf,
+            operator_substring: this.substring,
             operator_length: this.length,
             operator_contains: this.contains,
+            operator_startswith: this.startsWith,
+            operator_endswith: this.endsWith,
             operator_replace: this.replace,
             operator_if: this.if,
             operator_min: this.min,
@@ -129,6 +133,19 @@ class Scratch3OperatorsBlocks {
         return str.charAt(index);
     }
 
+    substring(args) {
+        const x = Math.min(Cast.toNumber(args.LETTER1) - 1, Cast.toNumber(args.LETTER2) - 1);
+        const y = Math.max(Cast.toNumber(args.LETTER1) - 1, Cast.toNumber(args.LETTER2) - 1);
+        const string = Cast.toString(args.STRING);
+        //JavaScripts substring implementation is annoying.
+        var answer = "";
+        for (let i = 0; i < y - x; i++) {
+            answer = answer + (string[x + i] || "");
+        }
+
+        return answer;
+    }
+
     length(args) {
         return Cast.toString(args.STRING).length;
     }
@@ -138,6 +155,20 @@ class Scratch3OperatorsBlocks {
             return Cast.toString(string).toLowerCase();
         };
         return format(args.STRING1).includes(format(args.STRING2));
+    }
+
+    startsWith(args) {
+        const format = function (string) {
+            return Cast.toString(string).toLowerCase();
+        };
+        return format(args.STRING1).startsWith(format(args.STRING2));
+    }
+
+    endsWith(args) {
+        const format = function (string) {
+            return Cast.toString(string).toLowerCase();
+        };
+        return format(args.STRING1).endsWith(format(args.STRING2));
     }
 
     replace(args) {
@@ -165,10 +196,16 @@ class Scratch3OperatorsBlocks {
         return result;
     }
 
+    fastpower(args) {
+        // operator_fastpower
+        return Math.pow(10, ((Math.log10(Cast.toNumber(args.NUM1)) || 0) * (Cast.toNumber(args.NUM2) || 0)) || 0);
+    }
+
     hex(args) {
         function _mod(x, y) {
             let result = x % y;
-            // Scratch mod uses floored division instead of truncated division.
+            // Scratch's modula uses floored division instead of truncated division.
+            // I do not know why.
             if (result / y < 0) result += y;
             return result;
         }

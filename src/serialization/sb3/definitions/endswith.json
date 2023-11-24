@@ -1,0 +1,259 @@
+{
+    "BbogX[.8y3J=Y[.U5/)W": {
+        "opcode": "procedures_definition",
+        "next": "?.9#aB8OZGWbepahqjH{",
+        "parent": null,
+        "inputs": { "custom_block": [1, "dS?Vl].N.o,e.+B2G%wO"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": true,
+        "x": 1071,
+        "y": 851
+    },
+    "dS?Vl].N.o,e.+B2G%wO": {
+        "opcode": "procedures_prototype",
+        "next": null,
+        "parent": "BbogX[.8y3J=Y[.U5/)W",
+        "inputs": {
+            "3XoTneS6!Bo3M4kn0WhW": [1, "DUdDbMi7yYdb!3pU_(~q"],
+            "cHwdE[]xlh4hL4rJ3)Pr": [1, "Nh|tLsyP}Y[T``MRcMga"]
+        },
+        "fields": {},
+        "shadow": true,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt. %s ends with %s",
+            "argumentids": "[\"3XoTneS6!Bo3M4kn0WhW\",\"cHwdE[]xlh4hL4rJ3)Pr\"]",
+            "argumentnames": "[\"x\",\"y\"]",
+            "argumentdefaults": "[\"\",\"\"]",
+            "warp": "true"
+        }
+    },
+    "DUdDbMi7yYdb!3pU_(~q": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "dS?Vl].N.o,e.+B2G%wO",
+        "inputs": {},
+        "fields": { "VALUE": ["x", null] },
+        "shadow": true,
+        "topLevel": false
+    },
+    "Nh|tLsyP}Y[T``MRcMga": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "dS?Vl].N.o,e.+B2G%wO",
+        "inputs": {},
+        "fields": { "VALUE": ["y", null] },
+        "shadow": true,
+        "topLevel": false
+    },
+    "?.9#aB8OZGWbepahqjH{": {
+        "opcode": "data_setvariableto",
+        "next": "59MCL!/Mycs$5hE5G^um",
+        "parent": "BbogX[.8y3J=Y[.U5/)W",
+        "inputs": { "VALUE": [1, [10, "1"]] },
+        "fields": { "VARIABLE": ["$rt.endswith", "rt_endswith"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "59MCL!/Mycs$5hE5G^um": {
+        "opcode": "data_setvariableto",
+        "next": "j/u[.h5Rti6OvX_xzzO7",
+        "parent": "?.9#aB8OZGWbepahqjH{",
+        "inputs": { "VALUE": [1, [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.endswith.i", "rt_endswith_i"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "j/u[.h5Rti6OvX_xzzO7": {
+        "opcode": "control_repeat",
+        "next": "?/nXd@aEX0@FjGpRgxRF",
+        "parent": "59MCL!/Mycs$5hE5G^um",
+        "inputs": {
+            "TIMES": [3, "ebb={5]mALd:g9{pL_-j", [6, "10"]],
+            "SUBSTACK": [2, "A1fOxBLfsl@$3l-;B+h+"]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "ebb={5]mALd:g9{pL_-j": {
+        "opcode": "operator_length",
+        "next": null,
+        "parent": "j/u[.h5Rti6OvX_xzzO7",
+        "inputs": { "STRING": [3, "Y5mAa*VkM/[eDy4z]Y?F", [10, "apple"]] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "Y5mAa*VkM/[eDy4z]Y?F": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "ebb={5]mALd:g9{pL_-j",
+        "inputs": {},
+        "fields": { "VALUE": ["y", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "A1fOxBLfsl@$3l-;B+h+": {
+        "opcode": "control_if_else",
+        "next": "=AwGnx$(8t.[K$4#8uo]",
+        "parent": "j/u[.h5Rti6OvX_xzzO7",
+        "inputs": {
+            "CONDITION": [2, "j|#(J7N2WL)F=#kIT4-@"],
+            "SUBSTACK2": [2, "X*H1}WTO-m#TD/8k31m$"]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "j|#(J7N2WL)F=#kIT4-@": {
+        "opcode": "operator_equals",
+        "next": null,
+        "parent": "A1fOxBLfsl@$3l-;B+h+",
+        "inputs": {
+            "OPERAND1": [3, "QsDe,cvX6}1d;M!:e$KL", [10, ""]],
+            "OPERAND2": [3, "px3Gr4:xFWQs-]^0=NA+", [10, "50"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "QsDe,cvX6}1d;M!:e$KL": {
+        "opcode": "operator_letter_of",
+        "next": null,
+        "parent": "j|#(J7N2WL)F=#kIT4-@",
+        "inputs": {
+            "LETTER": [3, "bJuy*:tk!6!BGW~o?;SE", [6, "1"]],
+            "STRING": [3, "oTqi4L,Js/_kDa/VY3v;", [10, "apple"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "bJuy*:tk!6!BGW~o?;SE": {
+        "opcode": "operator_subtract",
+        "next": null,
+        "parent": "QsDe,cvX6}1d;M!:e$KL",
+        "inputs": {
+            "NUM1": [3, "w4ygl,Q|]$,Qe5VQmX]o", [4, ""]],
+            "NUM2": [3, [12, "$rt.endswith.i", "rt_endswith_i"], [4, ""]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "w4ygl,Q|]$,Qe5VQmX]o": {
+        "opcode": "operator_length",
+        "next": null,
+        "parent": "bJuy*:tk!6!BGW~o?;SE",
+        "inputs": { "STRING": [3, "iK[ATy)WAt5;b)I0t%c2", [10, "apple"]] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "iK[ATy)WAt5;b)I0t%c2": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "w4ygl,Q|]$,Qe5VQmX]o",
+        "inputs": {},
+        "fields": { "VALUE": ["y", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "oTqi4L,Js/_kDa/VY3v;": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "QsDe,cvX6}1d;M!:e$KL",
+        "inputs": {},
+        "fields": { "VALUE": ["y", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "px3Gr4:xFWQs-]^0=NA+": {
+        "opcode": "operator_letter_of",
+        "next": null,
+        "parent": "j|#(J7N2WL)F=#kIT4-@",
+        "inputs": {
+            "LETTER": [3, "[LRRbhBrph,5zIwuRF?G", [6, "1"]],
+            "STRING": [3, "G#;]A{:rrI9:87p;+Y#%", [10, "apple"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "[LRRbhBrph,5zIwuRF?G": {
+        "opcode": "operator_subtract",
+        "next": null,
+        "parent": "px3Gr4:xFWQs-]^0=NA+",
+        "inputs": {
+            "NUM1": [3, "u5d#QVwntZRXogO4F$+m", [4, ""]],
+            "NUM2": [3, [12, "$rt.endswith.i", "rt_endswith_i"], [4, ""]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "u5d#QVwntZRXogO4F$+m": {
+        "opcode": "operator_length",
+        "next": null,
+        "parent": "[LRRbhBrph,5zIwuRF?G",
+        "inputs": { "STRING": [3, "Wjks@TfVQV]-p}!DmRY+", [10, "apple"]] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "Wjks@TfVQV]-p}!DmRY+": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "u5d#QVwntZRXogO4F$+m",
+        "inputs": {},
+        "fields": { "VALUE": ["x", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "G#;]A{:rrI9:87p;+Y#%": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "px3Gr4:xFWQs-]^0=NA+",
+        "inputs": {},
+        "fields": { "VALUE": ["x", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "X*H1}WTO-m#TD/8k31m$": {
+        "opcode": "data_setvariableto",
+        "next": null,
+        "parent": "A1fOxBLfsl@$3l-;B+h+",
+        "inputs": { "VALUE": [1, [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.endswith", "rt_endswith"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "=AwGnx$(8t.[K$4#8uo]": {
+        "opcode": "data_changevariableby",
+        "next": null,
+        "parent": "A1fOxBLfsl@$3l-;B+h+",
+        "inputs": { "VALUE": [1, [4, "1"]] },
+        "fields": { "VARIABLE": ["$rt.endswith.i", "rt_endswith_i"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "?/nXd@aEX0@FjGpRgxRF": {
+        "opcode": "data_addtolist",
+        "next": null,
+        "parent": "j/u[.h5Rti6OvX_xzzO7",
+        "inputs": {
+            "ITEM": [
+                3,
+                [12, "$rt.endswith", "rt_endswith"],
+                [10, "thing"]
+            ]
+        },
+        "fields": { "LIST": ["$rt.stack", "rt_stack"] },
+        "shadow": false,
+        "topLevel": false
+    }
+}

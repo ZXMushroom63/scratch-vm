@@ -1,0 +1,164 @@
+{
+    "pPv=O#B,{rA`kOI{jyNa": {
+        "opcode": "event_whenflagclicked",
+        "next": "NKN}F/?,AjHJP7|zKrzD",
+        "parent": null,
+        "inputs": {},
+        "fields": {},
+        "shadow": false,
+        "topLevel": true,
+        "x": 48,
+        "y": 256
+    },
+    "NKN}F/?,AjHJP7|zKrzD": {
+        "opcode": "data_setvariableto",
+        "next": "^|@7tp-y%Lz9f@I2_n|h",
+        "parent": "pPv=O#B,{rA`kOI{jyNa",
+        "inputs": {
+            "VALUE": [3, [12, "☁ $rt.channel", "rt_channel"], [10, "0"]]
+        },
+        "fields": {
+            "VARIABLE": ["$rt.network.cache", "rt_network_cache"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "^|@7tp-y%Lz9f@I2_n|h": {
+        "opcode": "control_forever",
+        "next": null,
+        "parent": "NKN}F/?,AjHJP7|zKrzD",
+        "inputs": { "SUBSTACK": [2, "C_[!6Vc+gh}q$9}E:t~X"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "C_[!6Vc+gh}q$9}E:t~X": {
+        "opcode": "control_wait_until",
+        "next": "hy^k-fMn~f$)L1GsWI+n",
+        "parent": "^|@7tp-y%Lz9f@I2_n|h",
+        "inputs": { "CONDITION": [2, "!;Q0:7EG%zd]@OZTma_G"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "!;Q0:7EG%zd]@OZTma_G": {
+        "opcode": "operator_equals",
+        "next": null,
+        "parent": "C_[!6Vc+gh}q$9}E:t~X",
+        "inputs": {
+            "OPERAND1": [
+                3,
+                [12, "$rt.network.active", "rt_network_active"],
+                [10, ""]
+            ],
+            "OPERAND2": [1, [10, "1"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "hy^k-fMn~f$)L1GsWI+n": {
+        "opcode": "control_wait_until",
+        "next": "F{$gQ,{[1Q6kuZUj2x8E",
+        "parent": "C_[!6Vc+gh}q$9}E:t~X",
+        "inputs": { "CONDITION": [2, "alB@`JE~)#*p-Bp{^Vgo"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "alB@`JE~)#*p-Bp{^Vgo": {
+        "opcode": "operator_not",
+        "next": null,
+        "parent": "hy^k-fMn~f$)L1GsWI+n",
+        "inputs": { "OPERAND": [2, "h0fU-9GXMk]tg!8GIiE*"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "h0fU-9GXMk]tg!8GIiE*": {
+        "opcode": "operator_equals",
+        "next": null,
+        "parent": "alB@`JE~)#*p-Bp{^Vgo",
+        "inputs": {
+            "OPERAND1": [
+                3,
+                [12, "$rt.network.cache", "rt_network_cache"],
+                [10, ""]
+            ],
+            "OPERAND2": [3, [12, "☁ $rt.channel", "rt_channel"], [10, "50"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "F{$gQ,{[1Q6kuZUj2x8E": {
+        "opcode": "data_setvariableto",
+        "next": "1EoTA0PBT2V{x1CaS;^3",
+        "parent": "hy^k-fMn~f$)L1GsWI+n",
+        "inputs": {
+            "VALUE": [3, [12, "☁ $rt.channel", "rt_channel"], [10, "0"]]
+        },
+        "fields": {
+            "VARIABLE": ["$rt.network.cache", "rt_network_cache"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "1EoTA0PBT2V{x1CaS;^3": {
+        "opcode": "procedures_call",
+        "next": "%_sR3032za{WVUzHU#Uf",
+        "parent": "F{$gQ,{[1Q6kuZUj2x8E",
+        "inputs": {
+            "L5d*8QQIY7i2_8%X9D$A": [
+                3,
+                [12, "$rt.network.cache", "rt_network_cache"],
+                [10, ""]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt.decode %s",
+            "argumentids": "[\"L5d*8QQIY7i2_8%X9D$A\"]",
+            "warp": "true"
+        }
+    },
+    "%_sR3032za{WVUzHU#Uf": {
+        "opcode": "data_setvariableto",
+        "next": "uNsBW};=`tk2dC4uStMi",
+        "parent": "1EoTA0PBT2V{x1CaS;^3",
+        "inputs": {
+            "VALUE": [
+                3,
+                [12, "$rt.network.decoded", "rt_network_decoded"],
+                [10, "0"]
+            ]
+        },
+        "fields": {
+            "VARIABLE": ["$rt.network.message", "rt_network_message"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "uNsBW};=`tk2dC4uStMi": {
+        "opcode": "event_broadcast",
+        "next": null,
+        "parent": "%_sR3032za{WVUzHU#Uf",
+        "inputs": {
+            "BROADCAST_INPUT": [
+                1,
+                [
+                    11,
+                    "$rt.Network Message Received",
+                    "rt_network_message_received"
+                ]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    }
+}

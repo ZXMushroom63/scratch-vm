@@ -58,6 +58,41 @@ var blockDefinitions = [
         opcodes: ["sensing_color"],
         force: false,
         definition: require("./definitions/color.json")
+    },
+    {
+        opcodes: ["operator_fastpower"],
+        force: false,
+        definition: require("./definitions/fastpower.json")
+    },
+    {
+        opcodes: ["network_messagereceived", "network_message", "network_start", "network_stop", "network_send", "network_broadcast"],
+        force: false,
+        globalVariables: {
+            "rt_channel": ["☁ $rt.channel", 0, true],
+            "rt_network_active": ["$rt.network.active", 0],
+            "rt_network_cache": ["$rt.network.cache", 0],
+            "rt_network_message": ["$rt.network.message", ""]
+        },
+        broadcasts: {
+            rt_network_message_received: "$rt.Network Message Received"
+        },
+        removeExtensions: ["network"],
+        definition: require("./definitions/network.json")
+    },
+    {
+        opcodes: ["operator_substring"],
+        force: false,
+        definition: require("./definitions/substring.json")
+    },
+    {
+        opcodes: ["operator_startswith"],
+        force: false,
+        definition: require("./definitions/startswith.json")
+    },
+    {
+        opcodes: ["operator_endswith"],
+        force: false,
+        definition: require("./definitions/endswith.json")
     }
 ]
 
@@ -66,44 +101,15 @@ const { reporterPatches, reporterPatchesBasic } = require("./reporterPatches");
 
 var moddedBlocks = ["motion_fencing_enable", "motion_fencing_disable", "operator_true", "operator_false", "operator_power",
     "looks_previouscostume", "looks_previousbackdrop", "looks_forcesizeto", "motion_pointtoxy", "operator_min", "operator_max",
-    "operator_if", "operator_replace", "operator_newline", "operator_hex", "sensing_color", "data_setlisttosplit"];
+    "operator_if", "operator_replace", "operator_newline", "operator_hex", "sensing_color", "data_setlisttosplit", "operator_substring", "operator_startswith", "operator_endswith"];
 
 var skipInjectingBlockDefinitions = false;
 var debug = false;
 var githubUrl = "https://github.com/ZXMushroom63/scratch-gui";
 
-/*/
-Note to self: If it is blank in normal scratch, check the imports, and scan for typos EVERYWHERE.
-If it loads but the inputs are blank make sure to check if the block definitions prototype has an invalid `inputs` object.
-/*/
-
-var blockDefinitionsList = [];
-function makeBlockDefinitionsListForProject(project) {
-    var data = JSON.parse(project);
-    var uBlockDefinitionsList = [];
-    var blockDefinitionsClone = [...blockDefinitions];
-    data.targets.forEach(target => {
-        var keys = Object.keys(target.blocks);
-        keys.forEach(k => {
-            var opcode = target.blocks[k].opcode;
-            blockDefinitionsClone.forEach((bd, i) => {
-                if (bd.force) {
-                    uBlockDefinitionsList.push(bd.definition);
-                    blockDefinitionsClone.splice(i, 1);
-                } else if (bd.opcodes.includes(opcode)) {
-                    uBlockDefinitionsList.push(bd.definition);
-                    blockDefinitionsClone.splice(i, 1);
-                }
-            });
-        });
-    });
-
-    blockDefinitionsList = uBlockDefinitionsList;
-    return project;
-}
-
 var factoryList = [];
 factoryList.push(require("./factories/split"));
+factoryList.push(require("./factories/network"));
 
 var localVariables = {
     "rt_fencing": ["$rt.spriteFencingEnabled", 1],
@@ -128,10 +134,25 @@ var localVariables = {
     "rt_split_i": ["$rt.split.i", 0],
     "rt_split_isMatch": ["$rt.split.isMatch", 0],
     "rt_split_j": ["$rt.split.j", 0],
-    "rt_split_tmp": ["$rt.split.tmp", 0]
+    "rt_split_tmp": ["$rt.split.tmp", 0],
+    "rt_network_charset": ["$rt.network.charset", ""],
+    "rt_network_enc_i": ["$rt.network.enc.i", 0],
+    "rt_network_enc_j": ["$rt.network.enc.j", 0],
+    "rt_network_encoded": ["$rt.network.encoded", ""],
+    "rt_network_decoded": ["$rt.network.decoded", ""],
+    "rt_network_dco_i": ["$rt.network.dco.i", 0],
+    "rt_network_dco": ["$rt.network.dco", ""],
+    "rt_substr": ["$rt.substr", ""],
+    "rt_substr_max": ["$rt.substr.max", ""],
+    "rt_substr_min": ["$rt.substr.min", ""],
+    "rt_substr_i": ["$rt.substr.i", 0],
+    "rt_startswith_i": ["$rt.startswith.i", 0],
+    "rt_startswith": ["$rt.startswith", 0],
+    "rt_endswith_i": ["$rt.endwith.i", 0],
+    "rt_endswith": ["$rt.endswith", 0]
 }
 var globalVariables = {
-    "rt_out": ["$rt.out", 0]
+    "rt_out": ["$rt.out", 0],
 }
 var localLists = {
     "rt_stack": ["$rt.stack", []],
@@ -139,6 +160,78 @@ var localLists = {
     "rt_replace": ["$rt.replace", []]
 }
 var globalLists = {
+}
+
+/*/
+Note to self: If it is blank in normal scratch, check the imports, and scan for typos EVERYWHERE.
+If it loads but the inputs are blank make sure to check if the block definitions prototype has an invalid `inputs` object.
+/*/
+
+var blockDefinitionsList = [];
+function makeBlockDefinitionsListForProject(project) {
+    var data = JSON.parse(project);
+    var uBlockDefinitionsList = [];
+    var blockDefinitionsClone = [...blockDefinitions];
+    data.targets.forEach(target => {
+        var keys = Object.keys(target.blocks);
+        keys.forEach(k => {
+            var opcode = target.blocks[k].opcode;
+            blockDefinitionsClone.forEach((bd, i) => {
+                if (bd.force) {
+                    uBlockDefinitionsList.push(bd.definition);
+                    blockDefinitionsClone.splice(i, 1);
+                    if (bd.globalVariables) {
+                        data.targets.forEach(t => {
+                            if (t.isStage) {
+                                Object.assign(t.variables, bd.globalVariables);
+                            }
+                        })
+                    }
+                    if (bd.broadcasts) {
+                        data.targets.forEach(t => {
+                            if (t.isStage) {
+                                Object.assign(t.broadcasts, bd.broadcasts);
+                            }
+                        })
+                    }
+                    if (Array.isArray(bd.removeExtensions)) {
+                        bd.removeExtensions.forEach((ex) => {
+                            if (data.extensions && data.extensions.includes(ex)) {
+                                data.extensions.splice(data.extensions.indexOf(ex), 1);
+                            }
+                        })
+                    }
+                } else if (bd.opcodes.includes(opcode)) {
+                    uBlockDefinitionsList.push(bd.definition);
+                    blockDefinitionsClone.splice(i, 1);
+                    if (bd.globalVariables) {
+                        data.targets.forEach(t => {
+                            if (t.isStage) {
+                                Object.assign(t.variables, bd.globalVariables);
+                            }
+                        })
+                    }
+                    if (bd.broadcasts) {
+                        data.targets.forEach(t => {
+                            if (t.isStage) {
+                                Object.assign(t.broadcasts, bd.broadcasts);
+                            }
+                        })
+                    }
+                    if (Array.isArray(bd.removeExtensions)) {
+                        bd.removeExtensions.forEach((ex) => {
+                            if (data.extensions && data.extensions.includes(ex)) {
+                                data.extensions.splice(data.extensions.indexOf(ex), 1);
+                            }
+                        })
+                    }
+                }
+            });
+        });
+    });
+
+    blockDefinitionsList = uBlockDefinitionsList;
+    return JSON.stringify(data);
 }
 
 function injectCostumes(project, obj) {
@@ -267,7 +360,12 @@ function applyStatementPatches(project, obj) {
         keys.forEach(key => {
             var block = target.blocks[key];
             if (modKeys.includes(block.opcode)) {
-                target.blocks[key] = patchBlock(statementPatches[block.opcode], target.blocks[key], target.blocks);
+                var dPatch = Object.assign({}, statementPatches[block.opcode]);
+                if (dPatch.mutation) {
+                    dPatch.mutation.tagName = "mutation";
+                    dPatch.mutation.children = [];
+                }
+                target.blocks[key] = patchBlock(dPatch, target.blocks[key], target.blocks);
             }
         });
     });
@@ -324,7 +422,10 @@ function applyReporterPatches(project, obj) {
             statementBlocks.forEach(block => {
                 var results = searchInputStackForOpcodes(targetOpcodes, block.id, target.blocks);
                 if (results.length > 0) {
-                    console.log(results);
+                    if (debug) {
+                        console.log("Reporter stack for block " + block.opcode);
+                        console.log(results);
+                    }
                     results = sortInputStack(results);
                     insertBeforeBlockId(target.blocks, block.id, {
                         "opcode": "data_deletealloflist",
@@ -334,6 +435,8 @@ function applyReporterPatches(project, obj) {
                     });
                     for (let i = 0; i < results.length; i++) {
                         var result = results[i];
+                        var isBool = Array.isArray(reporterPatches[target.blocks[result.reporterId].opcode]);
+                        var proccode = isBool ? reporterPatches[target.blocks[result.reporterId].opcode][0] : reporterPatches[target.blocks[result.reporterId].opcode];
                         var tempPatch = {
                             "opcode": "procedures_call",
                             "fields": {},
@@ -342,18 +445,46 @@ function applyReporterPatches(project, obj) {
                             "mutation": {
                                 "tagName": "mutation",
                                 "children": [],
-                                "proccode": reporterPatches[target.blocks[result.reporterId].opcode],
+                                "proccode": proccode,
                                 "warp": "true"
                             }
                         }
                         var newPatch = updatePatchWithInputs(tempPatch, target.blocks[result.reporterId], target.blocks);
                         insertBeforeBlockId(target.blocks, block.id, newPatch);
-                        Object.assign(target.blocks[result.reporterId], {
-                            "opcode": "data_itemoflist",
-                            "inputs": { "INDEX": [1, [7, "" + (i + 1) + ""]] },
-                            "fields": { "LIST": ["$rt.stack", "rt_stack"] },
-                            "shadow": false,
-                        });
+                        if (isBool) {
+                            if (debug) {
+                                console.log("Patching boolean reporter: " + target.blocks[result.reporterId].opcode);
+                            }
+                            var itemListId = genCharList("abcdefghijklmnopqrstuvwxyz0123456789/", 16);
+                            Object.assign(target.blocks[result.reporterId], {
+                                "opcode": "operator_equals",
+                                "inputs": {
+                                    "OPERAND1": [3, itemListId, [10, ""]],
+                                    "OPERAND2": [1, [10, "1"]]
+                                },
+                                "fields": {},
+                                "shadow": false,
+                            });
+                            target.blocks[itemListId] = {
+                                "opcode": "data_itemoflist",
+                                "next": null,
+                                "parent": result.reporterId,
+                                "inputs": { "INDEX": [1, [7, "" + (i + 1) + ""]] },
+                                "fields": { "LIST": ["$rt.stack", "rt_stack"] },
+                                "shadow": false,
+                                "topLevel": false
+                            }
+                        } else {
+                            if (debug) {
+                                console.log("Patching normal reporter: " + target.blocks[result.reporterId].opcode);
+                            }
+                            Object.assign(target.blocks[result.reporterId], {
+                                "opcode": "data_itemoflist",
+                                "inputs": { "INDEX": [1, [7, "" + (i + 1) + ""]] },
+                                "fields": { "LIST": ["$rt.stack", "rt_stack"] },
+                                "shadow": false,
+                            });
+                        }
                     }
                 }
             });
@@ -492,7 +623,7 @@ function searchInputStackForOpcodes(opcodes, blockId, blocks, arr = [], parentBl
     var inputKeys = Object.keys(blocks[blockId].inputs);
     for (let i = 0; i < inputKeys.length; i++) {
         const ik = inputKeys[i];
-        if (blocks[blockId].inputs[ik][0] === 3 && !Array.isArray(blocks[blockId].inputs[ik][1])) {
+        if ((blocks[blockId].inputs[ik][0] === 3 || blocks[blockId].inputs[ik][0] === 2) && !Array.isArray(blocks[blockId].inputs[ik][1])) {
             arr = searchInputStackForOpcodes(opcodes, blocks[blockId].inputs[ik][1], blocks, arr, blockId, ik, depth + 1);
         }
     }
@@ -624,7 +755,7 @@ function addCredits(project, obj) {
             "x": 0,
             "y": -200,
             "width": 420,
-            "height": 250,
+            "height": 255,
             "minimized": false,
             "text": `▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱\nCompiled with ❤️ by Scratch++!\nMade by ZXMushroom63.${githubSection}${compiledSection}\n▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱▰▱`
         }
@@ -661,7 +792,7 @@ function applyFactories(project, obj) {
             targetBlockKeys.forEach(key => {
                 var block = target.blocks[key];
                 if (block.opcode === factory.target_opcode) {
-                    factory.script(block, target.blocks, key, target);
+                    factory.script(block, target.blocks, key, target, data);
                 }
             });
         });

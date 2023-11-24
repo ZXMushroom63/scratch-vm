@@ -1,0 +1,1016 @@
+{
+    "8PHLz6_N~_U;nbVD5K)H": {
+        "opcode": "procedures_definition",
+        "next": "~rUZ_zy@@q4aVP2+F9D#",
+        "parent": null,
+        "inputs": { "custom_block": [1, ":`DA^a@$y)nd+FV85i0c"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": true,
+        "x": 1042,
+        "y": 64
+    },
+    ":`DA^a@$y)nd+FV85i0c": {
+        "opcode": "procedures_prototype",
+        "next": null,
+        "parent": "8PHLz6_N~_U;nbVD5K)H",
+        "inputs": { "HccJ~w]M4Q2ZK%;rh(z^": [1, "9ox|kui`o}csBH~Z|@?H"] },
+        "fields": {},
+        "shadow": true,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt.broadcast network message to all: %s",
+            "argumentids": "[\"HccJ~w]M4Q2ZK%;rh(z^\"]",
+            "argumentnames": "[\"msg\"]",
+            "argumentdefaults": "[\"\"]",
+            "warp": "true"
+        }
+    },
+    "9ox|kui`o}csBH~Z|@?H": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": ":`DA^a@$y)nd+FV85i0c",
+        "inputs": {},
+        "fields": { "VALUE": ["msg", null] },
+        "shadow": true,
+        "topLevel": false
+    },
+    "~rUZ_zy@@q4aVP2+F9D#": {
+        "opcode": "procedures_call",
+        "next": "V#I+A(J)7Q}Gm!3RS7,r",
+        "parent": "8PHLz6_N~_U;nbVD5K)H",
+        "inputs": {
+            "qY|u+%YVOu/s=?19Rytz": [3, "rDdp#G25~m$phwIL[sql", [10, ""]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt.encode %s",
+            "argumentids": "[\"qY|u+%YVOu/s=?19Rytz\"]",
+            "warp": "true"
+        }
+    },
+    "rDdp#G25~m$phwIL[sql": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "~rUZ_zy@@q4aVP2+F9D#",
+        "inputs": {},
+        "fields": { "VALUE": ["msg", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "V#I+A(J)7Q}Gm!3RS7,r": {
+        "opcode": "data_setvariableto",
+        "next": null,
+        "parent": "~rUZ_zy@@q4aVP2+F9D#",
+        "inputs": {
+            "VALUE": [
+                3,
+                [12, "$rt.network.encoded", "rt_network_encoded"],
+                [10, "0"]
+            ]
+        },
+        "fields": { "VARIABLE": ["☁ $rt.channel", "rt_channel"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "7s-mIcV;FvM^,4~087jy": {
+        "opcode": "procedures_definition",
+        "next": "5qG3nE?ey#Qs~$m4y.2F",
+        "parent": null,
+        "inputs": { "custom_block": [1, "rA;ToK}uf2#]T+H%Y?Oz"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": true,
+        "x": 2009,
+        "y": 64
+    },
+    "rA;ToK}uf2#]T+H%Y?Oz": {
+        "opcode": "procedures_prototype",
+        "next": null,
+        "parent": "7s-mIcV;FvM^,4~087jy",
+        "inputs": { "UHn_`FUEe$y]6#0}({]f": [1, "~0~kmaS?o3Uw9kBjK=p5"] },
+        "fields": {},
+        "shadow": true,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt.broadcast network message to other clients: %s",
+            "argumentids": "[\"UHn_`FUEe$y]6#0}({]f\"]",
+            "argumentnames": "[\"msg\"]",
+            "argumentdefaults": "[\"\"]",
+            "warp": "true"
+        }
+    },
+    "~0~kmaS?o3Uw9kBjK=p5": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "rA;ToK}uf2#]T+H%Y?Oz",
+        "inputs": {},
+        "fields": { "VALUE": ["msg", null] },
+        "shadow": true,
+        "topLevel": false
+    },
+    "5qG3nE?ey#Qs~$m4y.2F": {
+        "opcode": "procedures_call",
+        "next": "CHfFLT,t,=%=Yhe8?eCR",
+        "parent": "7s-mIcV;FvM^,4~087jy",
+        "inputs": {
+            "qY|u+%YVOu/s=?19Rytz": [3, "v*[3e$ep[3`;|-LR![*R", [10, ""]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt.encode %s",
+            "argumentids": "[\"qY|u+%YVOu/s=?19Rytz\"]",
+            "warp": "true"
+        }
+    },
+    "v*[3e$ep[3`;|-LR![*R": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "5qG3nE?ey#Qs~$m4y.2F",
+        "inputs": {},
+        "fields": { "VALUE": ["msg", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "CHfFLT,t,=%=Yhe8?eCR": {
+        "opcode": "data_setvariableto",
+        "next": "rbH-bWP9RFL.H(75#Rh,",
+        "parent": "5qG3nE?ey#Qs~$m4y.2F",
+        "inputs": {
+            "VALUE": [
+                3,
+                [12, "$rt.network.encoded", "rt_network_encoded"],
+                [10, "0"]
+            ]
+        },
+        "fields": {
+            "VARIABLE": ["$rt.network.cache", "rt_network_cache"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "rbH-bWP9RFL.H(75#Rh,": {
+        "opcode": "data_setvariableto",
+        "next": null,
+        "parent": "CHfFLT,t,=%=Yhe8?eCR",
+        "inputs": {
+            "VALUE": [
+                3,
+                [12, "$rt.network.encoded", "rt_network_encoded"],
+                [10, "0"]
+            ]
+        },
+        "fields": { "VARIABLE": ["☁ $rt.channel", "rt_channel"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "9{~0UK^]Qw*`jLrI|7lR": {
+        "opcode": "procedures_definition",
+        "next": "O9fE]7-1kUq=f@_e%IvJ",
+        "parent": null,
+        "inputs": { "custom_block": [1, "A`n;FC]o^z5gt}6I!o6-"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": true,
+        "x": 1042,
+        "y": 304
+    },
+    "A`n;FC]o^z5gt}6I!o6-": {
+        "opcode": "procedures_prototype",
+        "next": null,
+        "parent": "9{~0UK^]Qw*`jLrI|7lR",
+        "inputs": {},
+        "fields": {},
+        "shadow": true,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt.load charset",
+            "argumentids": "[]",
+            "argumentnames": "[]",
+            "argumentdefaults": "[]",
+            "warp": "true"
+        }
+    },
+    "O9fE]7-1kUq=f@_e%IvJ": {
+        "opcode": "data_setvariableto",
+        "next": null,
+        "parent": "9{~0UK^]Qw*`jLrI|7lR",
+        "inputs": {
+            "VALUE": [
+                1,
+                [
+                    10,
+                    " !\"#$%&'()*+,-./0123456789:;<=>?@abcdefghijklmnopqrstuvwxyz[\\]^_`{|}~§"
+                ]
+            ]
+        },
+        "fields": {
+            "VARIABLE": ["$rt.network.charset", "rt_network_charset"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "J:Ny.~_X;Dz}Y3H|80B(": {
+        "opcode": "procedures_definition",
+        "next": "q)u0#ROu,~uhd-^o(}a^",
+        "parent": null,
+        "inputs": { "custom_block": [1, "?p!rIlk43zMk}:4xM=zx"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": true,
+        "x": 1042,
+        "y": 496
+    },
+    "?p!rIlk43zMk}:4xM=zx": {
+        "opcode": "procedures_prototype",
+        "next": null,
+        "parent": "J:Ny.~_X;Dz}Y3H|80B(",
+        "inputs": { "qY|u+%YVOu/s=?19Rytz": [1, ";_7$T-Yoty1bkd.9/`8h"] },
+        "fields": {},
+        "shadow": true,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt.encode %s",
+            "argumentids": "[\"qY|u+%YVOu/s=?19Rytz\"]",
+            "argumentnames": "[\"text\"]",
+            "argumentdefaults": "[\"\"]",
+            "warp": "true"
+        }
+    },
+    ";_7$T-Yoty1bkd.9/`8h": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "?p!rIlk43zMk}:4xM=zx",
+        "inputs": {},
+        "fields": { "VALUE": ["text", null] },
+        "shadow": true,
+        "topLevel": false
+    },
+    "q)u0#ROu,~uhd-^o(}a^": {
+        "opcode": "procedures_call",
+        "next": "}=Q_(wQ;kD}|m-0hR(;_",
+        "parent": "J:Ny.~_X;Dz}Y3H|80B(",
+        "inputs": {},
+        "fields": {},
+        "shadow": false,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt.load charset",
+            "argumentids": "[]",
+            "warp": "true"
+        }
+    },
+    "}=Q_(wQ;kD}|m-0hR(;_": {
+        "opcode": "data_setvariableto",
+        "next": ";owg]gPCYzb6fl$.w5`.",
+        "parent": "q)u0#ROu,~uhd-^o(}a^",
+        "inputs": { "VALUE": [1, [10, "0"]] },
+        "fields": {
+            "VARIABLE": ["$rt.network.enc.i", "rt_network_enc_i"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    ";owg]gPCYzb6fl$.w5`.": {
+        "opcode": "data_setvariableto",
+        "next": "@]ou+Y`,9.XUQp:1X3PE",
+        "parent": "}=Q_(wQ;kD}|m-0hR(;_",
+        "inputs": { "VALUE": [1, [10, ""]] },
+        "fields": {
+            "VARIABLE": ["$rt.network.encoded", "rt_network_encoded"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "@]ou+Y`,9.XUQp:1X3PE": {
+        "opcode": "control_repeat_until",
+        "next": null,
+        "parent": ";owg]gPCYzb6fl$.w5`.",
+        "inputs": {
+            "CONDITION": [2, "20fH3GCZKiL+7oi92%Bf"],
+            "SUBSTACK": [2, "6v)?B:tV$mbauY!$dt5m"]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "20fH3GCZKiL+7oi92%Bf": {
+        "opcode": "operator_gt",
+        "next": null,
+        "parent": "@]ou+Y`,9.XUQp:1X3PE",
+        "inputs": {
+            "OPERAND1": [
+                3,
+                [12, "$rt.network.enc.i", "rt_network_enc_i"],
+                [10, ""]
+            ],
+            "OPERAND2": [3, "QR+z1/L]3:NSHGBT}N@y", [10, "50"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "QR+z1/L]3:NSHGBT}N@y": {
+        "opcode": "operator_subtract",
+        "next": null,
+        "parent": "20fH3GCZKiL+7oi92%Bf",
+        "inputs": {
+            "NUM1": [3, "]f1.y#lur~:u8a=4il90", [4, ""]],
+            "NUM2": [1, [4, "1"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "]f1.y#lur~:u8a=4il90": {
+        "opcode": "operator_length",
+        "next": null,
+        "parent": "QR+z1/L]3:NSHGBT}N@y",
+        "inputs": { "STRING": [3, "=[[^!Gj8y99KfrNMTh98", [10, "apple"]] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "=[[^!Gj8y99KfrNMTh98": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "]f1.y#lur~:u8a=4il90",
+        "inputs": {},
+        "fields": { "VALUE": ["text", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "6v)?B:tV$mbauY!$dt5m": {
+        "opcode": "data_changevariableby",
+        "next": "Hv7ORetk*7NqWwaqG8%6",
+        "parent": "@]ou+Y`,9.XUQp:1X3PE",
+        "inputs": { "VALUE": [1, [4, "1"]] },
+        "fields": {
+            "VARIABLE": ["$rt.network.enc.i", "rt_network_enc_i"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "Hv7ORetk*7NqWwaqG8%6": {
+        "opcode": "data_setvariableto",
+        "next": "+86/vDdmLkGu;j(h+w-1",
+        "parent": "6v)?B:tV$mbauY!$dt5m",
+        "inputs": { "VALUE": [1, [10, "0"]] },
+        "fields": {
+            "VARIABLE": ["$rt.network.enc.j", "rt_network_enc_j"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "+86/vDdmLkGu;j(h+w-1": {
+        "opcode": "control_repeat_until",
+        "next": "P}ErQ,),KFZ@VJ}nJ(_D",
+        "parent": "Hv7ORetk*7NqWwaqG8%6",
+        "inputs": {
+            "CONDITION": [2, "?aAa94w]lHP8RMy-%H4!"],
+            "SUBSTACK": [2, "jLuVS9;bqN9+b@Q8Pq5*"]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "?aAa94w]lHP8RMy-%H4!": {
+        "opcode": "operator_equals",
+        "next": null,
+        "parent": "+86/vDdmLkGu;j(h+w-1",
+        "inputs": {
+            "OPERAND1": [3, "^Q!w%5+vco]~:dF7*k|j", [10, ""]],
+            "OPERAND2": [3, "jBynwVv!hWAC/?09H|1]", [10, "50"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "^Q!w%5+vco]~:dF7*k|j": {
+        "opcode": "operator_letter_of",
+        "next": null,
+        "parent": "?aAa94w]lHP8RMy-%H4!",
+        "inputs": {
+            "LETTER": [
+                3,
+                [12, "$rt.network.enc.j", "rt_network_enc_j"],
+                [6, "1"]
+            ],
+            "STRING": [
+                3,
+                [12, "$rt.network.charset", "rt_network_charset"],
+                [10, "apple"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "jBynwVv!hWAC/?09H|1]": {
+        "opcode": "operator_letter_of",
+        "next": null,
+        "parent": "?aAa94w]lHP8RMy-%H4!",
+        "inputs": {
+            "LETTER": [
+                3,
+                [12, "$rt.network.enc.i", "rt_network_enc_i"],
+                [6, "1"]
+            ],
+            "STRING": [3, "rWDX0s`K_qQAq}eJWV8;", [10, "apple"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "rWDX0s`K_qQAq}eJWV8;": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "jBynwVv!hWAC/?09H|1]",
+        "inputs": {},
+        "fields": { "VALUE": ["text", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "jLuVS9;bqN9+b@Q8Pq5*": {
+        "opcode": "data_changevariableby",
+        "next": null,
+        "parent": "+86/vDdmLkGu;j(h+w-1",
+        "inputs": { "VALUE": [1, [4, "1"]] },
+        "fields": {
+            "VARIABLE": ["$rt.network.enc.j", "rt_network_enc_j"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "P}ErQ,),KFZ@VJ}nJ(_D": {
+        "opcode": "control_if",
+        "next": "n=AG]%yTC,?LaXKY8z2T",
+        "parent": "+86/vDdmLkGu;j(h+w-1",
+        "inputs": {
+            "CONDITION": [2, "f7EWX/GRbfWQ2gV268WG"],
+            "SUBSTACK": [2, "/))u|dCrAh3efZg*Oz,@"]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "f7EWX/GRbfWQ2gV268WG": {
+        "opcode": "operator_lt",
+        "next": null,
+        "parent": "P}ErQ,),KFZ@VJ}nJ(_D",
+        "inputs": {
+            "OPERAND1": [3, "?_eJ=%-AqoR2Q8%?nT]8", [10, ""]],
+            "OPERAND2": [1, [10, "2"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "?_eJ=%-AqoR2Q8%?nT]8": {
+        "opcode": "operator_length",
+        "next": null,
+        "parent": "f7EWX/GRbfWQ2gV268WG",
+        "inputs": {
+            "STRING": [
+                3,
+                [12, "$rt.network.enc.j", "rt_network_enc_j"],
+                [10, "apple"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "/))u|dCrAh3efZg*Oz,@": {
+        "opcode": "data_setvariableto",
+        "next": null,
+        "parent": "P}ErQ,),KFZ@VJ}nJ(_D",
+        "inputs": { "VALUE": [3, "8J`]h3!7MX,2[Hv$Y#dY", [10, "0"]] },
+        "fields": {
+            "VARIABLE": ["$rt.network.enc.j", "rt_network_enc_j"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "8J`]h3!7MX,2[Hv$Y#dY": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "/))u|dCrAh3efZg*Oz,@",
+        "inputs": {
+            "STRING1": [1, [10, "0"]],
+            "STRING2": [
+                3,
+                [12, "$rt.network.enc.j", "rt_network_enc_j"],
+                [10, "banana"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "n=AG]%yTC,?LaXKY8z2T": {
+        "opcode": "data_setvariableto",
+        "next": null,
+        "parent": "P}ErQ,),KFZ@VJ}nJ(_D",
+        "inputs": { "VALUE": [3, "}4DoMZ{Z~%JROu{-5K(%", [10, "0"]] },
+        "fields": {
+            "VARIABLE": ["$rt.network.encoded", "rt_network_encoded"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "}4DoMZ{Z~%JROu{-5K(%": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "n=AG]%yTC,?LaXKY8z2T",
+        "inputs": {
+            "STRING1": [
+                3,
+                [12, "$rt.network.encoded", "rt_network_encoded"],
+                [10, "apple "]
+            ],
+            "STRING2": [
+                3,
+                [12, "$rt.network.enc.j", "rt_network_enc_j"],
+                [10, "banana"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "8d!])[[CObnP0LF/#Jh]": {
+        "opcode": "procedures_definition",
+        "next": "vC0wOqzg(~PNY3tZkAu?",
+        "parent": null,
+        "inputs": { "custom_block": [1, "G-WRW]5f~XE_SegW}30V"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": true,
+        "x": 2579,
+        "y": 64
+    },
+    "G-WRW]5f~XE_SegW}30V": {
+        "opcode": "procedures_prototype",
+        "next": null,
+        "parent": "8d!])[[CObnP0LF/#Jh]",
+        "inputs": { "L5d*8QQIY7i2_8%X9D$A": [1, "5ePV~I(sVppJ|Km|P?*}"] },
+        "fields": {},
+        "shadow": true,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt.decode %s",
+            "argumentids": "[\"L5d*8QQIY7i2_8%X9D$A\"]",
+            "argumentnames": "[\"text\"]",
+            "argumentdefaults": "[\"\"]",
+            "warp": "true"
+        }
+    },
+    "5ePV~I(sVppJ|Km|P?*}": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "G-WRW]5f~XE_SegW}30V",
+        "inputs": {},
+        "fields": { "VALUE": ["text", null] },
+        "shadow": true,
+        "topLevel": false
+    },
+    "vC0wOqzg(~PNY3tZkAu?": {
+        "opcode": "procedures_call",
+        "next": "6bD5]M@vQF(dCsD(?iZy",
+        "parent": "8d!])[[CObnP0LF/#Jh]",
+        "inputs": {},
+        "fields": {},
+        "shadow": false,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt.load charset",
+            "argumentids": "[]",
+            "warp": "true"
+        }
+    },
+    "6bD5]M@vQF(dCsD(?iZy": {
+        "opcode": "data_setvariableto",
+        "next": "X%-eT?MNwfAjEW2:T(Um",
+        "parent": "vC0wOqzg(~PNY3tZkAu?",
+        "inputs": { "VALUE": [1, [10, ""]] },
+        "fields": {
+            "VARIABLE": ["$rt.network.decoded", "rt_network_decoded"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "X%-eT?MNwfAjEW2:T(Um": {
+        "opcode": "data_setvariableto",
+        "next": ";N64/4%?qQp6DXS,]WV+",
+        "parent": "6bD5]M@vQF(dCsD(?iZy",
+        "inputs": { "VALUE": [1, [10, "1"]] },
+        "fields": {
+            "VARIABLE": ["$rt.network.dco.i", "rt_network_dco_i"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    ";N64/4%?qQp6DXS,]WV+": {
+        "opcode": "data_setvariableto",
+        "next": "!(9d2Au7p9JQc%xx=7VB",
+        "parent": "X%-eT?MNwfAjEW2:T(Um",
+        "inputs": { "VALUE": [3, "sUE9QuUJ-ufu/xFXGHo3", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.network.dco", "rt_network_dco"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "sUE9QuUJ-ufu/xFXGHo3": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": ";N64/4%?qQp6DXS,]WV+",
+        "inputs": {},
+        "fields": { "VALUE": ["text", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "!(9d2Au7p9JQc%xx=7VB": {
+        "opcode": "control_if",
+        "next": "_n`G{}bdV-.S=%Wk3BZn",
+        "parent": ";N64/4%?qQp6DXS,]WV+",
+        "inputs": {
+            "CONDITION": [2, "826ToK)2i/Cud`Yo-u@A"],
+            "SUBSTACK": [2, "S+=a5b4(FxM^f^BuPH|L"]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "826ToK)2i/Cud`Yo-u@A": {
+        "opcode": "operator_equals",
+        "next": null,
+        "parent": "!(9d2Au7p9JQc%xx=7VB",
+        "inputs": {
+            "OPERAND1": [3, ";,(t=-=yRV/24P{Y{vZE", [10, ""]],
+            "OPERAND2": [1, [10, "1"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    ";,(t=-=yRV/24P{Y{vZE": {
+        "opcode": "operator_mod",
+        "next": null,
+        "parent": "826ToK)2i/Cud`Yo-u@A",
+        "inputs": {
+            "NUM1": [3, "qRLXM%ps2H,AJqE/(Vb]", [4, ""]],
+            "NUM2": [1, [4, "2"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "qRLXM%ps2H,AJqE/(Vb]": {
+        "opcode": "operator_length",
+        "next": null,
+        "parent": ";,(t=-=yRV/24P{Y{vZE",
+        "inputs": {
+            "STRING": [
+                3,
+                [12, "$rt.network.dco", "rt_network_dco"],
+                [10, "apple"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "S+=a5b4(FxM^f^BuPH|L": {
+        "opcode": "data_setvariableto",
+        "next": null,
+        "parent": "!(9d2Au7p9JQc%xx=7VB",
+        "inputs": { "VALUE": [3, "!UK+*~0Sh8k61Ot}KN.j", [10, "0"]] },
+        "fields": { "VARIABLE": ["$rt.network.dco", "rt_network_dco"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "!UK+*~0Sh8k61Ot}KN.j": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "S+=a5b4(FxM^f^BuPH|L",
+        "inputs": {
+            "STRING1": [1, [10, "0"]],
+            "STRING2": [
+                3,
+                [12, "$rt.network.dco", "rt_network_dco"],
+                [10, "banana"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "_n`G{}bdV-.S=%Wk3BZn": {
+        "opcode": "control_repeat",
+        "next": null,
+        "parent": "!(9d2Au7p9JQc%xx=7VB",
+        "inputs": {
+            "TIMES": [3, "wSQ_x~kLf=(^#pHO=sf_", [6, "10"]],
+            "SUBSTACK": [2, "KsZguP0CIn:eNST)`w(%"]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "wSQ_x~kLf=(^#pHO=sf_": {
+        "opcode": "operator_mathop",
+        "next": null,
+        "parent": "_n`G{}bdV-.S=%Wk3BZn",
+        "inputs": { "NUM": [3, "0^OQ{|Ee.6Z~?zCdYjBB", [4, ""]] },
+        "fields": { "OPERATOR": ["ceiling", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "0^OQ{|Ee.6Z~?zCdYjBB": {
+        "opcode": "operator_divide",
+        "next": null,
+        "parent": "wSQ_x~kLf=(^#pHO=sf_",
+        "inputs": {
+            "NUM1": [3, "]W~q[wE);8Xw}2HL}GUL", [4, ""]],
+            "NUM2": [1, [4, "2"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "]W~q[wE);8Xw}2HL}GUL": {
+        "opcode": "operator_length",
+        "next": null,
+        "parent": "0^OQ{|Ee.6Z~?zCdYjBB",
+        "inputs": {
+            "STRING": [
+                3,
+                [12, "$rt.network.dco", "rt_network_dco"],
+                [10, "apple"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "KsZguP0CIn:eNST)`w(%": {
+        "opcode": "data_setvariableto",
+        "next": "$.mYD.#sI%|y,Zc75C3L",
+        "parent": "_n`G{}bdV-.S=%Wk3BZn",
+        "inputs": { "VALUE": [3, "%+U39VK.E)%9F,1nJO4l", [10, "0"]] },
+        "fields": {
+            "VARIABLE": ["$rt.network.decoded", "rt_network_decoded"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "%+U39VK.E)%9F,1nJO4l": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "KsZguP0CIn:eNST)`w(%",
+        "inputs": {
+            "STRING1": [
+                3,
+                [12, "$rt.network.decoded", "rt_network_decoded"],
+                [10, "apple "]
+            ],
+            "STRING2": [3, "5g4O?_XrUpw)2dB1sdW.", [10, "banana"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "5g4O?_XrUpw)2dB1sdW.": {
+        "opcode": "operator_letter_of",
+        "next": null,
+        "parent": "%+U39VK.E)%9F,1nJO4l",
+        "inputs": {
+            "LETTER": [3, "y!/TI|EpOhF(D8yC7/8L", [6, "1"]],
+            "STRING": [
+                3,
+                [12, "$rt.network.charset", "rt_network_charset"],
+                [10, "apple"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "y!/TI|EpOhF(D8yC7/8L": {
+        "opcode": "operator_join",
+        "next": null,
+        "parent": "5g4O?_XrUpw)2dB1sdW.",
+        "inputs": {
+            "STRING1": [3, ";cD*Bww|Vx15h*jIN|0p", [10, "apple "]],
+            "STRING2": [3, "PIIBm;yy:u;9Mn3`zc(I", [10, "banana"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    ";cD*Bww|Vx15h*jIN|0p": {
+        "opcode": "operator_letter_of",
+        "next": null,
+        "parent": "y!/TI|EpOhF(D8yC7/8L",
+        "inputs": {
+            "LETTER": [
+                3,
+                [12, "$rt.network.dco.i", "rt_network_dco_i"],
+                [6, "1"]
+            ],
+            "STRING": [
+                3,
+                [12, "$rt.network.dco", "rt_network_dco"],
+                [10, "apple"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "PIIBm;yy:u;9Mn3`zc(I": {
+        "opcode": "operator_letter_of",
+        "next": null,
+        "parent": "y!/TI|EpOhF(D8yC7/8L",
+        "inputs": {
+            "LETTER": [3, "Nv)!7NXiYG)4WOe:?k[3", [6, "1"]],
+            "STRING": [
+                3,
+                [12, "$rt.network.dco", "rt_network_dco"],
+                [10, "apple"]
+            ]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "Nv)!7NXiYG)4WOe:?k[3": {
+        "opcode": "operator_add",
+        "next": null,
+        "parent": "PIIBm;yy:u;9Mn3`zc(I",
+        "inputs": {
+            "NUM1": [3, [12, "$rt.network.dco.i", "rt_network_dco_i"], [4, ""]],
+            "NUM2": [1, [4, "1"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "$.mYD.#sI%|y,Zc75C3L": {
+        "opcode": "data_changevariableby",
+        "next": null,
+        "parent": "KsZguP0CIn:eNST)`w(%",
+        "inputs": { "VALUE": [1, [4, "2"]] },
+        "fields": {
+            "VARIABLE": ["$rt.network.dco.i", "rt_network_dco_i"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "q/}B)B)hLY[8u]@JA*)*": {
+        "opcode": "procedures_definition",
+        "next": "-~r4[2Bq%zU4q$-ZqsG1",
+        "parent": null,
+        "inputs": { "custom_block": [1, "srAiKSYR4.xorqldrjms"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": true,
+        "x": 48,
+        "y": 64
+    },
+    "srAiKSYR4.xorqldrjms": {
+        "opcode": "procedures_prototype",
+        "next": null,
+        "parent": "q/}B)B)hLY[8u]@JA*)*",
+        "inputs": {},
+        "fields": {},
+        "shadow": true,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt.start listening for messages",
+            "argumentids": "[]",
+            "argumentnames": "[]",
+            "argumentdefaults": "[]",
+            "warp": "true"
+        }
+    },
+    "-~r4[2Bq%zU4q$-ZqsG1": {
+        "opcode": "data_setvariableto",
+        "next": null,
+        "parent": "q/}B)B)hLY[8u]@JA*)*",
+        "inputs": { "VALUE": [1, [10, "1"]] },
+        "fields": {
+            "VARIABLE": ["$rt.network.active", "rt_network_active"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "OZ}V[Xgz47-+340klSu8": {
+        "opcode": "procedures_definition",
+        "next": "c1E.5lK]s:yfSM6}U9O6",
+        "parent": null,
+        "inputs": { "custom_block": [1, "y6Er95{Tu0we_eZqE$VU"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": true,
+        "x": 653,
+        "y": 64
+    },
+    "y6Er95{Tu0we_eZqE$VU": {
+        "opcode": "procedures_prototype",
+        "next": null,
+        "parent": "OZ}V[Xgz47-+340klSu8",
+        "inputs": {},
+        "fields": {},
+        "shadow": true,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt.stop listening for messages",
+            "argumentids": "[]",
+            "argumentnames": "[]",
+            "argumentdefaults": "[]",
+            "warp": "true"
+        }
+    },
+    "c1E.5lK]s:yfSM6}U9O6": {
+        "opcode": "data_setvariableto",
+        "next": null,
+        "parent": "OZ}V[Xgz47-+340klSu8",
+        "inputs": { "VALUE": [1, [10, "0"]] },
+        "fields": {
+            "VARIABLE": ["$rt.network.active", "rt_network_active"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "XXOY9Yo1%3F:~yao,*lw": {
+        "opcode": "procedures_definition",
+        "next": "60,Hu~mHz*U4~,-YWE/D",
+        "parent": null,
+        "inputs": { "custom_block": [1, "Na2=g1thRY$]us_bQ~Gj"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": true,
+        "x": 563,
+        "y": 262
+    },
+    "Na2=g1thRY$]us_bQ~Gj": {
+        "opcode": "procedures_prototype",
+        "next": null,
+        "parent": "XXOY9Yo1%3F:~yao,*lw",
+        "inputs": {},
+        "fields": {},
+        "shadow": true,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt.received message",
+            "argumentids": "[]",
+            "argumentnames": "[]",
+            "argumentdefaults": "[]",
+            "warp": "true"
+        }
+    },
+    "60,Hu~mHz*U4~,-YWE/D": {
+        "opcode": "data_addtolist",
+        "next": null,
+        "parent": "XXOY9Yo1%3F:~yao,*lw",
+        "inputs": {
+            "ITEM": [
+                3,
+                [12, "$rt.network.message", "rt_network_message"],
+                [10, "thing"]
+            ]
+        },
+        "fields": { "LIST": ["$rt.stack", "rt_stack"] },
+        "shadow": false,
+        "topLevel": false
+    }
+}
