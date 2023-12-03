@@ -585,7 +585,7 @@ class Scratch3LooksBlocks {
 
     forceSetSize (args, util) {
         const size = Cast.toNumber(args.SIZE);
-        util.target.setSize(size, true);
+        util.target.setSize(Math.max(size, 1), true);
     }
 
     goToFrontBack (args, util) {

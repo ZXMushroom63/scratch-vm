@@ -97,7 +97,7 @@ var blockDefinitions = [
 ]
 
 const statementPatches = require("./statementPatches.json");
-const { reporterPatches, reporterPatchesBasic } = require("./reporterPatches");
+const { reporterPatches, reporterPatchesBasic, reporterPatchesVariable } = require("./reporterPatches");
 
 var moddedBlocks = ["motion_fencing_enable", "motion_fencing_disable", "operator_true", "operator_false", "operator_power",
     "looks_previouscostume", "looks_previousbackdrop", "looks_forcesizeto", "motion_pointtoxy", "operator_min", "operator_max",
@@ -419,7 +419,23 @@ function applyReporterPatches(project, obj) {
                 console.log("Statement blocks: ");
                 console.log(statementBlocks);
             }
+            var substackBlocks = {};
             statementBlocks.forEach(block => {
+                var substackFixNeeded = false;
+                var iKeys = Object.keys(block.inputs);
+                var foundSubstackKeys = [];
+                for (let q = 0; q < iKeys.length; q++) {
+                    if (iKeys[q].startsWith("SUBSTACK")) {
+                        substackFixNeeded = true;
+                        foundSubstackKeys.push(iKeys[q]);
+                    }
+                }
+                if (block.opcode === "control_repeat_until") {
+                    substackFixNeeded = true;
+                }
+                if (substackFixNeeded) {
+                    substackBlocks[block.id] = { stackKeys: foundSubstackKeys, patches: [], isImportantRP: block.opcode === "control_repeat_until" && foundSubstackKeys.length === 0 };
+                }
                 var results = searchInputStackForOpcodes(targetOpcodes, block.id, target.blocks);
                 if (results.length > 0) {
                     if (debug) {
@@ -451,6 +467,10 @@ function applyReporterPatches(project, obj) {
                         }
                         var newPatch = updatePatchWithInputs(tempPatch, target.blocks[result.reporterId], target.blocks);
                         insertBeforeBlockId(target.blocks, block.id, newPatch);
+
+                        if (substackFixNeeded) {
+                            substackBlocks[block.id].patches.push(Object.assign({}, newPatch));
+                        }
                         if (isBool) {
                             if (debug) {
                                 console.log("Patching boolean reporter: " + target.blocks[result.reporterId].opcode);
@@ -488,6 +508,42 @@ function applyReporterPatches(project, obj) {
                     }
                 }
             });
+            var stackBlockKeys = Object.keys(substackBlocks);
+            for (let q = 0; q < stackBlockKeys.length; q++) {
+                var blockId = stackBlockKeys[q];
+                var dataCapsule = substackBlocks[blockId];
+                if (dataCapsule.isImportantRP && dataCapsule.patches.length > 0) {
+                    var newLastId = genCharList("abcdefghijklmnopqrstuvwxyz0123456789_", 16);
+                    target.blocks[newLastId] = {
+                        "opcode": "data_deletealloflist",
+                        "inputs": {},
+                        "fields": { "LIST": ["$rt.stack", "rt_stack"] },
+                        "shadow": false,
+                        "next": null,
+                        "parent": blockId,
+                        "topLevel": false
+                    };
+                    target.blocks[blockId].inputs["SUBSTACK"] = [2, newLastId];
+                    for (let n = 0; n < dataCapsule.patches.length; n++) {
+                        newLastId = insertAfterBlockId(target.blocks, newLastId, dataCapsule.patches[n]);
+                    }
+                } else {
+                    for (let l = 0; l < dataCapsule.stackKeys.length; l++) {
+                        if (dataCapsule.patches.length > 0) {
+                            const stackKey = dataCapsule.stackKeys[l];
+                            var newLastId = insertAfterBlockId(target.blocks, getLastBlockInSubstack(target.blocks, blockId, stackKey), {
+                                "opcode": "data_deletealloflist",
+                                "inputs": {},
+                                "fields": { "LIST": ["$rt.stack", "rt_stack"] },
+                                "shadow": false,
+                            });
+                            for (let n = 0; n < dataCapsule.patches.length; n++) {
+                                newLastId = insertAfterBlockId(target.blocks, newLastId, dataCapsule.patches[n]);
+                            }
+                        }
+                    }
+                }
+            }
         });
         return JSON.stringify(data);
     }
@@ -520,6 +576,7 @@ function insertAfterBlockId(blocks, blockId, data) {
     data.parent = blockId;
     data.topLevel = false;
     blocks[newBlockId] = data;
+    return newBlockId;
 }
 
 function removeBlockId(blocks, blockId) {
@@ -537,6 +594,10 @@ function insertBeforeBlockId(blocks, blockId, data) {
     // Utility function to insert a block before another block.
     var newBlockId = genCharList("abcdefghijklmnopqrstuvwxyz1234567890", 14);
     data.id = newBlockId;
+    if (debug) {
+        console.log(`Inserted content${data.opcode ? " with opcode " + data.opcode : ""} before: `)
+        console.log(blocks[blockId].opcode);
+    }
     data.next = blockId;
     if (blocks[blockId].parent) {
         if (blocks[blocks[blockId].parent].next === blockId) {
@@ -553,6 +614,7 @@ function insertBeforeBlockId(blocks, blockId, data) {
                 }
             }
             if (substackDetected) {
+                console.log("SUBSTACK DETECTED: " + substackKey);
                 blocks[blocks[blockId].parent].inputs[substackKey][1] = newBlockId;
             }
         }
@@ -566,6 +628,10 @@ function insertBeforeBlockId(blocks, blockId, data) {
     }
     blocks[blockId].topLevel = false;
     blocks[newBlockId] = data;
+    if (debug) {
+        console.log(data);
+    }
+    return newBlockId;
 }
 
 function removeOrphanModdedBlocks(project, obj) {
@@ -582,6 +648,18 @@ function removeOrphanModdedBlocks(project, obj) {
     });
 
     return JSON.stringify(data);
+}
+
+function getLastBlockInSubstack(blocks, blockId, substackKey) {
+    var block = blocks[blockId];
+    var substack = block.inputs[substackKey];
+    var fBlockId = substack[1];
+    var fBlock = blocks[fBlockId];
+    while (fBlock.next) {
+        fBlockId = fBlock.next;
+        fBlock = blocks[fBlockId];
+    }
+    return fBlockId;
 }
 
 /*/
@@ -623,7 +701,7 @@ function searchInputStackForOpcodes(opcodes, blockId, blocks, arr = [], parentBl
     var inputKeys = Object.keys(blocks[blockId].inputs);
     for (let i = 0; i < inputKeys.length; i++) {
         const ik = inputKeys[i];
-        if ((blocks[blockId].inputs[ik][0] === 3 || blocks[blockId].inputs[ik][0] === 2) && !Array.isArray(blocks[blockId].inputs[ik][1])) {
+        if (!ik.startsWith("SUBSTACK") && (blocks[blockId].inputs[ik][0] === 3 || blocks[blockId].inputs[ik][0] === 2) && !Array.isArray(blocks[blockId].inputs[ik][1])) {
             arr = searchInputStackForOpcodes(opcodes, blocks[blockId].inputs[ik][1], blocks, arr, blockId, ik, depth + 1);
         }
     }
@@ -800,12 +878,88 @@ function applyFactories(project, obj) {
     return JSON.stringify(data);
 }
 
+function applyReporterExVariableOps(project, obj) {
+    function getVariableNameById(project, target, id) {
+        var stage = null;
+        for (let i = 0; i < project.targets.length; i++) {
+            if (project.targets[i].isStage) {
+                stage = project.targets[i];
+            }
+        }
+        if (stage && stage.variables[id]) {
+            return stage.variables[id][0];
+        }
+
+        if (target && target.variables[id]) {
+            return target.variables[id][0];
+        }
+
+        return "";
+    }
+    var data = JSON.parse(project);
+    var targetOpcodes = Object.keys(reporterPatchesVariable);
+    data.targets.forEach(target => {
+        var statementBlocks = getStatementBlocks(target.blocks);
+        statementBlocks.forEach(block => {
+            var results = searchInputStackForOpcodes(targetOpcodes, block.id, target.blocks);
+            if (results.length > 0) {
+                for (let i = 0; i < results.length; i++) {
+                    var result = results[i];
+                    var isBool = Array.isArray(reporterPatchesVariable[target.blocks[result.reporterId].opcode]);
+                    var variableId = isBool ? reporterPatchesVariable[target.blocks[result.reporterId].opcode][0] : reporterPatchesVariable[target.blocks[result.reporterId].opcode];
+                    if (isBool) {
+                        Object.assign(target.blocks[result.reporterId], {
+                            "opcode": "operator_equals",
+                            "inputs": {
+                                "OPERAND1": [
+                                    3,
+                                    [12, getVariableNameById(data, target, variableId), variableId],
+                                    [10, ""]
+                                ],
+                                "OPERAND2": [1, [10, "1"]]
+                            },
+                            "fields": {},
+                        });
+                    } else {
+                        target.blocks[result.foundIn].inputs[result.inputsEntry.inputKey] = [
+                            3,
+                            [12, getVariableNameById(data, target, variableId), variableId],
+                            [10, ""]
+                        ];
+
+                        console.log(target.blocks[result.foundIn].inputs);
+
+                        delete target.blocks[result.reporterId];
+                    }
+                }
+            }
+        });
+    });
+    return JSON.stringify(data);
+}
+
 /*/ 
 var obj = {
     rt_null: "afafa",
     rt_large: "afafa",
 }
 /*/
+function applyWaitUntilFix(p, obj) {
+    var targetOpcodes = Object.keys(reporterPatches);
+    var data = JSON.parse(p);
+    data.targets.forEach(t => {
+        var blockKeys = Object.keys(t.blocks);
+        blockKeys.forEach(k => {
+            if (t.blocks[k].opcode === "control_wait_until") {
+                var results = searchInputStackForOpcodes(targetOpcodes, t.blocks[k].id, t.blocks);
+                if (results.length > 0) {
+                    t.blocks[k].opcode = "control_repeat_until";
+                }
+            }
+        });
+    });
+    return JSON.stringify(data);
+}
 
 function toSb3(project, obj) {
     var p = project;
@@ -814,6 +968,8 @@ function toSb3(project, obj) {
     p = addIdPropertiesToBlocks(p, obj);
     p = injectCostumes(p, obj);
     p = injectRuntimeVariables(p, obj);
+    p = applyReporterExVariableOps(p, obj);
+    p = applyWaitUntilFix(p, obj);
     p = applyReporterPatches(p, obj);
     p = applyStatementPatches(p, obj);
     p = applyFactories(p, obj);

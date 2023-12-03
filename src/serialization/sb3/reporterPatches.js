@@ -1,4 +1,4 @@
-// Arays denote boolean reporters.
+// Arrays denote boolean reporters.
 var reporterPatches = {
     "operator_power": "$rt. %s ^ %s",
     "operator_min": "$rt.min %s %s",
@@ -18,5 +18,8 @@ var reporterPatchesBasic = {
     "operator_true": "operator_not",
     "operator_false": "operator_and"
 }
+var reporterPatchesVariable = {
+    //"sensing_loudness": ["rt_out"]
+}
 
-module.exports = { reporterPatches: reporterPatches, reporterPatchesBasic: reporterPatchesBasic }
+module.exports = { reporterPatches: reporterPatches, reporterPatchesBasic: reporterPatchesBasic, reporterPatchesVariable: reporterPatchesVariable }
