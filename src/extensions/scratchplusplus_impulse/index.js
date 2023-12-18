@@ -645,8 +645,8 @@ class ImpulseExtension {
                 },
                 {
                     opcode: "retrievedbodycollided",
-                    text: "object collided? (0/1)",
-                    blockType: BlockType.REPORTER,
+                    text: "object collided?",
+                    blockType: BlockType.BOOLEAN,
                     arguments: {},
                 },
                 {
@@ -966,7 +966,7 @@ class ImpulseExtension {
         return this.vars.RtImpulseRetrievedId;
     }
     retrievedbodycollided() {
-        return this.vars.RtImpulseRetrievedCollided;
+        return this.vars.RtImpulseRetrievedCollided === 1;
     }
     retrievedbodylastcollidedid() {
         return this.vars.RtImpulseRetrievedLastcollidedid;

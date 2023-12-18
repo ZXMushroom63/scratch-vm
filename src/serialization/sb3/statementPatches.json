@@ -138,5 +138,180 @@
             "proccode": "$rt.stop listening for messages",
             "warp": "true"
         }
+    },
+    "impulse_reset": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.reset",
+            "warp": "true"
+        }
+    },
+    "impulse_step": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.step",
+            "warp": "true"
+        }
+    },
+    "impulse_setgravity": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.set gravity to x: %s y: %s",
+            "warp": "true"
+        }
+    },
+    "impulse_settimestep": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.set time step scale to %s",
+            "warp": "true"
+        }
+    },
+    "impulse_setquality": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.set quality to %s",
+            "warp": "true"
+        }
+    },
+    "impulse_setpenetrationcorrection": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.set penetration correction to %s %",
+            "warp": "true"
+        }
+    },
+    "impulse_addcircle": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.Add Circle %s %s %s density %s friction %s id %s only rotate %s",
+            "warp": "true"
+        }
+    },
+    "impulse_addrectangle": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.Add Rectangle %s %s %s %s density %s ang %s friction %s id %s only rotate %s",
+            "warp": "true"
+        }
+    },
+    "impulse_setxofobject": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.Set x position of object with id: %s to %s",
+            "warp": "true"
+        }
+    },
+    "impulse_changexofobject": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.Change x position of object with id: %s by %s",
+            "warp": "true"
+        }
+    },
+    "impulse_setyofobject": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.Set y position of object with id: %s to %s",
+            "warp": "true"
+        }
+    },
+    "impulse_changeyofobject": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.Change y position of object with id: %s by %s",
+            "warp": "true"
+        }
+    },
+    "impulse_setrotationofobject": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.Set rotation of object with id: %s to %s",
+            "warp": "true"
+        }
+    },
+    "impulse_setvelocityofobject": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.Set velocity for object with id: %s (velocity x: %s , velocity y: %s )",
+            "warp": "true"
+        }
+    },
+    "impulse_addvelocitytoobject": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.Add velocity to object with id: %s (velocity x: %s , velocity y: %s )",
+            "warp": "true"
+        }
+    },
+    "impulse_addforcetoobject": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.Add force to object with id %s (force x: %s , force y: %s )",
+            "warp": "true"
+        }
+    },
+    "impulse_setangularvelocityofobject": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.Set angular velocity of object with id: %s velocity: %s",
+            "warp": "true"
+        }
+    },
+    "impulse_addangularvelocitytoobject": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.Add angular velocity to object with id: %s velocity: %s",
+            "warp": "true"
+        }
+    },
+    "impulse_setwidthofobject": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.Set width of object with id %s to %s",
+            "warp": "true"
+        }
+    },
+    "impulse_setheightofobject": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.Set height of object with id %s to %s",
+            "warp": "true"
+        }
+    },
+    "impulse_setdensityofobject": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.Set density of object with id %s to %s",
+            "warp": "true"
+        }
+    },
+    "impulse_setidofobject": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.Set id of object with id: %s to %s",
+            "warp": "true"
+        }
+    },
+    "impulse_deleteobject": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.Delete object with id: %s",
+            "warp": "true"
+        }
+    },
+    "impulse_getdatabyid": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.get data of object with id %s",
+            "warp": "true"
+        }
+    },
+    "impulse_loadscenedata": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.Load Scene Data %s",
+            "warp": "true"
+        }
     }
 }
