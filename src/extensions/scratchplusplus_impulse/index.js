@@ -697,79 +697,79 @@ class ImpulseExtension {
     }
 
     setxofobject(args) {
-        this.warp(this.RtImpulseSetXPositionOfObjectWithIdTo)(args.ID, args.N);
+        this.warp(this.RtImpulseSetXPositionOfObjectWithIdTo)(args.ID, this.toNumber(args.N));
     }
 
     changexofobject(args) {
         this.warp(this.RtImpulseChangeXPositionOfObjectWithIdBy)(
             args.ID,
-            args.N
+            this.toNumber(args.N)
         );
     }
 
     setyofobject(args) {
-        this.warp(this.RtImpulseSetYPositionOfObjectWithIdTo)(args.ID, args.N);
+        this.warp(this.RtImpulseSetYPositionOfObjectWithIdTo)(args.ID, this.toNumber(args.N));
     }
 
     changeyofobject(args) {
         this.warp(this.RtImpulseChangeYPositionOfObjectWithIdBy)(
             args.ID,
-            args.N
+            this.toNumber(args.N)
         );
     }
 
     setrotationofobject(args) {
-        this.warp(this.RtImpulseSetRotationOfObjectWithIdTo)(args.ID, args.N);
+        this.warp(this.RtImpulseSetRotationOfObjectWithIdTo)(args.ID, this.toNumber(args.N));
     }
 
     setvelocityofobject(args) {
         this.warp(this.RtImpulseSetVelocityForObjectWithIdVelocityXVelocityY)(
             args.ID,
-            args.X,
-            args.Y
+            this.toNumber(args.X),
+            this.toNumber(args.Y)
         );
     }
 
     addvelocitytoobject(args) {
         this.warp(this.RtImpulseAddVelocityToObjectWithIdVelocityXVelocityY)(
             args.ID,
-            args.X,
-            args.Y
+            this.toNumber(args.X),
+            this.toNumber(args.Y)
         );
     }
 
     addforcetoobject(args) {
         this.warp(this.RtImpulseAddForceToObjectWithIdForceXForceY)(
             args.ID,
-            args.X,
-            args.Y
+            this.toNumber(args.X),
+            this.toNumber(args.Y)
         );
     }
 
     setangularvelocityofobject(args) {
         this.warp(this.RtImpulseSetAngularVelocityOfObjectWithIdVelocity)(
             args.ID,
-            args.N
+            this.toNumber(args.N)
         );
     }
 
     addangularvelocitytoobject(args) {
         this.warp(this.RtImpulseAddAngularVelocityToObjectWithIdVelocity)(
             args.ID,
-            args.N
+            this.toNumber(args.N)
         );
     }
 
     setheightofobject(args) {
-        this.warp(this.RtImpulseSetHeightOfObjectWithIdTo)(args.ID, args.N);
+        this.warp(this.RtImpulseSetHeightOfObjectWithIdTo)(args.ID, this.toNumber(args.N));
     }
 
     setwidthofobject(args) {
-        this.warp(this.RtImpulseSetWidthOfObjectWithIdTo)(args.ID, args.N);
+        this.warp(this.RtImpulseSetWidthOfObjectWithIdTo)(args.ID, this.toNumber(args.N));
     }
 
     setdensityofobject(args) {
-        this.warp(this.RtImpulseSetDensityOfObjectWithIdTo)(args.ID, args.N);
+        this.warp(this.RtImpulseSetDensityOfObjectWithIdTo)(args.ID, this.toNumber(args.N));
     }
 
     setidofobject(args) {
