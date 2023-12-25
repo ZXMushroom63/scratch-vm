@@ -21,7 +21,7 @@ var blockDefinitions = [
     },
     {
         opcodes: ["looks_forcesizeto"],
-        force: false,
+        force: true,
         definition: require("./definitions/forcesetsize.json"),
     },
     {
