@@ -25,6 +25,7 @@ const { loadSound } = require('./import/load-sound.js');
 const { serializeSounds, serializeCostumes } = require('./serialization/serialize-assets');
 const { toSb3, genCharList } = require('./serialization/sb3/sbpp2sb3');
 const { largeCostumeSvg, nullCostumeSvg, dotCosumeSvg } = require('./serialization/sb3/costumeConsts');
+const { compress } = require('./serialization/optimiser.js');
 require('canvas-toBlob');
 
 const RESERVED_NAMES = ['_mouse_', '_stage_', '_edge_', '_myself_', '_random_'];
@@ -420,7 +421,7 @@ class VirtualMachine extends EventEmitter {
 
         return zip.generateAsync({
             type: 'blob',
-            mimeType: 'application/x.scratch.sb3',
+            mimeType: 'application/x.scratchplusplus.sbpp',
             compression: 'DEFLATE',
             compressionOptions: {
                 level: 6 // Tradeoff between best speed (1) and best compression (9)
@@ -430,11 +431,15 @@ class VirtualMachine extends EventEmitter {
     saveProjectSbpp() {
         const soundDescs = serializeSounds(this.runtime);
         const costumeDescs = serializeCostumes(this.runtime);
-        const projectJson = this.toJSON();
+        var projectJson = this.toJSON();
 
         // TODO want to eventually move zip creation out of here, and perhaps
         // into scratch-storage
         const zip = new JSZip();
+
+        var jsonParsed = JSON.parse(projectJson);
+        compress(jsonParsed);
+        projectJson = JSON.stringify(jsonParsed);
 
         // Put everything in a zip file
         zip.file('project.json', projectJson);

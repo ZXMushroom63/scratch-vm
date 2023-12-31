@@ -296,6 +296,7 @@ const {
     reporterPatchesBasic,
     reporterPatchesVariable,
 } = require("./reporterPatches");
+const { compress, hypercompress } = require("../optimiser");
 
 //Used by removeOrphanModdedBlocks and removeInvalidMonitors to ensure that non-converted blocks are deleted.
 var moddedBlocks = [
@@ -441,97 +442,100 @@ Note to self: If it is blank in normal scratch, check the imports, and scan for 
 If it loads but the inputs are blank make sure to check if the block definitions prototype has an invalid `inputs` object.
 /*/
 
-var blockDefinitionsList = [];
+var blockDefinitionsList = {};
 function makeBlockDefinitionsListForProject(project) {
     var data = JSON.parse(project);
+    data.targets.forEach((target) => {
+        blockDefinitionsList[target.name] = makeBlockDefinitionsListForSprite(target, data);
+    });
+    return JSON.stringify(data);
+}
+
+function makeBlockDefinitionsListForSprite(target, projectData) {
     var uBlockDefinitionsList = [];
     var blockDefinitionsClone = [...blockDefinitions];
-    data.targets.forEach((target) => {
-        var keys = Object.keys(target.blocks);
-        keys.forEach((k) => {
-            var opcode = target.blocks[k].opcode;
-            blockDefinitionsClone.forEach((bd, i) => {
-                if (bd.force) {
-                    uBlockDefinitionsList.push(bd.definition);
-                    blockDefinitionsClone.splice(i, 1);
-                    if (bd.globalVariables) {
-                        data.targets.forEach((t) => {
-                            if (t.isStage) {
-                                Object.assign(t.variables, bd.globalVariables);
-                            }
-                        });
-                    }
-                    if (bd.globalLists) {
-                        data.targets.forEach((t) => {
-                            if (t.isStage) {
-                                Object.assign(t.lists, bd.globalLists);
-                            }
-                        });
-                    }
-                    if (bd.broadcasts) {
-                        data.targets.forEach((t) => {
-                            if (t.isStage) {
-                                Object.assign(t.broadcasts, bd.broadcasts);
-                            }
-                        });
-                    }
-                    if (Array.isArray(bd.removeExtensions)) {
-                        bd.removeExtensions.forEach((ex) => {
-                            if (
-                                data.extensions &&
-                                data.extensions.includes(ex)
-                            ) {
-                                data.extensions.splice(
-                                    data.extensions.indexOf(ex),
-                                    1
-                                );
-                            }
-                        });
-                    }
-                } else if (bd.opcodes.includes(opcode)) {
-                    uBlockDefinitionsList.push(bd.definition);
-                    blockDefinitionsClone.splice(i, 1);
-                    if (bd.globalVariables) {
-                        data.targets.forEach((t) => {
-                            if (t.isStage) {
-                                Object.assign(t.variables, bd.globalVariables);
-                            }
-                        });
-                    }
-                    if (bd.globalLists) {
-                        data.targets.forEach((t) => {
-                            if (t.isStage) {
-                                Object.assign(t.lists, bd.globalLists);
-                            }
-                        });
-                    }
-                    if (bd.broadcasts) {
-                        data.targets.forEach((t) => {
-                            if (t.isStage) {
-                                Object.assign(t.broadcasts, bd.broadcasts);
-                            }
-                        });
-                    }
-                    if (Array.isArray(bd.removeExtensions)) {
-                        bd.removeExtensions.forEach((ex) => {
-                            if (
-                                data.extensions &&
-                                data.extensions.includes(ex)
-                            ) {
-                                data.extensions.splice(
-                                    data.extensions.indexOf(ex),
-                                    1
-                                );
-                            }
-                        });
-                    }
+    var keys = Object.keys(target.blocks);
+    keys.forEach((k) => {
+        var opcode = target.blocks[k].opcode;
+        blockDefinitionsClone.forEach((bd, i) => {
+            if (bd.force) {
+                uBlockDefinitionsList.push(bd.definition);
+                blockDefinitionsClone.splice(i, 1);
+                if (bd.globalVariables) {
+                    projectData.targets.forEach((t) => {
+                        if (t.isStage) {
+                            Object.assign(t.variables, bd.globalVariables);
+                        }
+                    });
                 }
-            });
+                if (bd.globalLists) {
+                    projectData.targets.forEach((t) => {
+                        if (t.isStage) {
+                            Object.assign(t.lists, bd.globalLists);
+                        }
+                    });
+                }
+                if (bd.broadcasts) {
+                    projectData.targets.forEach((t) => {
+                        if (t.isStage) {
+                            Object.assign(t.broadcasts, bd.broadcasts);
+                        }
+                    });
+                }
+                if (Array.isArray(bd.removeExtensions)) {
+                    bd.removeExtensions.forEach((ex) => {
+                        if (
+                            projectData.extensions &&
+                            projectData.extensions.includes(ex)
+                        ) {
+                            projectData.extensions.splice(
+                                projectData.extensions.indexOf(ex),
+                                1
+                            );
+                        }
+                    });
+                }
+            } else if (bd.opcodes.includes(opcode)) {
+                uBlockDefinitionsList.push(bd.definition);
+                blockDefinitionsClone.splice(i, 1);
+                if (bd.globalVariables) {
+                    projectData.targets.forEach((t) => {
+                        if (t.isStage) {
+                            Object.assign(t.variables, bd.globalVariables);
+                        }
+                    });
+                }
+                if (bd.globalLists) {
+                    projectData.targets.forEach((t) => {
+                        if (t.isStage) {
+                            Object.assign(t.lists, bd.globalLists);
+                        }
+                    });
+                }
+                if (bd.broadcasts) {
+                    projectData.targets.forEach((t) => {
+                        if (t.isStage) {
+                            Object.assign(t.broadcasts, bd.broadcasts);
+                        }
+                    });
+                }
+                if (Array.isArray(bd.removeExtensions)) {
+                    bd.removeExtensions.forEach((ex) => {
+                        if (
+                            projectData.extensions &&
+                            projectData.extensions.includes(ex)
+                        ) {
+                            projectData.extensions.splice(
+                                projectData.extensions.indexOf(ex),
+                                1
+                            );
+                        }
+                    });
+                }
+            }
         });
     });
-
-    blockDefinitionsList = uBlockDefinitionsList;
-    return JSON.stringify(data);
+    return uBlockDefinitionsList;
 }
 
 function injectCostumes(project, obj) {
@@ -630,11 +634,11 @@ function applyIfOperatorFix(project, obj) {
 function applyStatementPatches(project, obj) {
     // Converts Scratch++'s new blocks in to Scratch's custom blocks.
     var targetInputKeys = [];
-    function patchBlock(patch, theBlock, blocks) {
+    function patchBlock(patch, theBlock, blocks, blockDefsList) {
         var newPatch = Object.assign({}, patch);
         var newBlock = Object.assign({}, theBlock);
-        for (let K = 0; K < blockDefinitionsList.length; K++) {
-            const blockmod = blockDefinitionsList[K];
+        for (let K = 0; K < blockDefsList.length; K++) {
+            const blockmod = blockDefsList[K];
             var blockKeys = Object.keys(blockmod);
             for (let i = 0; i < blockKeys.length; i++) {
                 const key = blockKeys[i];
@@ -679,7 +683,8 @@ function applyStatementPatches(project, obj) {
                 target.blocks[key] = patchBlock(
                     dPatch,
                     target.blocks[key],
-                    target.blocks
+                    target.blocks,
+                    blockDefinitionsList[target.name]
                 );
             }
         });
@@ -696,11 +701,11 @@ function applyReporterPatches(project, obj) {
     // say (item (1) of $rt.stack)
     function transpileCustomReporters(project, obj) {
         var targetInputKeys = [];
-        function updatePatchWithInputs(patch, theBlock, blocks) {
+        function updatePatchWithInputs(patch, theBlock, blocks, blockDefsList) {
             var newPatch = Object.assign({}, patch);
             var newBlock = Object.assign({}, theBlock);
-            for (let K = 0; K < blockDefinitionsList.length; K++) {
-                const blockmod = blockDefinitionsList[K];
+            for (let K = 0; K < blockDefsList.length; K++) {
+                const blockmod = blockDefsList[K];
                 var blockKeys = Object.keys(blockmod);
                 for (let i = 0; i < blockKeys.length; i++) {
                     const key = blockKeys[i];
@@ -816,7 +821,8 @@ function applyReporterPatches(project, obj) {
                         var newPatch = updatePatchWithInputs(
                             tempPatch,
                             target.blocks[result.reporterId],
-                            target.blocks
+                            target.blocks,
+                            blockDefinitionsList[target.name]
                         );
                         insertBeforeBlockId(target.blocks, block.id, newPatch);
 
@@ -1071,7 +1077,7 @@ function removeInvalidMonitors(project, obj) {
 
     for (let i = 0; i < data.monitors.length; i++) {
         const monitor = data.monitors[i];
-        if(moddedBlocks.includes(monitor.opcode)){
+        if (moddedBlocks.includes(monitor.opcode)) {
             data.monitors.splice(i, 1);
         }
     }
@@ -1317,7 +1323,7 @@ function injectBlockDefinitions(project, obj) {
     // Injects the custom block definitions.
     var data = JSON.parse(project);
     data.targets.forEach((target) => {
-        blockDefinitionsList.forEach((blockDefinition) => {
+        blockDefinitionsList[target.name].forEach((blockDefinition) => {
             var copy = Object.assign({}, blockDefinition);
             var keys = Object.keys(copy);
             keys.forEach((key) => {
@@ -1488,6 +1494,15 @@ function toSb3(project, obj) {
     p = removeInvalidMonitors(p, obj);
     p = addCredits(p, obj);
     p = removeIdPropertiesFromBlocks(p, obj);
+    var data = JSON.parse(p);
+
+    //Shrink block and comment ids.
+    compress(data);
+
+    //Shrink custom block proccodes and empty blank text.
+    hypercompress(data);
+
+    p = JSON.stringify(data);
     if (debugPrintFinalJson) {
         console.log(JSON.parse(p));
     }
