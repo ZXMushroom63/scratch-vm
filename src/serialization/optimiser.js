@@ -55,10 +55,40 @@ class Pool {
     }
 }
 
+function dataValueOptimization(json, optimizer) {
+    let sprites = json.targets;
+    
+    for(let sprite of sprites) {
+        let variables = sprite.variables;
+        let lists = sprite.lists;
+        
+        for(let variableId in variables) {
+            variables[variableId][1] = optimizer(variables[variableId][1]);
+        }
+        
+        for(let listId in lists) {
+            lists[listId][1] = lists[listId][1].map(optimizer);
+        }
+    }
+}
+
 const hypercompress = (projectData) => {
+    var reserved = ["is compiled?", "is forkphorus?", "is TurboWarp?"]; //Renaming these argument reporters will cause some Scratch++ projects to malfunction.
     for (const target of projectData.targets) {
         var proccodeMap = {};
         var pool = new Pool();
+        var argumentPool = new Pool();
+        const isNotReserved = (token) => {
+            for (let i = 0; i < reserved.length; i++) {
+                if (token === reserved[i]) {
+                    return false;
+                }
+            }
+            return true;
+        };
+        reserved.forEach((reservedName) => {
+            argumentPool.skip(reservedName);
+        });
         for (const blockId of Object.keys(target.blocks)) {
             var block = target.blocks[blockId];
             for (let c in block.inputs) {
@@ -90,9 +120,16 @@ const hypercompress = (projectData) => {
                     }
                     proccodeMap[block.mutation.proccode] = percentString;
                 }
+            } else if (
+                block.opcode.startsWith("argument_reporter_") &&
+                Array.isArray(block.fields["VALUE"]) &&
+                isNotReserved(block.fields["VALUE"][0])
+            ) {
+                argumentPool.addReference(block.fields["VALUE"][0]);
             }
         }
         pool.generateNewIds();
+        argumentPool.generateNewIds();
         for (const blockId of Object.keys(target.blocks)) {
             var block = target.blocks[blockId];
             if (
@@ -104,9 +141,82 @@ const hypercompress = (projectData) => {
                 block.mutation.proccode =
                     pool.getNewId(block.mutation.proccode) +
                     proccodeMap[originalProccode];
+
+                if (block.opcode === "procedures_prototype") {
+                    var argumentNames = JSON.parse(
+                        block.mutation.argumentnames
+                    );
+                    for (let i = 0; i < argumentNames.length; i++) {
+                        const argumentName = argumentNames[i];
+                        if (isNotReserved(argumentName)) {
+                            argumentNames[i] =
+                                argumentPool.getNewId(argumentName);
+                        }
+                    }
+                    block.mutation.argumentnames =
+                        JSON.stringify(argumentNames);
+                }
+            } else if (
+                block.opcode.startsWith("argument_reporter_") &&
+                Array.isArray(block.fields["VALUE"]) &&
+                isNotReserved(block.fields["VALUE"][0])
+            ) {
+                block.fields["VALUE"][0] = argumentPool.getNewId(
+                    block.fields["VALUE"][0]
+                );
             }
         }
     }
+    var monitors = projectData.monitors;
+    for (var monitor of monitors) {
+        if (monitor.opcode == "data_listcontents") {
+            monitor.value = [];
+        } else {
+            monitor.value = 0;
+        }
+    }
+
+    var sprites = projectData.targets;
+
+    for (let sprite of sprites) {
+        let blocks = sprite.blocks;
+        let comments = sprite.comments;
+
+        for (let blockId in blocks) {
+            let block = blocks[blockId];
+            if (block.topLevel) {
+                block.x = Math.round(block.x) || 0;
+                block.y = Math.round(block.y) || 0;
+            }
+            if (Array.isArray(block) && block.length > 3) {
+                block[3] = Math.round(block[3]) || 0;
+                block[4] = Math.round(block[4]) || 0;
+            }
+        }
+
+        for (let commentId in comments) {
+            let comment = comments[commentId];
+            if ("x" in comment || "y" in comment) {
+                comment.x = Math.round(comment.x) || 0;
+                comment.y = Math.round(comment.y) || 0;
+            }
+            if ("width" in comment || "height" in comment) {
+                comment.width = Math.round(comment.width);
+                comment.height = Math.round(comment.height);
+            }
+        }
+    }
+
+    
+    dataValueOptimization(projectData, function (value) {
+        let string = value+"";
+        let short = +string.substr(0, string.length-1);
+        if((short+"").length < string.length-5 && Math.abs(1-(value/short)) < 1e-14) {
+            return short;
+        } else {
+            return value;
+        }
+    });
 };
 
 const compress = (projectData) => {
@@ -212,4 +322,8 @@ const compress = (projectData) => {
     }
 };
 
-module.exports = { compress: compress, hypercompress: hypercompress };
+module.exports = {
+    compress: compress,
+    hypercompress: hypercompress,
+    Pool: Pool,
+};

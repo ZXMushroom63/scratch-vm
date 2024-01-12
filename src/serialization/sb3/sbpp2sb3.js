@@ -8,6 +8,15 @@ var blockDefinitions = [
         opcodes: [],
         force: true,
         definition: require("./definitions/fencing.json"),
+        localVariables: {
+            rt_fencing: ["$rt.spriteFencingEnabled", 1],
+            rt_fencing_oldSize: ["$rt.fencing.oldSize", ""],
+            rt_fencing_oldCostume: ["$rt.fencing.oldCostume", ""],
+            rt_glide_newX: ["$rt.glide.newX", 0],
+            rt_glide_newY: ["$rt.glide.newY", 0],
+            rt_glide_oldX: ["$rt.glide.oldX", 0],
+            rt_glide_oldY: ["$rt.glide.oldY", 0],
+        }
     },
     {
         opcodes: ["operator_power"],
@@ -43,6 +52,14 @@ var blockDefinitions = [
         opcodes: ["operator_replace"],
         force: false,
         definition: require("./definitions/replace.json"),
+        localVariables: {
+            rt_replace_i: ["$rt.replace.i", 0],
+            rt_replace_isMatch: ["$rt.replace.isMatch", 0],
+            rt_replace_j: ["$rt.replace.j", 0],
+        },
+        localLists: {
+            rt_replace: ["$rt.replace", []],
+        }
     },
     {
         opcodes: ["operator_newline"],
@@ -53,11 +70,24 @@ var blockDefinitions = [
         opcodes: ["operator_hex"],
         force: false,
         definition: require("./definitions/hex.json"),
+        localVariables: {
+            rt_hex: ["$rt.hex", 0],
+            rt_hex_cdiv: ["$rt.hex.cdiv", 0],
+        }
     },
     {
         opcodes: ["sensing_color"],
         force: false,
         definition: require("./definitions/color.json"),
+        localVariables: {
+            rt_color_r: ["$rt.color.r", 0],
+            rt_color_g: ["$rt.color.g", 0],
+            rt_color_b: ["$rt.color.b", 0],
+            rt_color_cdiv: ["$rt.color.cdiv", 0],
+            rt_color_oldCostume: ["$rt.color.oldCostume", 0],
+            rt_color_oldSize: ["$rt.color.oldSize", 0],
+            rt_color_hex: ["$rt.color.hex", 0],
+        }
     },
     {
         opcodes: ["operator_fastpower"],
@@ -85,21 +115,44 @@ var blockDefinitions = [
         },
         removeExtensions: ["network"],
         definition: require("./definitions/network.json"),
+        localVariables: {
+            rt_network_charset: ["$rt.network.charset", ""],
+            rt_network_enc_i: ["$rt.network.enc.i", 0],
+            rt_network_enc_j: ["$rt.network.enc.j", 0],
+            rt_network_encoded: ["$rt.network.encoded", ""],
+            rt_network_decoded: ["$rt.network.decoded", ""],
+            rt_network_dco_i: ["$rt.network.dco.i", 0],
+            rt_network_dco: ["$rt.network.dco", ""],
+        }
     },
     {
         opcodes: ["operator_substring"],
         force: false,
         definition: require("./definitions/substring.json"),
+        localVariables: {
+            rt_substr: ["$rt.substr", ""],
+            rt_substr_max: ["$rt.substr.max", ""],
+            rt_substr_min: ["$rt.substr.min", ""],
+            rt_substr_i: ["$rt.substr.i", 0],
+        }
     },
     {
         opcodes: ["operator_startswith"],
         force: false,
         definition: require("./definitions/startswith.json"),
+        localVariables: {
+            rt_startswith_i: ["$rt.startswith.i", 0],
+            rt_startswith: ["$rt.startswith", 0],
+        }
     },
     {
         opcodes: ["operator_endswith"],
         force: false,
         definition: require("./definitions/endswith.json"),
+        localVariables: {
+            rt_endswith_i: ["$rt.endwith.i", 0],
+            rt_endswith: ["$rt.endswith", 0],
+        }
     },
     {
         opcodes: [
@@ -116,7 +169,7 @@ var blockDefinitions = [
             "impulse_penetrationcorrection",
             "impulse_objectcount",
             "impulse_addcircle",
-            "impulse_addrectrangle",
+            "impulse_addrectangle",
             "impulse_objectids",
             "impulse_setxofobject",
             "impulse_changexofobject",
@@ -296,7 +349,7 @@ const {
     reporterPatchesBasic,
     reporterPatchesVariable,
 } = require("./reporterPatches");
-const { compress, hypercompress } = require("../optimiser");
+const { compress, hypercompress, Pool } = require("../optimiser");
 
 //Used by removeOrphanModdedBlocks and removeInvalidMonitors to ensure that non-converted blocks are deleted.
 var moddedBlocks = [
@@ -339,7 +392,7 @@ var moddedBlocks = [
     "impulse_penetrationcorrection",
     "impulse_objectcount",
     "impulse_addcircle",
-    "impulse_addrectrangle",
+    "impulse_addrectangle",
     "impulse_objectids",
     "impulse_setxofobject",
     "impulse_changexofobject",
@@ -380,6 +433,7 @@ var moddedBlocks = [
 var skipInjectingBlockDefinitions = false;
 var debug = false;
 var debugPrintFinalJson = false;
+var debugGlobalJson = false;
 var debugPrintFinalExtensions = false;
 var githubUrl = "https://github.com/ZXMushroom63/scratch-gui";
 
@@ -388,44 +442,10 @@ factoryList.push(require("./factories/split"));
 factoryList.push(require("./factories/network"));
 
 var localVariables = {
-    rt_fencing: ["$rt.spriteFencingEnabled", 1],
-    rt_fencing_oldSize: ["$rt.fencing.oldSize", ""],
-    rt_fencing_oldCostume: ["$rt.fencing.oldCostume", ""],
-    rt_glide_newX: ["$rt.glide.newX", 0],
-    rt_glide_newY: ["$rt.glide.newY", 0],
-    rt_glide_oldX: ["$rt.glide.oldX", 0],
-    rt_glide_oldY: ["$rt.glide.oldY", 0],
-    rt_replace_i: ["$rt.replace.i", 0],
-    rt_replace_isMatch: ["$rt.replace.isMatch", 0],
-    rt_replace_j: ["$rt.replace.j", 0],
-    rt_hex: ["$rt.hex", 0],
-    rt_hex_cdiv: ["$rt.hex.cdiv", 0],
-    rt_color_r: ["$rt.color.r", 0],
-    rt_color_g: ["$rt.color.g", 0],
-    rt_color_b: ["$rt.color.b", 0],
-    rt_color_cdiv: ["$rt.color.cdiv", 0],
-    rt_color_oldCostume: ["$rt.color.oldCostume", 0],
-    rt_color_oldSize: ["$rt.color.oldSize", 0],
-    rt_color_hex: ["$rt.color.hex", 0],
     rt_split_i: ["$rt.split.i", 0],
     rt_split_isMatch: ["$rt.split.isMatch", 0],
     rt_split_j: ["$rt.split.j", 0],
     rt_split_tmp: ["$rt.split.tmp", 0],
-    rt_network_charset: ["$rt.network.charset", ""],
-    rt_network_enc_i: ["$rt.network.enc.i", 0],
-    rt_network_enc_j: ["$rt.network.enc.j", 0],
-    rt_network_encoded: ["$rt.network.encoded", ""],
-    rt_network_decoded: ["$rt.network.decoded", ""],
-    rt_network_dco_i: ["$rt.network.dco.i", 0],
-    rt_network_dco: ["$rt.network.dco", ""],
-    rt_substr: ["$rt.substr", ""],
-    rt_substr_max: ["$rt.substr.max", ""],
-    rt_substr_min: ["$rt.substr.min", ""],
-    rt_substr_i: ["$rt.substr.i", 0],
-    rt_startswith_i: ["$rt.startswith.i", 0],
-    rt_startswith: ["$rt.startswith", 0],
-    rt_endswith_i: ["$rt.endwith.i", 0],
-    rt_endswith: ["$rt.endswith", 0],
 };
 var globalVariables = {
     rt_out: ["$rt.out", 0],
@@ -433,12 +453,11 @@ var globalVariables = {
 var localLists = {
     rt_stack: ["$rt.stack", []],
     rt_split_temp: ["$rt.split.temp", []],
-    rt_replace: ["$rt.replace", []],
 };
 var globalLists = {};
 
 /*/
-Note to self: If it is blank in normal scratch, check the imports, and scan for typos EVERYWHERE.
+Note to self: If output is blank in normal scratch, check the imports, and scan for typos EVERYWHERE. (eg. making the block def list skipped impulse because it was looking for usage of 'impulse_addrectrangle', instead of 'impulse_addrectangle'. This took me 3 days to find. )
 If it loads but the inputs are blank make sure to check if the block definitions prototype has an invalid `inputs` object.
 /*/
 
@@ -446,7 +465,10 @@ var blockDefinitionsList = {};
 function makeBlockDefinitionsListForProject(project) {
     var data = JSON.parse(project);
     data.targets.forEach((target) => {
-        blockDefinitionsList[target.name] = makeBlockDefinitionsListForSprite(target, data);
+        blockDefinitionsList[target.name] = makeBlockDefinitionsListForSprite(
+            target,
+            data
+        );
     });
     return JSON.stringify(data);
 }
@@ -468,6 +490,7 @@ function makeBlockDefinitionsListForSprite(target, projectData) {
                         }
                     });
                 }
+                
                 if (bd.globalLists) {
                     projectData.targets.forEach((t) => {
                         if (t.isStage) {
@@ -475,6 +498,23 @@ function makeBlockDefinitionsListForSprite(target, projectData) {
                         }
                     });
                 }
+
+                if (bd.localLists) {
+                    projectData.targets.forEach((t) => {
+                        if (!t.isStage) {
+                            Object.assign(t.lists, bd.localLists);
+                        }
+                    });
+                }
+
+                if (bd.localVariables) {
+                    projectData.targets.forEach((t) => {
+                        if (!t.isStage) {
+                            Object.assign(t.variables, bd.localVariables);
+                        }
+                    });
+                }
+
                 if (bd.broadcasts) {
                     projectData.targets.forEach((t) => {
                         if (t.isStage) {
@@ -509,6 +549,20 @@ function makeBlockDefinitionsListForSprite(target, projectData) {
                     projectData.targets.forEach((t) => {
                         if (t.isStage) {
                             Object.assign(t.lists, bd.globalLists);
+                        }
+                    });
+                }
+                if (bd.localLists) {
+                    projectData.targets.forEach((t) => {
+                        if (!t.isStage) {
+                            Object.assign(t.lists, bd.localLists);
+                        }
+                    });
+                }
+                if (bd.localVariables) {
+                    projectData.targets.forEach((t) => {
+                        if (!t.isStage) {
+                            Object.assign(t.variables, bd.localVariables);
                         }
                     });
                 }
@@ -1030,7 +1084,9 @@ function insertBeforeBlockId(blocks, blockId, data) {
                 }
             }
             if (substackDetected) {
-                console.log("SUBSTACK DETECTED: " + substackKey);
+                if (debug) {
+                    console.log("SUBSTACK DETECTED: " + substackKey);
+                }
                 blocks[blocks[blockId].parent].inputs[substackKey][1] =
                     newBlockId;
             }
@@ -1319,15 +1375,126 @@ function addCredits(project, obj) {
     return JSON.stringify(data);
 }
 
+function avoidUsedIds(blocks, blockMod, target) {
+    var pool = new Pool();
+
+    //Skip reserved ids if we are given the sprite
+
+    if (target) {
+        for (const variableId of Object.keys(target.variables)) {
+            pool.skip(variableId);
+        }
+        for (const listId of Object.keys(target.lists)) {
+            pool.skip(listId);
+        }
+        for (const broadcastId of Object.keys(target.broadcasts)) {
+            pool.skip(broadcastId);
+        }
+
+        for (const commentId of Object.keys(target.comments)) {
+            const comment = target.comments[commentId];
+            if (comment.blockId) {
+                pool.skip(comment.blockId);
+            }
+        }
+    }
+
+    //Skip taken block ids
+
+    var blkeys = Object.keys(blocks);
+    blkeys.forEach((key) => {
+        pool.skip(key);
+        var block = blocks[key];
+        if (block.parent) {
+            pool.skip(block.parent);
+        }
+        if (block.next) {
+            pool.skip(block.next);
+        }
+        for (const input of Object.values(block.inputs)) {
+            for (let i = 1; i < input.length; i++) {
+                const inputValue = input[i];
+                if (typeof inputValue === "string") {
+                    pool.skip(inputValue);
+                }
+            }
+        }
+    });
+
+    // Add references for all the blockMod's ids
+
+    var keys = Object.keys(blockMod);
+    for (let i = 0; i < keys.length; i++) {
+        const blockId = keys[i];
+        const block = blockMod[blockId];
+        pool.addReference(blockId);
+        if (block.parent) {
+            pool.addReference(block.parent);
+        }
+        if (block.next) {
+            pool.addReference(block.next);
+        }
+        for (const input of Object.values(block.inputs)) {
+            for (let i = 1; i < input.length; i++) {
+                const inputValue = input[i];
+                if (typeof inputValue === "string") {
+                    pool.addReference(inputValue);
+                }
+            }
+        }
+    }
+
+    //Generate the new ids
+
+    pool.generateNewIds();
+
+    //Save deduped ids to a new blockmod
+
+    var dedupedBlockMod = {};
+
+    for (const blockId of Object.keys(blockMod)) {
+        const block = blockMod[blockId];
+        var newBlockId = pool.getNewId(blockId);
+        dedupedBlockMod[newBlockId] = JSON.parse(JSON.stringify(block));
+        var newBlock = dedupedBlockMod[newBlockId];
+        if (Array.isArray(block)) {
+            // Compressed native (eg: variable myVariableBlockId: [3, "my variable", "my_variable"])
+            continue;
+        }
+        if (block.parent) {
+            newBlock.parent = pool.getNewId(block.parent);
+        }
+        if (block.next) {
+            newBlock.next = pool.getNewId(block.next);
+        }
+        for (const inputKey of Object.keys(block.inputs)) {
+            const input = block.inputs[inputKey];
+            for (let i = 1; i < input.length; i++) {
+                const inputValue = input[i];
+                if (typeof inputValue === "string") {
+                    newBlock.inputs[inputKey][i] = pool.getNewId(inputValue);
+                }
+            }
+        }
+    }
+
+    //And return the amazing output!
+    return dedupedBlockMod;
+}
+
+window.avoidUsedIds = avoidUsedIds;
+
 function injectBlockDefinitions(project, obj) {
     // Injects the custom block definitions.
     var data = JSON.parse(project);
     data.targets.forEach((target) => {
         blockDefinitionsList[target.name].forEach((blockDefinition) => {
             var copy = Object.assign({}, blockDefinition);
-            var keys = Object.keys(copy);
+            var deduped = avoidUsedIds(target.blocks, copy, target);
+            var keys = Object.keys(deduped);
+
             keys.forEach((key) => {
-                var block = copy[key];
+                var block = deduped[key];
                 if (
                     typeof block.x === "number" ||
                     typeof block.y === "number"
@@ -1336,7 +1503,8 @@ function injectBlockDefinitions(project, obj) {
                     block.y = -1500;
                 }
             });
-            Object.assign(target.blocks, copy);
+
+            Object.assign(target.blocks, deduped);
         });
     });
     return JSON.stringify(data);
@@ -1476,6 +1644,7 @@ function applyWaitUntilFix(p, obj) {
 }
 
 function toSb3(project, obj) {
+    window.Pool = Pool;
     var p = project;
     p = makeBlockDefinitionsListForProject(p);
     p = applyIfOperatorFix(p, obj);
@@ -1505,6 +1674,9 @@ function toSb3(project, obj) {
     p = JSON.stringify(data);
     if (debugPrintFinalJson) {
         console.log(JSON.parse(p));
+    }
+    if (debugGlobalJson) {
+        window.CompiledProjectJSON = JSON.parse(p);
     }
     if (debugPrintFinalExtensions) {
         console.log(JSON.parse(p).extensions);
