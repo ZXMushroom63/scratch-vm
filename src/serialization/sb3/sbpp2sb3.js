@@ -688,9 +688,10 @@ function applyIfOperatorFix(project, obj) {
 function applyStatementPatches(project, obj) {
     // Converts Scratch++'s new blocks in to Scratch's custom blocks.
     var targetInputKeys = [];
-    function patchBlock(patch, theBlock, blocks, blockDefsList) {
+    function patchBlock(patch, theBlock, blocks, blockDefsList, target) {
         var newPatch = Object.assign({}, patch);
         var newBlock = Object.assign({}, theBlock);
+        var foundPrototype = false;
         for (let K = 0; K < blockDefsList.length; K++) {
             const blockmod = blockDefsList[K];
             var blockKeys = Object.keys(blockmod);
@@ -703,6 +704,7 @@ function applyStatementPatches(project, obj) {
                 ) {
                     newPatch.mutation.argumentids = block.mutation.argumentids;
                     targetInputKeys = Object.keys(block.inputs);
+                    foundPrototype = true;
                 } else if (block.opcode === "procedures_prototype" && debug) {
                     console.log(
                         "Failed to match statement patch: " +
@@ -712,6 +714,9 @@ function applyStatementPatches(project, obj) {
                     );
                 }
             }
+        }
+        if (!foundPrototype) {
+            throw new Error("Could not find prototype block for statement patch with proccode: '"+patch.mutation.proccode+"' in "+target.name);
         }
         var inputsObj = {};
         var oldInputKeys = Object.keys(newBlock.inputs);
@@ -738,7 +743,8 @@ function applyStatementPatches(project, obj) {
                     dPatch,
                     target.blocks[key],
                     target.blocks,
-                    blockDefinitionsList[target.name]
+                    blockDefinitionsList[target.name],
+                    target
                 );
             }
         });
@@ -755,9 +761,10 @@ function applyReporterPatches(project, obj) {
     // say (item (1) of $rt.stack)
     function transpileCustomReporters(project, obj) {
         var targetInputKeys = [];
-        function updatePatchWithInputs(patch, theBlock, blocks, blockDefsList) {
+        function updatePatchWithInputs(patch, theBlock, blocks, blockDefsList, target) {
             var newPatch = Object.assign({}, patch);
             var newBlock = Object.assign({}, theBlock);
+            var foundPrototype = false;
             for (let K = 0; K < blockDefsList.length; K++) {
                 const blockmod = blockDefsList[K];
                 var blockKeys = Object.keys(blockmod);
@@ -772,6 +779,7 @@ function applyReporterPatches(project, obj) {
                         newPatch.mutation.argumentids =
                             block.mutation.argumentids;
                         targetInputKeys = Object.keys(block.inputs);
+                        foundPrototype = true;
                     } else if (
                         block.opcode === "procedures_prototype" &&
                         debug
@@ -784,6 +792,9 @@ function applyReporterPatches(project, obj) {
                         );
                     }
                 }
+            }
+            if (!foundPrototype) {
+                throw new Error("Could not find prototype block for reporter patch with proccode: '"+patch.mutation.proccode+"' in "+target.name);
             }
             var inputsObj = {};
             var oldInputKeys = Object.keys(newBlock.inputs);
@@ -876,7 +887,8 @@ function applyReporterPatches(project, obj) {
                             tempPatch,
                             target.blocks[result.reporterId],
                             target.blocks,
-                            blockDefinitionsList[target.name]
+                            blockDefinitionsList[target.name],
+                            target
                         );
                         insertBeforeBlockId(target.blocks, block.id, newPatch);
 
