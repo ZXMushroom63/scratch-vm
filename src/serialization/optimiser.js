@@ -121,7 +121,7 @@ const hypercompress = (projectData) => {
                     
                     delete target.blocks[notId];
 
-                    if (Array.isArray(block.inputs["SUBSTACK"]) && !Array.isArray(block.inputs["SUBSTACK2"])) {
+                    if (hasSecondStack && !hasFirstStack) {
                         block.opcode = "control_if";
                     }
                 }
