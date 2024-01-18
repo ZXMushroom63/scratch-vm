@@ -57,22 +57,77 @@ class Pool {
 
 function dataValueOptimization(json, optimizer) {
     let sprites = json.targets;
-    
-    for(let sprite of sprites) {
+
+    for (let sprite of sprites) {
         let variables = sprite.variables;
         let lists = sprite.lists;
-        
-        for(let variableId in variables) {
+
+        for (let variableId in variables) {
             variables[variableId][1] = optimizer(variables[variableId][1]);
         }
-        
-        for(let listId in lists) {
+
+        for (let listId in lists) {
             lists[listId][1] = lists[listId][1].map(optimizer);
         }
     }
 }
 
+
+
 const hypercompress = (projectData) => {
+    //Remove useless operator_nots
+    for (const target of projectData.targets) {
+        for (const blockId of Object.keys(target.blocks)) {
+            var block = target.blocks[blockId];
+
+            while (block && (block.opcode === "control_if" || block.opcode === "control_if_else") && block.inputs && block.inputs["CONDITION"] && Array.isArray(block.inputs["CONDITION"]) && block.inputs["CONDITION"][0] === 2 && typeof block.inputs["CONDITION"][1] === "string" && target.blocks[block.inputs["CONDITION"][1]].opcode === "operator_not") {
+                if (block.opcode === "control_if") {
+                    block.opcode = "control_if_else";
+                }
+
+                if (block.opcode === "control_if_else") {
+                    var hasFirstStack = Array.isArray(block.inputs["SUBSTACK"]);
+                    var hasSecondStack = Array.isArray(block.inputs["SUBSTACK2"]);
+                    var firstStack = block.inputs["SUBSTACK"];
+                    var secondStack = block.inputs["SUBSTACK2"];
+                    //Swapping substacks around
+                    if (hasFirstStack) {
+                        delete block.inputs["SUBSTACK"];
+                    }
+                    if (hasSecondStack) {
+                        delete block.inputs["SUBSTACK2"];
+                    }
+                    if (hasFirstStack) {
+                        block.inputs["SUBSTACK2"] = firstStack;
+                    }
+                    if (hasSecondStack) {
+                        block.inputs["SUBSTACK"] = secondStack;
+                    }
+
+                    //Remove not block
+                    var notId = block.inputs["CONDITION"][1];
+                    var not = target.blocks[notId];
+                    var hasOperand = Array.isArray(not.inputs["OPERAND"]);
+                    var operandValue = not.inputs["OPERAND"];
+
+                    if (hasOperand) {
+                        var notOperandId = not.inputs["OPERAND"][1];
+                        var notOperand = target.blocks[notOperandId];
+                        notOperand.parent = blockId;
+                        block.inputs["CONDITION"] = operandValue;
+                    } else {
+                        delete block.inputs["CONDITION"];
+                    }
+                    
+                    delete target.blocks[notId];
+
+                    if (Array.isArray(block.inputs["SUBSTACK"]) && !Array.isArray(block.inputs["SUBSTACK2"])) {
+                        block.opcode = "control_if";
+                    }
+                }
+            }
+        }
+    }
     var reserved = ["is compiled?", "is forkphorus?", "is TurboWarp?"]; //Renaming these argument reporters will cause some Scratch++ projects to malfunction.
     for (const target of projectData.targets) {
         var proccodeMap = {};
@@ -113,7 +168,7 @@ const hypercompress = (projectData) => {
                         var inputDefId = block.inputs[argumentId][1];
                         var letter =
                             target.blocks[inputDefId].opcode ===
-                            "argument_reporter_boolean"
+                                "argument_reporter_boolean"
                                 ? "b"
                                 : "s";
                         percentString += " %" + letter;
@@ -207,16 +262,45 @@ const hypercompress = (projectData) => {
         }
     }
 
-    
-    dataValueOptimization(projectData, function (value) {
-        let string = value+"";
-        let short = +string.substr(0, string.length-1);
-        if((short+"").length < string.length-5 && Math.abs(1-(value/short)) < 1e-14) {
-            return short;
-        } else {
-            return value;
+
+    // dataValueOptimization(projectData, function (value) {
+    //     let string = value+"";
+    //     let short = +string.substr(0, string.length-1);
+    //     if((short+"").length < string.length-5 && Math.abs(1-(value/short)) < 1e-14) {
+    //         return short;
+    //     } else {
+    //         return value;
+    //     }
+    // });
+
+    var sprites = projectData.targets;
+
+    for (let sprite of sprites) {
+        let blocks = sprite.blocks;
+
+        for (let blockId in blocks) {
+            let block = blocks[blockId];
+            if (block.opcode !== "data_itemoflist" &&
+                block.opcode !== "data_replaceitemoflist" &&
+                block.opcode !== "data_deleteoflist") continue;
+
+            let input = block.inputs.INDEX;
+            if (input.length !== 3) continue;
+
+            let inputBlockId = input[1];
+            if (typeof inputBlockId !== "string") continue;
+
+            let inputBlock = blocks[inputBlockId];
+            if (!inputBlock || inputBlock.opcode !== "data_lengthoflist") continue;
+
+            let list1 = block.fields.LIST;
+            let list2 = inputBlock.fields.LIST;
+            if (list1[0] !== list2[0] || list1[1] !== list2[1]) continue;
+
+            delete blocks[inputBlockId];
+            block.inputs.INDEX = [1, [6, "last"]];
         }
-    });
+    }
 };
 
 const compress = (projectData) => {

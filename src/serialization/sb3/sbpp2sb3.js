@@ -431,6 +431,7 @@ var moddedBlocks = [
 ];
 
 var skipInjectingBlockDefinitions = false;
+var skipOptimisation = false;
 var debug = false;
 var debugPrintFinalJson = false;
 var debugGlobalJson = false;
@@ -490,7 +491,7 @@ function makeBlockDefinitionsListForSprite(target, projectData) {
                         }
                     });
                 }
-                
+
                 if (bd.globalLists) {
                     projectData.targets.forEach((t) => {
                         if (t.isStage) {
@@ -708,15 +709,15 @@ function applyStatementPatches(project, obj) {
                 } else if (block.opcode === "procedures_prototype" && debug) {
                     console.log(
                         "Failed to match statement patch: " +
-                            block.mutation.proccode +
-                            " != " +
-                            patch.mutation.proccode
+                        block.mutation.proccode +
+                        " != " +
+                        patch.mutation.proccode
                     );
                 }
             }
         }
         if (!foundPrototype) {
-            throw new Error("Could not find prototype block for statement patch with proccode: '"+patch.mutation.proccode+"' in "+target.name);
+            throw new Error("Could not find prototype block for statement patch with proccode: '" + patch.mutation.proccode + "' in " + target.name);
         }
         var inputsObj = {};
         var oldInputKeys = Object.keys(newBlock.inputs);
@@ -751,7 +752,29 @@ function applyStatementPatches(project, obj) {
     });
     return JSON.stringify(data);
 }
+function duplicateBlockStack(blocks, block) {
+    var duplicatedBlockStack = {};
+    
+    function sift(targetBlock, parentId) {
+        var sId = genCharList("abcdefghijklmnopqrstuvwxyz1234567890", 14);
+        duplicatedBlockStack[sId] = structuredClone(targetBlock);
+        targetBlock.parent = parentId;
+        targetBlock.next = null;
+        for (const input of Object.values(targetBlock.inputs)) {
+            for (let i = 1; i < input.length; i++) {
+                const inputValue = input[i];
+                if (typeof inputValue === "string") {
+                    var newId = sift(blocks[inputValue], sId);
+                    input[i] = newId;
+                }
+            }
+        }
+        return sId;
+    }
 
+    var id = sift(block, null);
+    return [duplicatedBlockStack[id], duplicatedBlockStack, id];
+}
 function applyReporterPatches(project, obj) {
     // Converts reporters to lists and custom blocks. Eg:
     // say (min (6) (4))
@@ -786,15 +809,15 @@ function applyReporterPatches(project, obj) {
                     ) {
                         console.log(
                             "Failed to match reporter patch: " +
-                                block.mutation.proccode +
-                                " != " +
-                                patch.mutation.proccode
+                            block.mutation.proccode +
+                            " != " +
+                            patch.mutation.proccode
                         );
                     }
                 }
             }
             if (!foundPrototype) {
-                throw new Error("Could not find prototype block for reporter patch with proccode: '"+patch.mutation.proccode+"' in "+target.name);
+                throw new Error("Could not find prototype block for reporter patch with proccode: '" + patch.mutation.proccode + "' in " + target.name);
             }
             var inputsObj = {};
             var oldInputKeys = Object.keys(newBlock.inputs);
@@ -835,6 +858,7 @@ function applyReporterPatches(project, obj) {
                     substackBlocks[block.id] = {
                         stackKeys: foundSubstackKeys,
                         patches: [],
+                        libPatch: {},
                         isImportantRP:
                             block.opcode === "control_repeat_until" &&
                             foundSubstackKeys.length === 0,
@@ -861,16 +885,16 @@ function applyReporterPatches(project, obj) {
                         var result = results[i];
                         var isBool = Array.isArray(
                             reporterPatches[
-                                target.blocks[result.reporterId].opcode
+                            target.blocks[result.reporterId].opcode
                             ]
                         );
                         var proccode = isBool
                             ? reporterPatches[
-                                  target.blocks[result.reporterId].opcode
-                              ][0]
+                            target.blocks[result.reporterId].opcode
+                            ][0]
                             : reporterPatches[
-                                  target.blocks[result.reporterId].opcode
-                              ];
+                            target.blocks[result.reporterId].opcode
+                            ];
                         var tempPatch = {
                             opcode: "procedures_call",
                             fields: {},
@@ -890,18 +914,24 @@ function applyReporterPatches(project, obj) {
                             blockDefinitionsList[target.name],
                             target
                         );
-                        insertBeforeBlockId(target.blocks, block.id, newPatch);
 
                         if (substackFixNeeded) {
+                            //Need to clone entire stack *sigh*
+                            var dStack = duplicateBlockStack(target.blocks, newPatch);
+                            Object.assign(substackBlocks[block.id].libPatch, dStack[1]);
                             substackBlocks[block.id].patches.push(
-                                Object.assign({}, newPatch)
+                                JSON.parse(JSON.stringify(dStack[0]))
                             );
                         }
+
+                        insertBeforeBlockId(target.blocks, block.id, newPatch);
+
+                        
                         if (isBool) {
                             if (debug) {
                                 console.log(
                                     "Patching boolean reporter: " +
-                                        target.blocks[result.reporterId].opcode
+                                    target.blocks[result.reporterId].opcode
                                 );
                             }
                             var itemListId = genCharList(
@@ -930,7 +960,7 @@ function applyReporterPatches(project, obj) {
                             if (debug) {
                                 console.log(
                                     "Patching normal reporter: " +
-                                        target.blocks[result.reporterId].opcode
+                                    target.blocks[result.reporterId].opcode
                                 );
                             }
                             Object.assign(target.blocks[result.reporterId], {
@@ -947,6 +977,9 @@ function applyReporterPatches(project, obj) {
             for (let q = 0; q < stackBlockKeys.length; q++) {
                 var blockId = stackBlockKeys[q];
                 var dataCapsule = substackBlocks[blockId];
+
+                Object.assign(target.blocks, dataCapsule.libPatch);
+                
                 if (
                     dataCapsule.isImportantRP &&
                     dataCapsule.patches.length > 0
@@ -1018,9 +1051,9 @@ function applyReporterPatches(project, obj) {
                 if (debug) {
                     console.log(
                         "Patching opcode " +
-                            block.opcode +
-                            " to " +
-                            reporterPatchesBasic[block.opcode]
+                        block.opcode +
+                        " to " +
+                        reporterPatchesBasic[block.opcode]
                     );
                 }
                 block.opcode = reporterPatchesBasic[block.opcode];
@@ -1071,8 +1104,7 @@ function insertBeforeBlockId(blocks, blockId, data) {
     data.id = newBlockId;
     if (debug) {
         console.log(
-            `Inserted content${
-                data.opcode ? " with opcode " + data.opcode : ""
+            `Inserted content${data.opcode ? " with opcode " + data.opcode : ""
             } before: `
         );
         console.log(blocks[blockId].opcode);
@@ -1571,16 +1603,16 @@ function applyReporterExVariableOps(project, obj) {
                     var result = results[i];
                     var isBool = Array.isArray(
                         reporterPatchesVariable[
-                            target.blocks[result.reporterId].opcode
+                        target.blocks[result.reporterId].opcode
                         ]
                     );
                     var variableId = isBool
                         ? reporterPatchesVariable[
-                              target.blocks[result.reporterId].opcode
-                          ][0]
+                        target.blocks[result.reporterId].opcode
+                        ][0]
                         : reporterPatchesVariable[
-                              target.blocks[result.reporterId].opcode
-                          ];
+                        target.blocks[result.reporterId].opcode
+                        ];
                     if (isBool) {
                         Object.assign(target.blocks[result.reporterId], {
                             opcode: "operator_equals",
@@ -1606,14 +1638,14 @@ function applyReporterExVariableOps(project, obj) {
                         target.blocks[result.foundIn].inputs[
                             result.inputsEntry.inputKey
                         ] = [
-                            3,
-                            [
-                                12,
-                                getVariableNameById(data, target, variableId),
-                                variableId,
-                            ],
-                            [10, ""],
-                        ];
+                                3,
+                                [
+                                    12,
+                                    getVariableNameById(data, target, variableId),
+                                    variableId,
+                                ],
+                                [10, ""],
+                            ];
 
                         if (debug) {
                             console.log(target.blocks[result.foundIn].inputs);
@@ -1675,15 +1707,17 @@ function toSb3(project, obj) {
     p = removeInvalidMonitors(p, obj);
     p = addCredits(p, obj);
     p = removeIdPropertiesFromBlocks(p, obj);
-    var data = JSON.parse(p);
+    if (!skipOptimisation) {
+        var data = JSON.parse(p);
 
-    //Shrink block and comment ids.
-    compress(data);
+        //Shrink block and comment ids.
+        compress(data);
 
-    //Shrink custom block proccodes and empty blank text.
-    hypercompress(data);
+        //Shrink custom block proccodes and empty blank text.
+        hypercompress(data);
 
-    p = JSON.stringify(data);
+        p = JSON.stringify(data);
+    }
     if (debugPrintFinalJson) {
         console.log(JSON.parse(p));
     }
