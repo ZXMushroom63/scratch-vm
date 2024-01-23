@@ -33,6 +33,7 @@ class Scratch3ControlBlocks {
             control_if: this.if,
             control_if_else: this.ifElse,
             control_stop: this.stop,
+            control_launch: this.launch,
             control_create_clone_of: this.createClone,
             control_delete_this_clone: this.deleteClone,
             control_get_counter: this.getCounter,
@@ -64,6 +65,19 @@ class Scratch3ControlBlocks {
         // If we still have some left, start the branch.
         if (util.stackFrame.loopCounter >= 0) {
             util.startBranch(1, true);
+        }
+    }
+
+    launch(args, util) {
+        var thisId = util.thread.peekStack();
+        var nextId = util.thread.target.blocks.getBranch(
+            thisId,
+            1
+        );
+        if (nextId) {
+            util.runtime._pushThread(nextId, util.target);
+        } else {
+            util.runtime._pushThread(null, util.target);
         }
     }
 

@@ -39,11 +39,13 @@ class Scratch3OperatorsBlocks {
             operator_contains: this.contains,
             operator_startswith: this.startsWith,
             operator_endswith: this.endsWith,
+            operator_else: this.else,
             operator_replace: this.replace,
             operator_if: this.if,
             operator_min: this.min,
             operator_max: this.max,
             operator_mod: this.mod,
+            operator_clamp: this.clamp,
             operator_hex: this.hex,
             operator_round: this.round,
             operator_mathop: this.mathop
@@ -64,6 +66,28 @@ class Scratch3OperatorsBlocks {
 
     divide(args) {
         return Cast.toNumber(args.NUM1) / Cast.toNumber(args.NUM2);
+    }
+
+    else(args) {
+        return Cast.toBoolean(args.CASE) ? Cast.toString(args.CASE) : Cast.toString(args.DEFAULT);
+    }
+
+    clamp(args) {
+        if (this.gt({
+            OPERAND1: args.MIN,
+            OPERAND2: args.VALUE,
+        })) {
+            return args.MIN;
+        } else {
+            if (this.lt({
+                OPERAND1: args.MAX,
+                OPERAND2: args.VALUE,
+            })) {
+                return args.MAX;
+            } else {
+                return args.VALUE;
+            }
+        }
     }
 
     power(args) {

@@ -341,6 +341,16 @@ var blockDefinitions = [
         definition: require("./definitions/impulse.json"),
         removeExtensions: ["impulse"],
     },
+    {
+        opcodes: ["operator_else"],
+        force: false,
+        definition: require("./definitions/elseoperator.json"),
+    },
+    {
+        opcodes: ["operator_clamp"],
+        force: false,
+        definition: require("./definitions/clamp.json"),
+    },
 ];
 
 const statementPatches = require("./statementPatches.json");
@@ -428,6 +438,8 @@ var moddedBlocks = [
     "impulse_retrievedbodylastcollidedid",
     "impulse_loadscenedata",
     "impulse_scenedata",
+    "operator_else",
+    "operator_clamp"
 ];
 
 var skipInjectingBlockDefinitions = false;
@@ -441,6 +453,7 @@ var githubUrl = "https://github.com/ZXMushroom63/scratch-gui";
 var factoryList = [];
 factoryList.push(require("./factories/split"));
 factoryList.push(require("./factories/network"));
+factoryList.push(require("./factories/launch"));
 
 var localVariables = {
     rt_split_i: ["$rt.split.i", 0],

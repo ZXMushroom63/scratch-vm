@@ -17,6 +17,8 @@ var reporterPatches = {
     "impulse_objectids": "$rt.impulse.object ids",
     "impulse_objectexists": ["$rt.impulse.object with id %s exists?"],
     "impulse_scenedata": "$rt.impulse.Scene Data",
+    "operator_else": "$rt. %s ?? %s",
+    "operator_clamp": "$rt.clamp %s %s %s",
 }
 var reporterPatchesBasic = {
     "operator_true": "operator_not",
