@@ -991,6 +991,11 @@ function applyReporterPatches(project, obj) {
                 var blockId = stackBlockKeys[q];
                 var dataCapsule = substackBlocks[blockId];
 
+                if (!target.blocks[blockId] || (target.blocks[blockId].mutation && target.blocks[blockId].mutation.hasnext === "false")) {
+                    console.log("Skipped invalid block.")
+                    continue;
+                }
+
                 Object.assign(target.blocks, dataCapsule.libPatch);
                 
                 if (
@@ -1022,13 +1027,16 @@ function applyReporterPatches(project, obj) {
                     for (let l = 0; l < dataCapsule.stackKeys.length; l++) {
                         if (dataCapsule.patches.length > 0) {
                             const stackKey = dataCapsule.stackKeys[l];
+                            var lastId = getLastBlockInSubstack(target.blocks, blockId, stackKey);
+                            if (!target.blocks[lastId] || (target.blocks[lastId].mutation && target.blocks[lastId].mutation.hasnext === "false")) {
+                                if (debug) {
+                                    console.log("Skipped invalid control_stop.");
+                                }
+                                continue;
+                            }
                             var newLastId = insertAfterBlockId(
                                 target.blocks,
-                                getLastBlockInSubstack(
-                                    target.blocks,
-                                    blockId,
-                                    stackKey
-                                ),
+                                lastId,
                                 {
                                     opcode: "data_deletealloflist",
                                     inputs: {},
@@ -1321,7 +1329,7 @@ function getStatementBlocks(blocks) {
         const key = keys[i];
         if (blocks[key].topLevel === true) {
             topLevelBlocks.push(key);
-        } else if (blocks[key].parent) {
+        } else if (blocks[key].parent && blocks[blocks[key].parent]) {
             var parentBlock = blocks[blocks[key].parent];
             var isValid = false;
             var iKeys = Object.keys(parentBlock.inputs);

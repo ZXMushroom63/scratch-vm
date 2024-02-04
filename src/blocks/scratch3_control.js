@@ -74,10 +74,28 @@ class Scratch3ControlBlocks {
             thisId,
             1
         );
-        if (nextId) {
-            util.runtime._pushThread(nextId, util.target);
+        
+        if (util.thread.target.isStage) {
+            if (nextId) {
+                util.runtime._pushThread(nextId, util.target);
+            } else {
+                util.runtime._pushThread(null, util.target);
+            }
         } else {
-            util.runtime._pushThread(null, util.target);
+            var targetName = util.thread.target.getName();
+            for (let i = 0; i < util.runtime.targets.length; i++) {
+                const target = util.runtime.targets[i];
+                if (target.isStage) {
+                    continue;
+                }
+                if (target.sprite && target.sprite.name === targetName) {
+                    if (nextId) {
+                        util.runtime._pushThread(nextId, target);
+                    } else {
+                        util.runtime._pushThread(null, target);
+                    }
+                }
+            }
         }
     }
 
