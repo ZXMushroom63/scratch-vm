@@ -40,6 +40,7 @@ var reporterPatchesVariable = {
     "impulse_retrievedbodywidth": "rt_impulse_retrieved_width",
     "impulse_retrievedbodyheight": "rt_impulse_retrieved_height",
     "impulse_retrievedbodyrotation": "rt_impulse_retrieved_rotation",
+    "impulse_retrievedbodyrestitution": "rt_impulse_retrieved_restitution",
     "impulse_retrievedbodyvr": "rt_impulse_retrieved_vr",
     "impulse_retrievedbodyradius": "rt_impulse_retrieved_radius",
     "impulse_retrievedbodymass": "rt_impulse_retrieved_mass",

@@ -197,6 +197,7 @@ var blockDefinitions = [
             "impulse_retrievedbodywidth",
             "impulse_retrievedbodyheight",
             "impulse_retrievedbodyrotation",
+            "impulse_retrievedbodyrestitution",
             "impulse_retrievedbodyvr",
             "impulse_retrievedbodyradius",
             "impulse_retrievedbodymass",
@@ -262,6 +263,10 @@ var blockDefinitions = [
             rt_impulse_retrieved_y: ["$rt.impulse.retrieved.y", 0],
             rt_impulse_retrieved_rotation: [
                 "$rt.impulse.retrieved.rotation",
+                0,
+            ],
+            rt_impulse_retrieved_restitution: [
+                "$rt.impulse.retrieved.restitution",
                 0,
             ],
             rt_impulse_retrieved_type: ["$rt.impulse.retrieved.type", 0],
@@ -439,7 +444,8 @@ var moddedBlocks = [
     "impulse_loadscenedata",
     "impulse_scenedata",
     "operator_else",
-    "operator_clamp"
+    "operator_clamp",
+    "impulse_retrievedbodyrestitution"
 ];
 
 function checkCap(block) {
