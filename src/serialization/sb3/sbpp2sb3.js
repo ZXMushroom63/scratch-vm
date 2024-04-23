@@ -442,6 +442,21 @@ var moddedBlocks = [
     "operator_clamp"
 ];
 
+function checkCap(block) {
+    var checks = [(blck) => {
+        return (blck.mutation && blck.mutation.hasnext === "false")
+    }, (blck) => {
+        var badopcodes = ["control_forever", "control_delete_this_clone"];
+        return badopcodes.includes(blck.opcode);
+    }];
+    var t = false;
+    for (let i = 0; i < checks.length; i++) {
+        t ||= checks[i](block);
+    }
+    return t;
+}
+
+
 var skipInjectingBlockDefinitions = false;
 var skipOptimisation = false;
 var debug = false;
@@ -991,7 +1006,7 @@ function applyReporterPatches(project, obj) {
                 var blockId = stackBlockKeys[q];
                 var dataCapsule = substackBlocks[blockId];
 
-                if (!target.blocks[blockId] || (target.blocks[blockId].mutation && target.blocks[blockId].mutation.hasnext === "false")) {
+                if (!target.blocks[blockId] || checkCap(target.blocks[blockId])) {
                     console.log("Skipped invalid block.")
                     continue;
                 }
@@ -1028,9 +1043,9 @@ function applyReporterPatches(project, obj) {
                         if (dataCapsule.patches.length > 0) {
                             const stackKey = dataCapsule.stackKeys[l];
                             var lastId = getLastBlockInSubstack(target.blocks, blockId, stackKey);
-                            if (!target.blocks[lastId] || (target.blocks[lastId].mutation && target.blocks[lastId].mutation.hasnext === "false")) {
+                            if (!target.blocks[lastId] || checkCap(target.blocks[lastId])) {
                                 if (debug) {
-                                    console.log("Skipped invalid control_stop.");
+                                    console.log("Skipped invalid cap block.");
                                 }
                                 continue;
                             }
