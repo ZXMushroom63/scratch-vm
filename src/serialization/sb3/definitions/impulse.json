@@ -33333,7 +33333,7 @@
     },
     "t=": {
         "opcode": "data_setvariableto",
-        "next": "t?",
+        "next": "afafafaf_t=",
         "parent": "t;",
         "inputs": { "VALUE": [1, [10, ""]] },
         "fields": {
@@ -33342,10 +33342,21 @@
         "shadow": false,
         "topLevel": false
     },
+    "afafafaf_t=": {
+        "opcode": "data_setvariableto",
+        "next": "t?",
+        "parent": "t=",
+        "inputs": { "VALUE": [1, [10, ""]] },
+        "fields": {
+            "VARIABLE": ["$rt.impulse.retrieved.restitution", "rt_impulse_retrieved_restitution"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
     "t?": {
         "opcode": "data_setvariableto",
         "next": "t@",
-        "parent": "t=",
+        "parent": "afafafaf_t=",
         "inputs": { "VALUE": [1, [10, ""]] },
         "fields": {
             "VARIABLE": ["$rt.impulse.retrieved.type", "rt_impulse_retrieved_type"]
@@ -33712,7 +33723,7 @@
     },
     "ix": {
         "opcode": "data_setvariableto",
-        "next": "iy",
+        "next": "afafaf_ix",
         "parent": "iw",
         "inputs": { "VALUE": [3, "uj", [10, "0"]] },
         "fields": {
@@ -33751,10 +33762,51 @@
         "shadow": false,
         "topLevel": false
     },
+    "afafaf_ix": {
+        "opcode": "data_setvariableto",
+        "next": "iy",
+        "parent": "ix",
+        "inputs": { "VALUE": [3, "afafaf_uj", [10, "0"]] },
+        "fields": {
+            "VARIABLE": ["$rt.impulse.retrieved.restitution", "rt_impulse_retrieved_restitution"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "uafafaf_j": {
+        "opcode": "data_itemoflist",
+        "next": null,
+        "parent": "afafaf_ix",
+        "inputs": { "INDEX": [3, "afafaf_K]", [7, "10"]] },
+        "fields": {
+            "LIST": [
+                "$rt.impulse.rigid_body",
+                "rt_impulse_rigid_body"
+            ]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "afafaf_K]": {
+        "opcode": "operator_add",
+        "next": null,
+        "parent": "afafaf_uj",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.impulse.retrieved.idx", "rt_impulse_retrieved_idx"],
+                [4, "10"]
+            ],
+            "NUM2": [1, [4, "23"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
     "iy": {
         "opcode": "data_setvariableto",
         "next": "iz",
-        "parent": "ix",
+        "parent": "afafaf_ix",
         "inputs": { "VALUE": [3, "uk", [10, "0"]] },
         "fields": {
             "VARIABLE": ["$rt.impulse.retrieved.type", "rt_impulse_retrieved_type"]
@@ -35521,6 +35573,224 @@
         "opcode": "data_changevariableby",
         "next": null,
         "parent": "bi",
+        "inputs": {
+            "VALUE": [
+                3,
+                [12, "$rt.impulse.@RB", "rt_impulse_rb"],
+                [4, "10"]
+            ]
+        },
+        "fields": {
+            "VARIABLE": ["$rt.impulse.bodyIdx", "rt_impulse_bodyidx"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "afafaf_uV": {
+        "opcode": "procedures_definition",
+        "next": "afafaf_uW",
+        "parent": null,
+        "inputs": { "custom_block": [1, "afafaf_iY"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": true,
+        "x": 4979,
+        "y": 64
+    },
+    "afafaf_iY": {
+        "opcode": "procedures_prototype",
+        "next": null,
+        "parent": "afafaf_uV",
+        "inputs": {
+            "6D4%T.^]Mx??CihV2@:n": [1, "afafaf_LO"],
+            "ZoJ~_i?4|E(3w1NKTSyE": [1, "afafaf_LP"]
+        },
+        "fields": {},
+        "shadow": true,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt.impulse.Set restitution of object with id: %s to %s",
+            "argumentids": "[\"6D4%T.^]Mx??CihV2@:n\",\"ZoJ~_i?4|E(3w1NKTSyE\"]",
+            "argumentnames": "[\"id\",\"res\"]",
+            "argumentdefaults": "[\"\",\"\"]",
+            "warp": "true"
+        }
+    },
+    "afafaf_LO": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "afafaf_iY",
+        "inputs": {},
+        "fields": { "VALUE": ["id", null] },
+        "shadow": true,
+        "topLevel": false
+    },
+    "afafaf_LP": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "afafaf_iY",
+        "inputs": {},
+        "fields": { "VALUE": ["res", null] },
+        "shadow": true,
+        "topLevel": false
+    },
+    "afafaf_uW": {
+        "opcode": "procedures_call",
+        "next": "afafaf_uX",
+        "parent": "afafaf_uV",
+        "inputs": {},
+        "fields": {},
+        "shadow": false,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt.impulse.update body #",
+            "argumentids": "[]",
+            "warp": "true"
+        }
+    },
+    "afafaf_uX": {
+        "opcode": "data_setvariableto",
+        "next": "afafaf_uY",
+        "parent": "afafaf_uW",
+        "inputs": {
+            "VALUE": [
+                3,
+                [12, "$rt.impulse.@RB", "rt_impulse_rb"],
+                [10, ""]
+            ]
+        },
+        "fields": {
+            "VARIABLE": ["$rt.impulse.bodyIdx", "rt_impulse_bodyidx"]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "afafaf_uY": {
+        "opcode": "control_repeat",
+        "next": null,
+        "parent": "afafaf_uX",
+        "inputs": {
+            "TIMES": [
+                3,
+                [12, "$rt.impulse.body#", "rt_impulse_body"],
+                [6, "10"]
+            ],
+            "SUBSTACK": [2, "afafaf_bi"]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "afafaf_bi": {
+        "opcode": "control_if",
+        "next": "afafaf_LQ",
+        "parent": "afafaf_uY",
+        "inputs": { "CONDITION": [2, "afafaf_iZ"], "SUBSTACK": [2, "afafaf_i!"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "afafaf_iZ": {
+        "opcode": "operator_equals",
+        "next": null,
+        "parent": "afafaf_bi",
+        "inputs": {
+            "OPERAND1": [3, "afafaf_uZ", [10, ""]],
+            "OPERAND2": [3, "afafaf_LR", [10, "50"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "afafaf_uZ": {
+        "opcode": "data_itemoflist",
+        "next": null,
+        "parent": "afafaf_iZ",
+        "inputs": { "INDEX": [3, "afafaf_LS", [7, "10"]] },
+        "fields": {
+            "LIST": [
+                "$rt.impulse.rigid_body",
+                "rt_impulse_rigid_body"
+            ]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "afafaf_LS": {
+        "opcode": "operator_add",
+        "next": null,
+        "parent": "afafaf_uZ",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.impulse.bodyIdx", "rt_impulse_bodyidx"],
+                [4, "10"]
+            ],
+            "NUM2": [1, [4, "28"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "afafaf_LR": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "afafaf_iZ",
+        "inputs": {},
+        "fields": { "VALUE": ["id", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "afafaf_i!": {
+        "opcode": "data_replaceitemoflist",
+        "next": null,
+        "parent": "afafaf_bi",
+        "inputs": {
+            "INDEX": [3, "afafaf_LT", [7, "1"]],
+            "ITEM": [3, "afafaf_LU", [10, "thing"]]
+        },
+        "fields": {
+            "LIST": [
+                "$rt.impulse.rigid_body",
+                "rt_impulse_rigid_body"
+            ]
+        },
+        "shadow": false,
+        "topLevel": false
+    },
+    "afafaf_LT": {
+        "opcode": "operator_add",
+        "next": null,
+        "parent": "afafaf_i!",
+        "inputs": {
+            "NUM1": [
+                3,
+                [12, "$rt.impulse.bodyIdx", "rt_impulse_bodyidx"],
+                [4, "10"]
+            ],
+            "NUM2": [1, [4, "23"]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "afafaf_LU": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "afafaf_i!",
+        "inputs": {},
+        "fields": { "VALUE": ["res", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "afafaf_LQ": {
+        "opcode": "data_changevariableby",
+        "next": null,
+        "parent": "afafaf_bi",
         "inputs": {
             "VALUE": [
                 3,

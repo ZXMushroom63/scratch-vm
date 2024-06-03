@@ -30,6 +30,7 @@ class ImpulseExtension {
         this.vars.RtImpulseRetrievedId = "";
         this.vars.RtImpulseRetrievedLastcollidedid = "";
         this.vars.RtImpulseRetrievedMass = "";
+        this.vars.RtImpulseRetrievedRestitution = "";
         this.vars.RtImpulseRetrievedRotation = "";
         this.vars.RtImpulseRetrievedVx = "";
         this.vars.RtImpulseRetrievedVy = "";
@@ -518,6 +519,21 @@ class ImpulseExtension {
                     },
                 },
                 {
+                    opcode: "setrestitutionofobject",
+                    text: "set restition of object with id [ID] to [N]",
+                    blockType: BlockType.COMMAND,
+                    arguments: {
+                        ID: {
+                            type: ArgumentType.STRING,
+                            defaultValue: "myObject",
+                        },
+                        N: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: 0,
+                        },
+                    },
+                },
+                {
                     opcode: "setidofobject",
                     text: "change id of object with id [ID] to [N]",
                     blockType: BlockType.COMMAND,
@@ -616,6 +632,12 @@ class ImpulseExtension {
                 {
                     opcode: "retrievedbodyrotation",
                     text: "object rotation",
+                    blockType: BlockType.REPORTER,
+                    arguments: {},
+                },
+                {
+                    opcode: "retrievedbodyrestitution",
+                    text: "object restitution",
                     blockType: BlockType.REPORTER,
                     arguments: {},
                 },
@@ -720,6 +742,10 @@ class ImpulseExtension {
 
     setrotationofobject(args) {
         this.warp(this.RtImpulseSetRotationOfObjectWithIdTo)(args.ID, this.toNumber(args.N));
+    }
+
+    setrestitutionofobject(args) {
+        this.warp(this.RtImpulseSetRestitutionOfObjectWithIdTo)(args.ID, this.toNumber(args.N));
     }
 
     setvelocityofobject(args) {
@@ -952,6 +978,9 @@ class ImpulseExtension {
     }
     retrievedbodyrotation() {
         return this.vars.RtImpulseRetrievedRotation;
+    }
+    retrievedbodyrestitution() {
+        return this.vars.RtImpulseRetrievedRestitution;
     }
     retrievedbodyradius() {
         return this.vars.RtImpulseRetrievedRadius;
@@ -3737,6 +3766,7 @@ class ImpulseExtension {
         this.vars.RtImpulseRetrievedWidth = "";
         this.vars.RtImpulseRetrievedHeight = "";
         this.vars.RtImpulseRetrievedRotation = "";
+        this.vars.RtImpulseRetrievedRestitution = "";
         this.vars.RtImpulseRetrievedType = "";
         this.vars.RtImpulseRetrievedX = "";
         this.vars.RtImpulseRetrievedY = "";
@@ -3783,6 +3813,10 @@ class ImpulseExtension {
                 this.vars.RtImpulseRetrievedRotation = this.itemOf(
                     this.vars.RtImpulseRigidBody,
                     this.toNumber(this.vars.RtImpulseRetrievedIdx) + 15
+                );
+                this.vars.RtImpulseRetrievedRestitution = this.itemOf(
+                    this.vars.RtImpulseRigidBody,
+                    this.toNumber(this.vars.RtImpulseRetrievedIdx) + 22
                 );
                 this.vars.RtImpulseRetrievedType = this.itemOf(
                     this.vars.RtImpulseRigidBody,
@@ -3976,6 +4010,29 @@ class ImpulseExtension {
                     this.toNumber(this.vars.RtImpulseBodyidx) + 15,
                     1,
                     rot
+                );
+            }
+            this.vars.RtImpulseBodyidx += this.toNumber(this.vars.RtImpulseRb);
+        }
+    }
+
+    *RtImpulseSetRestitutionOfObjectWithIdTo(id, res) {
+        this.warp(this.RtImpulseUpdateBody)();
+        this.vars.RtImpulseBodyidx = this.vars.RtImpulseRb;
+        for (let i = 0; i < this.toNumber(this.vars.RtImpulseBody); i++) {
+            if (
+                this.compare(
+                    this.itemOf(
+                        this.vars.RtImpulseRigidBody,
+                        this.toNumber(this.vars.RtImpulseBodyidx) + 27
+                    ),
+                    id
+                ) === 0
+            ) {
+                this.vars.RtImpulseRigidBody.splice(
+                    this.toNumber(this.vars.RtImpulseBodyidx) + 22,
+                    1,
+                    res
                 );
             }
             this.vars.RtImpulseBodyidx += this.toNumber(this.vars.RtImpulseRb);

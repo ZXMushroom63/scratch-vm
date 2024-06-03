@@ -230,6 +230,13 @@
             "warp": "true"
         }
     },
+    "impulse_setrestitutionofobject": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.impulse.Set restitution of object with id: %s to %s",
+            "warp": "true"
+        }
+    },
     "impulse_setvelocityofobject": {
         "opcode": "procedures_call",
         "mutation": {
