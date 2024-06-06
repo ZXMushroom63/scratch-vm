@@ -453,11 +453,11 @@ function checkCap(block) {
         return (blck.mutation && blck.mutation.hasnext === "false")
     }, (blck) => {
         var badopcodes = ["control_forever", "control_delete_this_clone"];
-        return badopcodes.includes(blck.opcode);
+        return !badopcodes.includes(blck.opcode);
     }];
     var t = false;
     for (let i = 0; i < checks.length; i++) {
-        t ||= checks[i](block);
+        t &&= checks[i](block);
     }
     return t;
 }
@@ -1753,10 +1753,10 @@ function toSb3(project, obj) {
         var data = JSON.parse(p);
 
         //Shrink block and comment ids.
-        compress(data);
+        //compress(data);
 
         //Shrink custom block proccodes and empty blank text.
-        hypercompress(data);
+        //hypercompress(data);
 
         p = JSON.stringify(data);
     }

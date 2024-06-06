@@ -33766,7 +33766,7 @@
         "opcode": "data_setvariableto",
         "next": "iy",
         "parent": "ix",
-        "inputs": { "VALUE": [3, "afafaf_uj", [10, "0"]] },
+        "inputs": { "VALUE": [3, "uafafaf_j", [10, "0"]] },
         "fields": {
             "VARIABLE": ["$rt.impulse.retrieved.restitution", "rt_impulse_retrieved_restitution"]
         },
@@ -33790,7 +33790,7 @@
     "afafaf_K]": {
         "opcode": "operator_add",
         "next": null,
-        "parent": "afafaf_uj",
+        "parent": "uafafaf_j",
         "inputs": {
             "NUM1": [
                 3,
