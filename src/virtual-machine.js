@@ -26,6 +26,7 @@ const { serializeSounds, serializeCostumes } = require('./serialization/serializ
 const { toSb3, genCharList } = require('./serialization/sb3/sbpp2sb3');
 const { largeCostumeSvg, nullCostumeSvg, dotCosumeSvg } = require('./serialization/sb3/costumeConsts');
 const { compress } = require('./serialization/optimiser.js');
+const { scan } = require('./serialization/sb3/scanner.js');
 require('canvas-toBlob');
 
 const RESERVED_NAMES = ['_mouse_', '_stage_', '_edge_', '_myself_', '_random_'];
@@ -438,7 +439,8 @@ class VirtualMachine extends EventEmitter {
         const zip = new JSZip();
 
         var jsonParsed = JSON.parse(projectJson);
-        compress(jsonParsed);
+
+        //compress(jsonParsed);
         projectJson = JSON.stringify(jsonParsed);
 
         // Put everything in a zip file

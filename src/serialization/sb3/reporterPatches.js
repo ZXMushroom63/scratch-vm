@@ -19,6 +19,9 @@ var reporterPatches = {
     "impulse_scenedata": "$rt.impulse.Scene Data",
     "operator_else": "$rt. %s ?? %s",
     "operator_clamp": "$rt.clamp %s %s %s",
+    "tempvars_get": "$rt.tempvars.get %s",
+    "tempvars_exists": ["$rt.tempvars.exists %s"],
+    "tempvars_keys": "$rt.tempvars.keys %s",
 }
 var reporterPatchesBasic = {
     "operator_true": "operator_not",

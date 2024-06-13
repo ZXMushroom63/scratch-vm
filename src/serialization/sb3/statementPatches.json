@@ -320,5 +320,26 @@
             "proccode": "$rt.impulse.Load Scene Data %s",
             "warp": "true"
         }
+    },
+    "tempvars_clear": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.tempvars.clear",
+            "warp": "true"
+        }
+    },
+    "tempvars_set": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.tempvars.set %s %s",
+            "warp": "true"
+        }
+    },
+    "tempvars_delete": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.tempvars.delete %s",
+            "warp": "true"
+        }
     }
 }

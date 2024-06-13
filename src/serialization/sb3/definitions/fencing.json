@@ -220,7 +220,7 @@
         "opcode": "looks_setsizeto",
         "next": "B@-M^}7*BX=$7jCkA19J",
         "parent": "DbqyDLwC*})H.szZ#AlY",
-        "inputs": { "SIZE": [1, [4, "999999999999999999999999999999"]] },
+        "inputs": { "SIZE": [1, [4, "Infinity"]] },
         "fields": {},
         "shadow": false,
         "topLevel": false
@@ -667,7 +667,7 @@
         "opcode": "looks_setsizeto",
         "next": "hIC`6rmij#_}`%VbU9zl",
         "parent": "V=%piBoB@JU_MWUVt_RP",
-        "inputs": { "SIZE": [1, [4, "999999999999999999999999999999"]] },
+        "inputs": { "SIZE": [1, [4, "Infinity"]] },
         "fields": {},
         "shadow": false,
         "topLevel": false
@@ -901,7 +901,7 @@
         "opcode": "looks_setsizeto",
         "next": "OR@;@Ct(MhF9eH^7Cz#U",
         "parent": "]:T!cOq8{}5n+RoiqTEy",
-        "inputs": { "SIZE": [1, [4, "999999999999999999999999999999"]] },
+        "inputs": { "SIZE": [1, [4, "Infinity"]] },
         "fields": {},
         "shadow": false,
         "topLevel": false
@@ -1157,7 +1157,7 @@
         "opcode": "looks_setsizeto",
         "next": "r*%O4#WuNZmz=-AABhJ_",
         "parent": "5[LOzDGOBL.=[#i@4WLv",
-        "inputs": { "SIZE": [1, [4, "999999999999999999999999999999"]] },
+        "inputs": { "SIZE": [1, [4, "Infinity"]] },
         "fields": {},
         "shadow": false,
         "topLevel": false
@@ -1391,7 +1391,7 @@
         "opcode": "looks_setsizeto",
         "next": "8Hls.rYiJ$:]25(=gdHC",
         "parent": "~tSnOo@y75U6:^$`bL!]",
-        "inputs": { "SIZE": [1, [4, "999999999999999999999999999999"]] },
+        "inputs": { "SIZE": [1, [4, "Infinity"]] },
         "fields": {},
         "shadow": false,
         "topLevel": false
@@ -1625,7 +1625,7 @@
         "opcode": "looks_setsizeto",
         "next": "UFb;2lbY9!_7/U+r!AdI",
         "parent": "lumJQ-Q}[T6rrI*H)lJL",
-        "inputs": { "SIZE": [1, [4, "999999999999999999999999999999"]] },
+        "inputs": { "SIZE": [1, [4, "Infinity"]] },
         "fields": {},
         "shadow": false,
         "topLevel": false
@@ -1859,7 +1859,7 @@
         "opcode": "looks_setsizeto",
         "next": "?96o];l{|U#/V.m8m28=",
         "parent": "s{3xrytFz@fL6D5G1]S{",
-        "inputs": { "SIZE": [1, [4, "999999999999999999999999999999"]] },
+        "inputs": { "SIZE": [1, [4, "Infinity"]] },
         "fields": {},
         "shadow": false,
         "topLevel": false

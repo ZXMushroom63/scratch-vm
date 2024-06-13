@@ -5,6 +5,7 @@
 
 var blockDefinitions = [
     {
+        name: "Fencing",
         opcodes: [],
         force: true,
         definition: require("./definitions/fencing.json"),
@@ -19,36 +20,43 @@ var blockDefinitions = [
         }
     },
     {
+        name: "Power",
         opcodes: ["operator_power"],
         force: false,
         definition: require("./definitions/power.json"),
     },
     {
+        name: "Previous Costume",
         opcodes: ["looks_previouscostume", "looks_previousbackdrop"],
         force: false,
         definition: require("./definitions/previous.json"),
     },
     {
+        name: "Force Set Size",
         opcodes: ["looks_forcesizeto"],
         force: true,
         definition: require("./definitions/forcesetsize.json"),
     },
     {
+        name: "Point to X Y",
         opcodes: ["motion_pointtoxy"],
         force: false,
         definition: require("./definitions/pointtoxy.json"),
     },
     {
+        name: "Min & Max",
         opcodes: ["operator_min", "operator_max"],
         force: false,
         definition: require("./definitions/minmax.json"),
     },
     {
+        name: "If Operator",
         opcodes: ["operator_if"],
         force: false,
         definition: require("./definitions/ifoperator.json"),
     },
     {
+        name: "Replace Operator",
         opcodes: ["operator_replace"],
         force: false,
         definition: require("./definitions/replace.json"),
@@ -62,11 +70,13 @@ var blockDefinitions = [
         }
     },
     {
+        name: "Newline Character",
         opcodes: ["operator_newline"],
         force: false,
         definition: require("./definitions/newline.json"),
     },
     {
+        name: "Decimal to Hexadecimal",
         opcodes: ["operator_hex"],
         force: false,
         definition: require("./definitions/hex.json"),
@@ -76,6 +86,7 @@ var blockDefinitions = [
         }
     },
     {
+        name: "Color at my position",
         opcodes: ["sensing_color"],
         force: false,
         definition: require("./definitions/color.json"),
@@ -90,11 +101,13 @@ var blockDefinitions = [
         }
     },
     {
+        name: "Fast Power",
         opcodes: ["operator_fastpower"],
         force: false,
         definition: require("./definitions/fastpower.json"),
     },
     {
+        name: "Network Extension",
         opcodes: [
             "network_messagereceived",
             "network_message",
@@ -126,6 +139,7 @@ var blockDefinitions = [
         }
     },
     {
+        name: "Substring Operator",
         opcodes: ["operator_substring"],
         force: false,
         definition: require("./definitions/substring.json"),
@@ -137,6 +151,7 @@ var blockDefinitions = [
         }
     },
     {
+        name: "Starts With Operator",
         opcodes: ["operator_startswith"],
         force: false,
         definition: require("./definitions/startswith.json"),
@@ -146,6 +161,7 @@ var blockDefinitions = [
         }
     },
     {
+        name: "Ends With Operator",
         opcodes: ["operator_endswith"],
         force: false,
         definition: require("./definitions/endswith.json"),
@@ -155,6 +171,7 @@ var blockDefinitions = [
         }
     },
     {
+        name: "Distilled Impulse 2D Extension",
         opcodes: [
             "impulse_reset",
             "impulse_step",
@@ -347,14 +364,34 @@ var blockDefinitions = [
         removeExtensions: ["impulse"],
     },
     {
+        name: "Else Operator",
         opcodes: ["operator_else"],
         force: false,
         definition: require("./definitions/elseoperator.json"),
     },
     {
+        name: "Clamp Operator",
         opcodes: ["operator_clamp"],
         force: false,
         definition: require("./definitions/clamp.json"),
+    },
+    {
+        name: "Temporary Variables",
+        opcodes: ["tempvars_get",
+            "tempvars_exists",
+            "tempvars_keys",
+            "tempvars_clear",
+            "tempvars_set",
+            "tempvars_delete"],
+        force: false,
+        definition: require("./definitions/tempvars.json"),
+        localVariables: {
+            rt_tempvars_i: ["$rt.tempvars.i", "0"],
+        },
+        globalLists: {
+            rt_tempvars_key: ["$rt.tempvars.key", []],
+            rt_tempvars_value: ["$rt.tempvars.value", []],
+        },
     },
 ];
 
@@ -365,6 +402,7 @@ const {
     reporterPatchesVariable,
 } = require("./reporterPatches");
 const { compress, hypercompress, Pool } = require("../optimiser");
+const { scan, scanLocal } = require("./scanner");
 
 //Used by removeOrphanModdedBlocks and removeInvalidMonitors to ensure that non-converted blocks are deleted.
 var moddedBlocks = [
@@ -445,7 +483,13 @@ var moddedBlocks = [
     "impulse_scenedata",
     "operator_else",
     "operator_clamp",
-    "impulse_retrievedbodyrestitution"
+    "impulse_retrievedbodyrestitution",
+    "tempvars_get",
+    "tempvars_exists",
+    "tempvars_keys",
+    "tempvars_clear",
+    "tempvars_set",
+    "tempvars_delete"
 ];
 
 function checkCap(block) {
@@ -788,7 +832,7 @@ function applyStatementPatches(project, obj) {
 }
 function duplicateBlockStack(blocks, block) {
     var duplicatedBlockStack = {};
-    
+
     function sift(targetBlock, parentId) {
         var sId = genCharList("abcdefghijklmnopqrstuvwxyz1234567890", 14);
         duplicatedBlockStack[sId] = structuredClone(targetBlock);
@@ -960,7 +1004,7 @@ function applyReporterPatches(project, obj) {
 
                         insertBeforeBlockId(target.blocks, block.id, newPatch);
 
-                        
+
                         if (isBool) {
                             if (debug) {
                                 console.log(
@@ -1018,7 +1062,7 @@ function applyReporterPatches(project, obj) {
                 }
 
                 Object.assign(target.blocks, dataCapsule.libPatch);
-                
+
                 if (
                     dataCapsule.isImportantRP &&
                     dataCapsule.patches.length > 0
@@ -1568,6 +1612,8 @@ function avoidUsedIds(blocks, blockMod, target) {
     return dedupedBlockMod;
 }
 
+
+window.scanLocal = scanLocal;
 window.avoidUsedIds = avoidUsedIds;
 
 function injectBlockDefinitions(project, obj) {
@@ -1702,6 +1748,87 @@ function applyReporterExVariableOps(project, obj) {
     return JSON.stringify(data);
 }
 
+const myFlash = { block: null, timerID: null };
+window.locateBlock = function locateBlock(blockOrId) {
+    function flash(block) {
+        if (myFlash.timerID > 0) {
+            clearTimeout(myFlash.timerID);
+            if (myFlash.block.svgPath_) {
+                myFlash.block.svgPath_.style.fill = "";
+            }
+        }
+
+        let count = 4;
+        let flashOn = true;
+        myFlash.block = block;
+
+        /**
+         * Internal method to switch the colour of a block between light yellow and it's original colour
+         * @private
+         */
+        function _flash() {
+            if (myFlash.block.svgPath_) {
+                myFlash.block.svgPath_.style.fill = flashOn ? "#ffff80" : "";
+            }
+            flashOn = !flashOn;
+            count--;
+            if (count > 0) {
+                myFlash.timerID = setTimeout(_flash, 200);
+            } else {
+                myFlash.timerID = 0;
+                myFlash.block = null;
+            }
+        }
+
+        _flash();
+    }
+    function getTopOfStackFor(block) {
+        let base = block;
+        while (base.getOutputShape() && base.getSurroundParent()) {
+            base = base.getSurroundParent();
+        }
+        return base;
+    }
+    let workspace = ScratchBlocks.getMainWorkspace()
+
+    let block = workspace.getBlockById(blockOrId);
+
+    if (!block) {
+        console.log("Block does not exist.")
+        return;
+    }
+
+    /**
+     * !Blockly.Block
+     */
+    let root = block.getRootBlock();
+    let base = getTopOfStackFor(block);
+    let ePos = base.getRelativeToSurfaceXY(), // Align with the top of the block
+        rPos = root.getRelativeToSurfaceXY(), // Align with the left of the block 'stack'
+        scale = workspace.scale,
+        x = rPos.x * scale,
+        y = ePos.y * scale,
+        xx = block.width + x, // Turns out they have their x & y stored locally, and they are the actual size rather than scaled or including children...
+        yy = block.height + y,
+        s = workspace.getMetrics();
+    if (
+        x < s.viewLeft + 32 - 4 ||
+        xx > s.viewLeft + s.viewWidth ||
+        y < s.viewTop + 32 - 4 ||
+        yy > s.viewTop + s.viewHeight
+    ) {
+        // sx = s.contentLeft + s.viewWidth / 2 - x,
+        let sx = x - s.contentLeft - 32,
+            // sy = s.contentTop - y + Math.max(Math.min(32, 32 * scale), (s.viewHeight - yh) / 2);
+            sy = y - s.contentTop - 32;
+
+        // workspace.hideChaff(),
+        workspace.scrollbar.set(sx, sy);
+    }
+    ScratchBlocks?.hideChaff();
+    flash(block);
+}
+
 /*/ 
 var obj = {
     rt_null: "afafa",
@@ -1728,10 +1855,32 @@ function applyWaitUntilFix(p, obj) {
     });
     return JSON.stringify(data);
 }
-
+function validateBlockDefs() {
+    blockDefinitions.forEach(bd => {
+        var d = JSON.stringify(bd.definition);
+        var scanResults = scanLocal(d);
+        if (!scanResults.allGood) {
+            console.error("[!!!] CRITICAL: INVALID BLOCKDEF FOUND!")
+            console.error(" @ " + bd.name);
+            console.log(scanResults);
+            throw new Error("(killed with exit code 1)");
+        }
+    });
+    console.log("All block definitions passed test!");
+}
 function toSb3(project, obj) {
     window.Pool = Pool;
     var p = project;
+
+    var compileBugChecker = scan(p);
+    if (!compileBugChecker.allGood) {
+        alert(`Scratch++ compiler found ${compileBugChecker.offenders.length} potential issue${compileBugChecker.offenders.length > 1 ? "s" : ""} in generated code, check console for details. Please report this to the project's github page: ${githubUrl}`);
+        console.log("The Scratch++ compiler has detected blocks referencing block ids that do not exist.");
+        console.log(`When loading a compiled project, this can cause the error: 'Cannot read properties of undefined, reading _isHat'`);
+        console.log(compileBugChecker);
+    }
+
+    validateBlockDefs();
     p = makeBlockDefinitionsListForProject(p);
     p = applyIfOperatorFix(p, obj);
     p = addIdPropertiesToBlocks(p, obj);
@@ -1753,13 +1902,16 @@ function toSb3(project, obj) {
         var data = JSON.parse(p);
 
         //Shrink block and comment ids.
-        //compress(data);
+        compress(data);
 
         //Shrink custom block proccodes and empty blank text.
-        //hypercompress(data);
+        hypercompress(data);
 
         p = JSON.stringify(data);
     }
+
+    //Typical scan location
+
     if (debugPrintFinalJson) {
         console.log(JSON.parse(p));
     }
