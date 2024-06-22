@@ -150,8 +150,14 @@ class Scratch3MotionBlocks {
 
         const dx = targetX - util.target.x;
         const dy = targetY - util.target.y;
-        const direction = 90 - MathUtil.radToDeg(Math.atan2(dy, dx));
-        util.target.setDirection(direction);
+
+        //Direct replica of scratchblocks version
+        util.target.setDirection(
+            (
+                (Math.atan(Cast.toNumber(dx / dy)) * 180)
+            / Math.PI) + 
+            (180 * (Cast.compare(util.target.y, args.Y) > 0)
+        ));
     }
 
     glide(args, util) {

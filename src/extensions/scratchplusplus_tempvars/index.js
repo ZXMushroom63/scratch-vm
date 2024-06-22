@@ -1,6 +1,7 @@
 const formatMessage = require("format-message");
 const BlockType = require("../../extension-support/block-type");
 const ArgumentType = require("../../extension-support/argument-type");
+const Cast = require("../../util/cast");
 
 var tempvarMap = {};
 
@@ -49,7 +50,7 @@ class TempvarsExtension {
                         VAR: {
                             type: ArgumentType.STRING,
                             defaultValue: formatMessage({
-                                id: "network.variable",
+                                id: "tempvars.variable",
                                 default: "x",
                                 description: "Example variable name for tempvars extension."
                             })
@@ -68,7 +69,7 @@ class TempvarsExtension {
                         VAR: {
                             type: ArgumentType.STRING,
                             defaultValue: formatMessage({
-                                id: "network.variable",
+                                id: "tempvars.variable",
                                 default: "x",
                                 description: "Example variable name for tempvars extension."
                             })
@@ -76,7 +77,34 @@ class TempvarsExtension {
                         VAL: {
                             type: ArgumentType.STRING,
                             defaultValue: formatMessage({
-                                id: "network.value",
+                                id: "tempvars.value",
+                                default: "3",
+                                description: "Example variable value for tempvars extension."
+                            })
+                        }
+                    }
+                },
+                {
+                    opcode: "change",
+                    text: formatMessage({
+                        id: "tempvars.setBlock",
+                        default: "change variable [VAR] by [VAL]",
+                        description: "Changes specified tempvar by value."
+                    }),
+                    blockType: BlockType.COMMAND,
+                    arguments: {
+                        VAR: {
+                            type: ArgumentType.STRING,
+                            defaultValue: formatMessage({
+                                id: "tempvars.variable",
+                                default: "x",
+                                description: "Example variable name for tempvars extension."
+                            })
+                        },
+                        VAL: {
+                            type: ArgumentType.STRING,
+                            defaultValue: formatMessage({
+                                id: "tempvars.value",
                                 default: "3",
                                 description: "Example variable value for tempvars extension."
                             })
@@ -95,7 +123,7 @@ class TempvarsExtension {
                         VAR: {
                             type: ArgumentType.STRING,
                             defaultValue: formatMessage({
-                                id: "network.variable",
+                                id: "tempvars.variable",
                                 default: "x",
                                 description: "Example variable name for tempvars extension."
                             })
@@ -114,7 +142,7 @@ class TempvarsExtension {
                         VAR: {
                             type: ArgumentType.STRING,
                             defaultValue: formatMessage({
-                                id: "network.variable",
+                                id: "tempvars.variable",
                                 default: "x",
                                 description: "Example variable name for tempvars extension."
                             })
@@ -133,7 +161,7 @@ class TempvarsExtension {
                         DELIM: {
                             type: ArgumentType.STRING,
                             defaultValue: formatMessage({
-                                id: "network.delimiter",
+                                id: "tempvars.delimiter",
                                 default: ",",
                                 description: "Example delimiter for tempvars extension."
                             })
@@ -154,6 +182,10 @@ class TempvarsExtension {
 
     set(args, util) {
         tempvarMap[args.VAR] = args.VAL;
+    }
+
+    change(args, util) {
+        tempvarMap[args.VAR] = Cast.toNumber(args.VAL) + Cast.toNumber(tempvarMap[args.VAR]);
     }
 
     get(args, util) {

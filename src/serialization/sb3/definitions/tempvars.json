@@ -216,11 +216,7 @@
         "next": null,
         "parent": "hWFNO?N1q!nD7:R/gGn3",
         "inputs": {
-            "OPERAND1": [
-                3,
-                [12, "$rt.tempvars.i", "rt_tempvars_i"],
-                [10, ""]
-            ],
+            "OPERAND1": [3, [12, "$rt.tempvars.i", "rt_tempvars_i"], [10, ""]],
             "OPERAND2": [3, "4TNSATqmO74YYu4y8dVZ", [10, "50"]]
         },
         "fields": {},
@@ -262,11 +258,7 @@
         "next": null,
         "parent": "kuji9/!9_?KV8bVf)_7?",
         "inputs": {
-            "INDEX": [
-                3,
-                [12, "$rt.tempvars.i", "rt_tempvars_i"],
-                [7, "1"]
-            ]
+            "INDEX": [3, [12, "$rt.tempvars.i", "rt_tempvars_i"], [7, "1"]]
         },
         "fields": { "LIST": ["$rt.tempvars.key", "rt_tempvars_key"] },
         "shadow": false,
@@ -295,11 +287,7 @@
         "next": null,
         "parent": "7#BKdRTlrCT0D2@`zEC7",
         "inputs": {
-            "INDEX": [
-                3,
-                [12, "$rt.tempvars.i", "rt_tempvars_i"],
-                [7, "1"]
-            ]
+            "INDEX": [3, [12, "$rt.tempvars.i", "rt_tempvars_i"], [7, "1"]]
         },
         "fields": { "LIST": ["$rt.tempvars.key", "rt_tempvars_key"] },
         "shadow": false,
@@ -684,11 +672,7 @@
         "next": null,
         "parent": "%blj%H^BOQs3{8k_jh2a",
         "inputs": {
-            "STRING1": [
-                3,
-                [12, "$rt.out", "rt_out"],
-                [10, "apple "]
-            ],
+            "STRING1": [3, [12, "$rt.out", "rt_out"], [10, "apple "]],
             "STRING2": [3, "NBqTj#A5.Ox;UP@eQxR[", [10, "banana"]]
         },
         "fields": {},
@@ -700,14 +684,168 @@
         "next": null,
         "parent": "5_qrBs%de`nS1a%9!X?L",
         "inputs": {
-            "STRING1": [
-                3,
-                [12, "$rt.out", "rt_out"],
-                [10, "apple "]
-            ],
+            "STRING1": [3, [12, "$rt.out", "rt_out"], [10, "apple "]],
             "STRING2": [3, "kuji9/!9_?KV8bVf)_7?", [10, "banana"]]
         },
         "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "R}7r#=9R=yK1i9V58%@)": {
+        "opcode": "procedures_definition",
+        "next": "YYk])ugASh|?+[WRs_j;",
+        "parent": null,
+        "inputs": { "custom_block": [1, "];RPFhVK*?gNgO9.u3I5"] },
+        "fields": {},
+        "shadow": false,
+        "topLevel": true,
+        "x": -492,
+        "y": -42
+    },
+    "];RPFhVK*?gNgO9.u3I5": {
+        "opcode": "procedures_prototype",
+        "next": null,
+        "parent": "R}7r#=9R=yK1i9V58%@)",
+        "inputs": {
+            "W:vv}/-hP(]ePEn:u2P=": [1, "xnwI{YD*ysb3xM4CVr/D"],
+            "PBr5bH@(|DUFUx?;dXfi": [1, ".6SGzXUJjQ`4?dYaNsI="]
+        },
+        "fields": {},
+        "shadow": true,
+        "topLevel": false,
+        "mutation": {
+            "tagName": "mutation",
+            "children": [],
+            "proccode": "$rt.tempvars.change %s %s",
+            "argumentids": "[\"W:vv}/-hP(]ePEn:u2P=\",\"PBr5bH@(|DUFUx?;dXfi\"]",
+            "argumentnames": "[\"key\",\"value\"]",
+            "argumentdefaults": "[\"\",\"\"]",
+            "warp": "true"
+        }
+    },
+    "xnwI{YD*ysb3xM4CVr/D": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "];RPFhVK*?gNgO9.u3I5",
+        "inputs": {},
+        "fields": { "VALUE": ["key"] },
+        "shadow": true,
+        "topLevel": false
+    },
+    ".6SGzXUJjQ`4?dYaNsI=": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "];RPFhVK*?gNgO9.u3I5",
+        "inputs": {},
+        "fields": { "VALUE": ["value"] },
+        "shadow": true,
+        "topLevel": false
+    },
+    "^9(.gBj~M%hZej:|rP|,": {
+        "opcode": "data_listcontainsitem",
+        "next": null,
+        "parent": "YYk])ugASh|?+[WRs_j;",
+        "inputs": { "ITEM": [3, "x5Uy7*CYGG_]78l9ZsE8", [10, "thing"]] },
+        "fields": { "LIST": ["$rt.tempvars.key", "rt_tempvars_key"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "x5Uy7*CYGG_]78l9ZsE8": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "^9(.gBj~M%hZej:|rP|,",
+        "inputs": {},
+        "fields": { "VALUE": ["key"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "I2B+u;!|sYSh-cVpIRig": {
+        "opcode": "data_replaceitemoflist",
+        "next": null,
+        "parent": "YYk])ugASh|?+[WRs_j;",
+        "inputs": {
+            "INDEX": [3, ";{k3c,i(_q?w(sNy={8/", [7, "1"]],
+            "ITEM": [3, "syY?1qxb!W#(|x2H)3SG", [10, "thing"]]
+        },
+        "fields": { "LIST": ["$rt.tempvars.value", "rt_tempvars_value"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    ";{k3c,i(_q?w(sNy={8/": {
+        "opcode": "data_itemnumoflist",
+        "next": null,
+        "parent": "I2B+u;!|sYSh-cVpIRig",
+        "inputs": { "ITEM": [3, "bab8wga;OH8:(E#@T6kr", [10, "thing"]] },
+        "fields": { "LIST": ["$rt.tempvars.key", "rt_tempvars_key"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "bab8wga;OH8:(E#@T6kr": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": ";{k3c,i(_q?w(sNy={8/",
+        "inputs": {},
+        "fields": { "VALUE": ["key"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "ndN+iE+rn2,2s14dz8Qc": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "syY?1qxb!W#(|x2H)3SG",
+        "inputs": {},
+        "fields": { "VALUE": ["value"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "YYk])ugASh|?+[WRs_j;": {
+        "opcode": "control_if",
+        "next": null,
+        "parent": "R}7r#=9R=yK1i9V58%@)",
+        "inputs": {
+            "SUBSTACK": [2, "I2B+u;!|sYSh-cVpIRig"],
+            "CONDITION": [2, "^9(.gBj~M%hZej:|rP|,"]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "syY?1qxb!W#(|x2H)3SG": {
+        "opcode": "operator_add",
+        "next": null,
+        "parent": "I2B+u;!|sYSh-cVpIRig",
+        "inputs": {
+            "NUM1": [3, "9C}NOO7Htw.YkZb;;al@", [4, ""]],
+            "NUM2": [3, "ndN+iE+rn2,2s14dz8Qc", [4, ""]]
+        },
+        "fields": {},
+        "shadow": false,
+        "topLevel": false
+    },
+    "3KxN}+WC4E.`jl+8LD8r": {
+        "opcode": "data_itemnumoflist",
+        "next": null,
+        "parent": "9C}NOO7Htw.YkZb;;al@",
+        "inputs": { "ITEM": [3, "5|Zo}O{Wb/.e9b6{;Y!_", [10, "thing"]] },
+        "fields": { "LIST": ["$rt.tempvars.key", "rt_tempvars_key"] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "5|Zo}O{Wb/.e9b6{;Y!_": {
+        "opcode": "argument_reporter_string_number",
+        "next": null,
+        "parent": "3KxN}+WC4E.`jl+8LD8r",
+        "inputs": {},
+        "fields": { "VALUE": ["key", null] },
+        "shadow": false,
+        "topLevel": false
+    },
+    "9C}NOO7Htw.YkZb;;al@": {
+        "opcode": "data_itemoflist",
+        "next": null,
+        "parent": "syY?1qxb!W#(|x2H)3SG",
+        "inputs": { "INDEX": [3, "3KxN}+WC4E.`jl+8LD8r", [7, "1"]] },
+        "fields": { "LIST": ["$rt.tempvars.value", "rt_tempvars_value"] },
         "shadow": false,
         "topLevel": false
     }

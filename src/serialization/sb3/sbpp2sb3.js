@@ -382,7 +382,8 @@ var blockDefinitions = [
             "tempvars_keys",
             "tempvars_clear",
             "tempvars_set",
-            "tempvars_delete"],
+            "tempvars_delete",
+            "tempvars_change"],
         force: false,
         definition: require("./definitions/tempvars.json"),
         localVariables: {
@@ -392,6 +393,18 @@ var blockDefinitions = [
             rt_tempvars_key: ["$rt.tempvars.key", []],
             rt_tempvars_value: ["$rt.tempvars.value", []],
         },
+    },
+    {
+        name: "Color Reporter",
+        opcodes: ["operator_color"],
+        force: false,
+        definition: require("./definitions/echocolor.json"),
+    },
+    {
+        name: "Cast to Boolean",
+        opcodes: ["operator_boolcast"],
+        force: false,
+        definition: require("./definitions/boolcast.json"),
     },
 ];
 
@@ -415,6 +428,7 @@ var moddedBlocks = [
     "looks_previousbackdrop",
     "looks_forcesizeto",
     "motion_pointtoxy",
+    "operator_fastpower",
     "operator_min",
     "operator_max",
     "operator_if",
@@ -489,7 +503,10 @@ var moddedBlocks = [
     "tempvars_keys",
     "tempvars_clear",
     "tempvars_set",
-    "tempvars_delete"
+    "tempvars_delete",
+    "tempvars_change",
+    "operator_color",
+    "operator_boolcast"
 ];
 
 function checkCap(block) {

@@ -341,5 +341,12 @@
             "proccode": "$rt.tempvars.delete %s",
             "warp": "true"
         }
+    },
+    "tempvars_change": {
+        "opcode": "procedures_call",
+        "mutation": {
+            "proccode": "$rt.tempvars.change %s %s",
+            "warp": "true"
+        }
     }
 }

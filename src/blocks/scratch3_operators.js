@@ -48,7 +48,9 @@ class Scratch3OperatorsBlocks {
             operator_clamp: this.clamp,
             operator_hex: this.hex,
             operator_round: this.round,
-            operator_mathop: this.mathop
+            operator_mathop: this.mathop,
+            operator_color: this.color,
+            operator_boolcast: this.boolcast
         };
     }
 
@@ -269,6 +271,14 @@ class Scratch3OperatorsBlocks {
             case '10 ^': return Math.pow(10, n);
         }
         return 0;
+    }
+
+    color(args) {
+        return Cast.toString(args.COLOR);
+    }
+    
+    boolcast(args) {
+        return Cast.toBoolean(args.STRING);
     }
 }
 
