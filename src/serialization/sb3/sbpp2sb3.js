@@ -126,9 +126,10 @@ var blockDefinitions = [
         broadcasts: {
             rt_network_message_received: "$rt.Network Message Received",
         },
+        forceStage: true,
         removeExtensions: ["network"],
         definition: require("./definitions/network.json"),
-        localVariables: {
+        globalVariables: {
             rt_network_charset: ["$rt.network.charset", ""],
             rt_network_enc_i: ["$rt.network.enc.i", 0],
             rt_network_enc_j: ["$rt.network.enc.j", 0],
@@ -395,12 +396,6 @@ var blockDefinitions = [
         },
     },
     {
-        name: "Color Reporter",
-        opcodes: ["operator_color"],
-        force: false,
-        definition: require("./definitions/echocolor.json"),
-    },
-    {
         name: "Cast to Boolean",
         opcodes: ["operator_boolcast"],
         force: false,
@@ -536,6 +531,7 @@ var factoryList = [];
 factoryList.push(require("./factories/split"));
 factoryList.push(require("./factories/network"));
 factoryList.push(require("./factories/launch"));
+factoryList.push(require("./factories/echo"));
 
 var localVariables = {
     rt_split_i: ["$rt.split.i", 0],
@@ -573,115 +569,72 @@ function makeBlockDefinitionsListForSprite(target, projectData) {
     var uBlockDefinitionsList = [];
     var blockDefinitionsClone = [...blockDefinitions];
     var keys = Object.keys(target.blocks);
-    keys.forEach((k) => {
-        var opcode = target.blocks[k].opcode;
-        blockDefinitionsClone.forEach((bd, i) => {
+    function inject(bd, i) {
+        uBlockDefinitionsList.push(bd.definition);
+        blockDefinitionsClone.splice(i, 1);
+        if (bd.globalVariables) {
+            projectData.targets.forEach((t) => {
+                if (t.isStage) {
+                    Object.assign(t.variables, bd.globalVariables);
+                }
+            });
+        }
+
+        if (bd.globalLists) {
+            projectData.targets.forEach((t) => {
+                if (t.isStage) {
+                    Object.assign(t.lists, bd.globalLists);
+                }
+            });
+        }
+
+        if (bd.localLists) {
+            projectData.targets.forEach((t) => {
+                if (!t.isStage) {
+                    Object.assign(t.lists, bd.localLists);
+                }
+            });
+        }
+
+        if (bd.localVariables) {
+            projectData.targets.forEach((t) => {
+                if (!t.isStage) {
+                    Object.assign(t.variables, bd.localVariables);
+                }
+            });
+        }
+
+        if (bd.broadcasts) {
+            projectData.targets.forEach((t) => {
+                if (t.isStage) {
+                    Object.assign(t.broadcasts, bd.broadcasts);
+                }
+            });
+        }
+        if (Array.isArray(bd.removeExtensions)) {
+            bd.removeExtensions.forEach((ex) => {
+                if (
+                    projectData.extensions &&
+                    projectData.extensions.includes(ex)
+                ) {
+                    projectData.extensions.splice(
+                        projectData.extensions.indexOf(ex),
+                        1
+                    );
+                }
+            });
+        }
+    }
+    blockDefinitionsClone.forEach((bd, i) => {
+        if (bd.forceStage && target.isStage) {
+            inject(bd, i);
+        }
+        keys.forEach((k) => {
+            var opcode = target.blocks[k].opcode;
             if (bd.force) {
-                uBlockDefinitionsList.push(bd.definition);
-                blockDefinitionsClone.splice(i, 1);
-                if (bd.globalVariables) {
-                    projectData.targets.forEach((t) => {
-                        if (t.isStage) {
-                            Object.assign(t.variables, bd.globalVariables);
-                        }
-                    });
-                }
-
-                if (bd.globalLists) {
-                    projectData.targets.forEach((t) => {
-                        if (t.isStage) {
-                            Object.assign(t.lists, bd.globalLists);
-                        }
-                    });
-                }
-
-                if (bd.localLists) {
-                    projectData.targets.forEach((t) => {
-                        if (!t.isStage) {
-                            Object.assign(t.lists, bd.localLists);
-                        }
-                    });
-                }
-
-                if (bd.localVariables) {
-                    projectData.targets.forEach((t) => {
-                        if (!t.isStage) {
-                            Object.assign(t.variables, bd.localVariables);
-                        }
-                    });
-                }
-
-                if (bd.broadcasts) {
-                    projectData.targets.forEach((t) => {
-                        if (t.isStage) {
-                            Object.assign(t.broadcasts, bd.broadcasts);
-                        }
-                    });
-                }
-                if (Array.isArray(bd.removeExtensions)) {
-                    bd.removeExtensions.forEach((ex) => {
-                        if (
-                            projectData.extensions &&
-                            projectData.extensions.includes(ex)
-                        ) {
-                            projectData.extensions.splice(
-                                projectData.extensions.indexOf(ex),
-                                1
-                            );
-                        }
-                    });
-                }
+                inject(bd, i);
             } else if (bd.opcodes.includes(opcode)) {
-                uBlockDefinitionsList.push(bd.definition);
-                blockDefinitionsClone.splice(i, 1);
-                if (bd.globalVariables) {
-                    projectData.targets.forEach((t) => {
-                        if (t.isStage) {
-                            Object.assign(t.variables, bd.globalVariables);
-                        }
-                    });
-                }
-                if (bd.globalLists) {
-                    projectData.targets.forEach((t) => {
-                        if (t.isStage) {
-                            Object.assign(t.lists, bd.globalLists);
-                        }
-                    });
-                }
-                if (bd.localLists) {
-                    projectData.targets.forEach((t) => {
-                        if (!t.isStage) {
-                            Object.assign(t.lists, bd.localLists);
-                        }
-                    });
-                }
-                if (bd.localVariables) {
-                    projectData.targets.forEach((t) => {
-                        if (!t.isStage) {
-                            Object.assign(t.variables, bd.localVariables);
-                        }
-                    });
-                }
-                if (bd.broadcasts) {
-                    projectData.targets.forEach((t) => {
-                        if (t.isStage) {
-                            Object.assign(t.broadcasts, bd.broadcasts);
-                        }
-                    });
-                }
-                if (Array.isArray(bd.removeExtensions)) {
-                    bd.removeExtensions.forEach((ex) => {
-                        if (
-                            projectData.extensions &&
-                            projectData.extensions.includes(ex)
-                        ) {
-                            projectData.extensions.splice(
-                                projectData.extensions.indexOf(ex),
-                                1
-                            );
-                        }
-                    });
-                }
+                inject(bd, i);
             }
         });
     });
@@ -1664,9 +1617,10 @@ function applyFactories(project, obj) {
     data.targets.forEach((target) => {
         var targetBlockKeys = Object.keys(target.blocks);
         factoryList.forEach((factory) => {
+            var matchesAgainstList = Array.isArray(factory.target_opcode);
             targetBlockKeys.forEach((key) => {
                 var block = target.blocks[key];
-                if (block.opcode === factory.target_opcode) {
+                if (matchesAgainstList ? factory.target_opcode.includes(block.opcode.toLowerCase()) : block.opcode === factory.target_opcode) {
                     factory.script(block, target.blocks, key, target, data);
                 }
             });
@@ -1765,87 +1719,6 @@ function applyReporterExVariableOps(project, obj) {
     return JSON.stringify(data);
 }
 
-const myFlash = { block: null, timerID: null };
-window.locateBlock = function locateBlock(blockOrId) {
-    function flash(block) {
-        if (myFlash.timerID > 0) {
-            clearTimeout(myFlash.timerID);
-            if (myFlash.block.svgPath_) {
-                myFlash.block.svgPath_.style.fill = "";
-            }
-        }
-
-        let count = 4;
-        let flashOn = true;
-        myFlash.block = block;
-
-        /**
-         * Internal method to switch the colour of a block between light yellow and it's original colour
-         * @private
-         */
-        function _flash() {
-            if (myFlash.block.svgPath_) {
-                myFlash.block.svgPath_.style.fill = flashOn ? "#ffff80" : "";
-            }
-            flashOn = !flashOn;
-            count--;
-            if (count > 0) {
-                myFlash.timerID = setTimeout(_flash, 200);
-            } else {
-                myFlash.timerID = 0;
-                myFlash.block = null;
-            }
-        }
-
-        _flash();
-    }
-    function getTopOfStackFor(block) {
-        let base = block;
-        while (base.getOutputShape() && base.getSurroundParent()) {
-            base = base.getSurroundParent();
-        }
-        return base;
-    }
-    let workspace = ScratchBlocks.getMainWorkspace()
-
-    let block = workspace.getBlockById(blockOrId);
-
-    if (!block) {
-        console.log("Block does not exist.")
-        return;
-    }
-
-    /**
-     * !Blockly.Block
-     */
-    let root = block.getRootBlock();
-    let base = getTopOfStackFor(block);
-    let ePos = base.getRelativeToSurfaceXY(), // Align with the top of the block
-        rPos = root.getRelativeToSurfaceXY(), // Align with the left of the block 'stack'
-        scale = workspace.scale,
-        x = rPos.x * scale,
-        y = ePos.y * scale,
-        xx = block.width + x, // Turns out they have their x & y stored locally, and they are the actual size rather than scaled or including children...
-        yy = block.height + y,
-        s = workspace.getMetrics();
-    if (
-        x < s.viewLeft + 32 - 4 ||
-        xx > s.viewLeft + s.viewWidth ||
-        y < s.viewTop + 32 - 4 ||
-        yy > s.viewTop + s.viewHeight
-    ) {
-        // sx = s.contentLeft + s.viewWidth / 2 - x,
-        let sx = x - s.contentLeft - 32,
-            // sy = s.contentTop - y + Math.max(Math.min(32, 32 * scale), (s.viewHeight - yh) / 2);
-            sy = y - s.contentTop - 32;
-
-        // workspace.hideChaff(),
-        workspace.scrollbar.set(sx, sy);
-    }
-    ScratchBlocks?.hideChaff();
-    flash(block);
-}
-
 /*/ 
 var obj = {
     rt_null: "afafa",
@@ -1885,7 +1758,38 @@ function validateBlockDefs() {
     });
     console.log("All block definitions passed test!");
 }
+
+function loadCompilerConfigs(projectData) {
+    var data = JSON.parse(projectData);
+    data.targets.forEach(targ => {
+        if (targ.isStage) {
+            var commentKeys = Object.keys(targ.comments);
+            for (let i = 0; i < commentKeys.length; i++) {
+                const comment = targ.comments[commentKeys[i]];
+                if (!comment.text.startsWith("$rt.__spp_compile_cfg__")) {
+                    continue;
+                }
+                var cfg = comment.text.split("\n")[1];
+                var parsedCfg = null;
+                try {
+                    parsedCfg = JSON.parse(cfg);
+                } catch (error) {
+
+                }
+                if (parsedCfg) {
+                    debug = parsedCfg.debug;
+                    skipOptimisation = parsedCfg.optimisation;
+                    debugPrintFinalExtensions = parsedCfg.log_extensions;
+                    debugPrintFinalJson = parsedCfg.log_json;
+                    skipInjectingBlockDefinitions = parsedCfg.skip_defs;
+                }
+            }
+        }
+    });
+}
+
 function toSb3(project, obj) {
+    loadCompilerConfigs(project);
     window.Pool = Pool;
     var p = project;
 

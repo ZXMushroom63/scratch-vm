@@ -50,7 +50,8 @@ class Scratch3OperatorsBlocks {
             operator_round: this.round,
             operator_mathop: this.mathop,
             operator_color: this.color,
-            operator_boolcast: this.boolcast
+            operator_boolcast: this.boolcast,
+            operator_string: this.string,
         };
     }
 
@@ -279,6 +280,10 @@ class Scratch3OperatorsBlocks {
     
     boolcast(args) {
         return Cast.toBoolean(args.STRING);
+    }
+
+    string(args) {
+        return Cast.toString(args.STRING);
     }
 }
 

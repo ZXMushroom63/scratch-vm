@@ -22,7 +22,6 @@ var reporterPatches = {
     "tempvars_get": "$rt.tempvars.get %s",
     "tempvars_exists": ["$rt.tempvars.exists %s"],
     "tempvars_keys": "$rt.tempvars.keys %s",
-    "operator_color": "$rt.echocolor.color %s",
     "operator_boolcast": ["$rt.boolcast.cast %s"],
 }
 var reporterPatchesBasic = {
