@@ -87,7 +87,7 @@ class TempvarsExtension {
                 {
                     opcode: "change",
                     text: formatMessage({
-                        id: "tempvars.setBlock",
+                        id: "tempvars.changeBlock",
                         default: "change variable [VAR] by [VAL]",
                         description: "Changes specified tempvar by value."
                     }),
