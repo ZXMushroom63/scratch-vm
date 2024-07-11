@@ -525,6 +525,7 @@ var debug = false;
 var debugPrintFinalJson = false;
 var debugGlobalJson = false;
 var debugPrintFinalExtensions = false;
+var shadowedBlockDefs = false;
 var githubUrl = "https://github.com/ZXMushroom63/scratch-gui";
 
 var factoryList = [];
@@ -1604,6 +1605,10 @@ function injectBlockDefinitions(project, obj) {
                     block.x = -1500;
                     block.y = -1500;
                 }
+
+                if (shadowedBlockDefs && block.opcode === "procedures_definition" && block.topLevel) {
+                    block.shadow = true;
+                }
             });
 
             Object.assign(target.blocks, deduped);
@@ -1782,6 +1787,7 @@ function loadCompilerConfigs(projectData) {
                     debugPrintFinalExtensions = parsedCfg.log_extensions;
                     debugPrintFinalJson = parsedCfg.log_json;
                     skipInjectingBlockDefinitions = parsedCfg.skip_defs;
+                    shadowedBlockDefs = parsedCfg.shadowing;
                 }
             }
         }
