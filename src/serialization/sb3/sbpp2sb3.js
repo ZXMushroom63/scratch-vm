@@ -401,6 +401,12 @@ var blockDefinitions = [
         force: false,
         definition: require("./definitions/boolcast.json"),
     },
+    {
+        name: "Atan2 Operator",
+        opcodes: ["operator_atan2"],
+        force: false,
+        definition: require("./definitions/atan2.json"),
+    },
 ];
 
 const statementPatches = require("./statementPatches.json");
@@ -501,7 +507,8 @@ var moddedBlocks = [
     "tempvars_delete",
     "tempvars_change",
     "operator_color",
-    "operator_boolcast"
+    "operator_boolcast",
+    "operator_atan2",
 ];
 
 function checkCap(block) {
@@ -568,11 +575,18 @@ function makeBlockDefinitionsListForProject(project) {
 
 function makeBlockDefinitionsListForSprite(target, projectData) {
     var uBlockDefinitionsList = [];
-    var blockDefinitionsClone = [...blockDefinitions];
+    var blockDefinitionsClone = structuredClone(blockDefinitions);
     var keys = Object.keys(target.blocks);
-    function inject(bd, i) {
+    function inject(bd) {
+        if (debug) {
+            console.log(`Adding blockdef to sprite ${target.name}: ${bd.name}`);
+        }
+
         uBlockDefinitionsList.push(bd.definition);
-        blockDefinitionsClone.splice(i, 1);
+        if (blockDefinitionsClone.includes(bd)) {
+            blockDefinitionsClone.splice(blockDefinitionsClone.indexOf(bd), 1);
+        }
+        
         if (bd.globalVariables) {
             projectData.targets.forEach((t) => {
                 if (t.isStage) {
@@ -627,15 +641,18 @@ function makeBlockDefinitionsListForSprite(target, projectData) {
         }
     }
     blockDefinitionsClone.forEach((bd, i) => {
+        if (debug) {
+            console.log(`Scanning blockdef ${bd.name} in ${target.name}`);
+        }
         if (bd.forceStage && target.isStage) {
-            inject(bd, i);
+            inject(bd);
         }
         keys.forEach((k) => {
             var opcode = target.blocks[k].opcode;
             if (bd.force) {
-                inject(bd, i);
+                inject(bd);
             } else if (bd.opcodes.includes(opcode)) {
-                inject(bd, i);
+                inject(bd);
             }
         });
     });

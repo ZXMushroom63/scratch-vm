@@ -23,6 +23,7 @@ var reporterPatches = {
     "tempvars_exists": ["$rt.tempvars.exists %s"],
     "tempvars_keys": "$rt.tempvars.keys %s",
     "operator_boolcast": ["$rt.boolcast.cast %s"],
+    "operator_atan2": "$rt.atan2 %s %s",
 }
 var reporterPatchesBasic = {
     "operator_true": "operator_not",

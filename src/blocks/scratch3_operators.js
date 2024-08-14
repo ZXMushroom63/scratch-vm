@@ -52,6 +52,7 @@ class Scratch3OperatorsBlocks {
             operator_color: this.color,
             operator_boolcast: this.boolcast,
             operator_string: this.string,
+            operator_atan2: this.atan2,
         };
     }
 
@@ -175,6 +176,10 @@ class Scratch3OperatorsBlocks {
 
     length(args) {
         return Cast.toString(args.STRING).length;
+    }
+
+    atan2(args) {
+        return (Math.atan(Cast.toNumber(args.Y) / Cast.toNumber(args.X)) * 180 / Math.PI) + (180 * ((Cast.toNumber(args.X) < 0)))
     }
 
     contains(args) {
