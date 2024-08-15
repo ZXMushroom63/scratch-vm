@@ -646,15 +646,20 @@ function makeBlockDefinitionsListForSprite(target, projectData) {
         }
         if (bd.forceStage && target.isStage) {
             inject(bd);
+            return;
         }
-        keys.forEach((k) => {
-            var opcode = target.blocks[k].opcode;
-            if (bd.force) {
+        if (bd.force) {
+            inject(bd);
+            return;
+        }
+        for (let i = 0; i < keys.length; i++) {
+            const k = keys[i];
+            var opcode = target.blocks[k].opcode || "";
+            if (bd.opcodes.includes(opcode)) {
                 inject(bd);
-            } else if (bd.opcodes.includes(opcode)) {
-                inject(bd);
+                break;
             }
-        });
+        }
     });
     return uBlockDefinitionsList;
 }

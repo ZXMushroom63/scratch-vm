@@ -356,6 +356,9 @@ const compress = (projectData) => {
 
         for (const commentId of Object.keys(target.comments)) {
             const comment = target.comments[commentId];
+            if (commentId.includes("__spp_compile_cfg__::compileFlags") && !comment.text) {
+                comment.text = "$rt.__spp_compile_cfg__\n";
+            }
             pool.addReference(commentId);
             if (comment.blockId) {
                 pool.addReference(comment.blockId);
